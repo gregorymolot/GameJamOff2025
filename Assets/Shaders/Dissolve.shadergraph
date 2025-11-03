@@ -802,10 +802,10 @@
     "m_Guid": {
         "m_GuidSerialized": "757539ff-5715-43a0-8bc5-a91ef1769d96"
     },
-    "m_Name": "CutoffHeight",
+    "m_Name": "DissolveAmount",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "CutoffHeight",
-    "m_DefaultReferenceName": "_CutoffHeight",
+    "m_RefNameGeneratedByDisplayName": "DissolveAmount",
+    "m_DefaultReferenceName": "_DissolveAmount",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
@@ -968,7 +968,7 @@
     "m_ObjectId": "4a4171e8350a4042bc645c43b9474e4e",
     "m_Title": "Dissolve",
     "m_Position": {
-        "x": -1844.000244140625,
+        "x": -1844.0001220703125,
         "y": -428.0
     }
 }
@@ -1788,7 +1788,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "afbe87b8ffdc4c83b94eefe97e9aadf7",
     "m_Id": 0,
-    "m_DisplayName": "CutoffHeight",
+    "m_DisplayName": "DissolveAmount",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

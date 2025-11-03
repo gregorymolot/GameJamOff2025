@@ -83,11 +83,39 @@
                 {
                     "name": "",
                     "id": "ae33d576-76fa-4450-9fd4-fd40225ba5c5",
-                    "path": "",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Interactable",
+            "id": "fa0ae25c-6a45-421a-984e-5601ec5c9184",
+            "actions": [
+                {
+                    "name": "Return",
+                    "type": "Button",
+                    "id": "cf337cfc-5c68-44ca-9b1a-b355470d1a00",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b46ab216-7c73-4e7d-a0fd-142e4c8af869",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Return",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

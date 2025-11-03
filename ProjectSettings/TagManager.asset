@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Findable
+  - Emitter
   layers:
   - Default
   - TransparentFX

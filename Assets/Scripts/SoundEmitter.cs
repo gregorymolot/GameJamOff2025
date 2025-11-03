@@ -64,7 +64,6 @@ public class EmitterEditor : Editor
 
             emitter.startingSize = EditorGUILayout.FloatField("Constant Start Size", emitter.startingSize);
         }
-
         else
         {
             EditorGUILayout.Space();

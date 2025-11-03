@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
 
     public void ReturnItem()
     {
-        if (interactable != null)
+        if (interactable != null && !interactable.IsInteracting)
         {
             interactable.Return();
         }

@@ -10,8 +10,13 @@ public class InteractableItem : MonoBehaviour, IInteractable
     Vector3 targetPosition;
     Quaternion initialRotation;
     Quaternion spinningRotation;
+    private bool isInteracting;
+
+    public bool IsInteracting { get => isInteracting; set => isInteracting = value; }
+
     public void Interact()
     {
+        IsInteracting = true;
         ControllerManager.Instance.DeactivateAllControllers();
         StartCoroutine(RotateAndBob());
         Debug.Log("Interacted with: " + gameObject.name);
@@ -37,10 +42,11 @@ public class InteractableItem : MonoBehaviour, IInteractable
         while (timer < 1f)
         {
             transform.rotation = Quaternion.Slerp(spinningRotation, initialRotation, timer);
-            transform.position = Vector3.Lerp(initialPosition, targetPosition, timer);
+            transform.position = Vector3.Lerp(targetPosition, initialPosition, timer);
             timer += Time.deltaTime;
             yield return null;
         }
+        StopAllCoroutines();
         ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
     }
 
@@ -55,6 +61,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
             yield return null;
         }
         ControllerManager.Instance.SwapCurrentController(ControllerType.Interactable);
+        IsInteracting = false;
     }
 
     IEnumerator RotateAndBob()

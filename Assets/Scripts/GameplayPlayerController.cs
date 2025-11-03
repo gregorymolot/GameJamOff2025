@@ -21,7 +21,10 @@ public class GameplayPlayerController : MonoBehaviour
 
     void OnDisable()
     {
-        tilt.enabled = false;
+        if (tilt)
+        {
+            tilt.enabled = false;
+        }
         GetComponent<PlayerInput>().enabled = false;
     }
 

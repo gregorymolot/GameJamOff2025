@@ -42,9 +42,11 @@ public class ControllerManager : MonoBehaviour
         {
             case ControllerType.Gameplay:
                 playerController.enabled = true;
+                Time.timeScale = 1f;
                 break;
             case ControllerType.Interactable:
                 interactableController.enabled = true;
+                Time.timeScale = 0f;
                 break;
         }
     }

@@ -5,6 +5,11 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UIElements.Experimental;
 
+public enum ItemKey
+{
+    Sponges
+}
+
 public class InteractableItem : MonoBehaviour, IInteractable
 {
 
@@ -14,10 +19,14 @@ public class InteractableItem : MonoBehaviour, IInteractable
     Quaternion spinningRotation;
     private bool isInteracting;
 
+    [SerializeField]
+    private ItemKey key;
+    public ItemKey Key {get => key; }
+
     [Header("Text")]
     [SerializeField]
     private string itemName;
-    public string ItemName { get => itemName;}
+    public string ItemName { get => itemName; }
 
     [SerializeField]
     [TextArea(3, 10)]
@@ -57,7 +66,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
         main.startSize = size;
         var emission = particles.emission;
         emission.rateOverTime = 10f;
-        
+
         ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
         EventManager.Items.Return?.Invoke();
 

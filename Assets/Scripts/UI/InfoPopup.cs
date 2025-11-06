@@ -65,7 +65,7 @@ public class InfoPopup : MonoBehaviour
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("InfoPopupAnimationIn"));
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
 
-        item.IsInteracting = false;
+        item.Returnable = true;
     }
 
     public void Deactivate()

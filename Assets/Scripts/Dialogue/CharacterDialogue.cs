@@ -1,11 +1,18 @@
 using System.Collections;
-using TMPro;
-using Unity.Multiplayer.Center.Common;
+using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public enum Name
 {
-    
+    Tobias,
+    Charlie,
+    Daniel,
+    Elizabeth,
+    Jared,
+    Natasha,
+    Anthony,
+    Jonathan
 }
 
 public class CharacterDialogue : MonoBehaviour, IInteractable
@@ -16,24 +23,33 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     bool alreadyInteracted;
 
-    public int returningLineIndex;
 
     [SerializeField]
-    public DialogueChoices[] dialogueChoices;
+    DialoguePiece[] piecesOfDialogue;
 
-    public DialoguePiece[] piecesOfDialogue;
+    [SerializeField]
+    DialogueChoices[] dialogueChoices;
+
+    public int returningLineIndex;
 
     int dialogueIndex = 0;
 
-    bool isInteracting;
+    bool returnable = false;
 
-    public bool IsInteracting { get => isInteracting; set => isInteracting = value; }
+    public bool Returnable { get { return false; } set { } }
 
     bool isTyping;
 
-    bool isDialogueActive;
+    public bool isDialogueActive { get; private set; }
 
     DialogueManager dialogueManager;
+    [SerializeField]
+    CinemachineCamera npcCamera;
+
+    void Awake()
+    {
+        npcCamera.enabled = false;
+    }
 
     void Start()
     {
@@ -60,7 +76,32 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             dialogueManager.SetDialogueText(piecesOfDialogue[dialogueIndex].dialogueLine);
             isTyping = false;
         }
-        else if (++dialogueIndex < piecesOfDialogue.Length)
+
+        //Clear chocies
+        dialogueManager.ClearChoices();
+
+        //Check if an end line and return line maybe?
+        if (piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.ReturningLine)
+        {
+            dialogueIndex = returningLineIndex;
+        }
+        else if(piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.EndLine)
+        {
+            Return();
+        }
+
+        //Check if there are choices and display
+        foreach(DialogueChoices dialogueChoice in dialogueChoices)
+        {
+            if (dialogueChoice.choiceIndex == dialogueIndex)
+            {
+                DisplayChoices(dialogueChoice);
+                return;
+            }
+        }
+
+
+        if (++dialogueIndex < piecesOfDialogue.Length)
         {
             StartCoroutine(TypeSentence());
         }
@@ -72,13 +113,16 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     void StartDialogue()
     {
+        DialogueManager.Instance.SetDialogue(this);
+        ControllerManager.Instance.SwapCurrentController(ControllerType.Dialogue);
+        npcCamera.enabled = true;
         isDialogueActive = true;
         dialogueIndex = 0;
         dialogueManager.SetNameText(characterName.ToString());
         dialogueManager.ShowDialogueUI(true);
         StartCoroutine(TypeSentence());
     }
-    
+
     IEnumerator TypeSentence()
     {
         string dialogueText = "";
@@ -96,15 +140,35 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             yield return null;
         }
         isTyping = false;
-        dialogueIndex++;
+        //dialogueIndex++;
+    }
+
+    void DisplayChoices(DialogueChoices choice)
+    {
+        for (int i = 0; i < choice.choices.Length; i++)
+        {
+            int nextIndex = choice.choices[i].nextLineIndex;
+            //Add a delay here
+            dialogueManager.CreateChoiceButton(choice.choices[i].choiceText, () => ChooseOption(nextIndex));
+        }
+    }
+    
+    void ChooseOption(int nextIndex)
+    {
+        dialogueIndex = nextIndex;
+        dialogueManager.ClearChoices();
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence());
     }
 
     public void Return()
     {
         StopAllCoroutines();
+        npcCamera.enabled = false;
         isDialogueActive = false;
         dialogueManager.SetDialogueText("");
         dialogueManager.SetNameText("");
         dialogueManager.ShowDialogueUI(false);
+        ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
     }
 }

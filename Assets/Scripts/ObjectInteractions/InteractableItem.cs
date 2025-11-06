@@ -17,7 +17,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
     Vector3 targetPosition;
     Quaternion initialRotation;
     Quaternion spinningRotation;
-    private bool isInteracting;
+    private bool returnable;
 
     [SerializeField]
     private ItemKey key;
@@ -41,11 +41,11 @@ public class InteractableItem : MonoBehaviour, IInteractable
     ParticleSystem particles;
 
 
-    public bool IsInteracting { get => isInteracting; set => isInteracting = value; }
+    public bool Returnable { get => returnable; set => returnable = value; }
 
     public void Interact()
     {
-        isInteracting = true;
+        returnable = false;
         EventManager.Items.ShowItem?.Invoke(this);
     }
 

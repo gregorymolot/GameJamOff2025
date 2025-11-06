@@ -1,12 +1,14 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
 public class Choice
 {
+    [TextArea(3,10)]
     public string choiceText;
     public int nextLineIndex;
-    public ItemKey[] itemKeys;
+    public List<ItemKey> itemKeys = new List<ItemKey>();
 
     Dictionary<ItemKey, bool> lockedItems = new Dictionary<ItemKey, bool>();
 

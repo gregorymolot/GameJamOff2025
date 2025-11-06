@@ -1,18 +1,23 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
-    TextMeshProUGUI dialogueText;
-    TextMeshProUGUI nameText;
+    [SerializeField]
+    DialogueController dialogueController;
+    public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI nameText;
 
-    GameObject choiceButtonPrefab;
+    public GameObject choiceButtonPrefab;
 
-    Transform choiceContainer;
+    public Transform choiceContainer;
 
-    Animator dialogueAnimator;
+    public Animator dialogueAnimator;
 
     public GameObject dialoguePanel;
+
+    CharacterDialogue currentDialogue;
 
     public static DialogueManager Instance
     {
@@ -39,6 +44,11 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    public void SetDialogue(CharacterDialogue dialogue)
+    {
+        dialogueController.SetCharacterDialogue(dialogue);
+    }
+
     public void ShowDialogueUI(bool show)
     {
         dialoguePanel.SetActive(show);
@@ -54,15 +64,16 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = dialogue;
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void ClearChoices()
     {
-        
+        foreach (Transform child in choiceContainer) Destroy(child.gameObject);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void CreateChoiceButton(string choiceText, UnityEngine.Events.UnityAction onClick)
     {
-        
+        //Add typing in here
+        GameObject choiceButton = Instantiate(choiceButtonPrefab, choiceContainer);
+        choiceButton.GetComponentInChildren<TextMeshProUGUI>().text = choiceText;
+        choiceButton.GetComponent<Button>().onClick.AddListener(onClick);
     }
 }

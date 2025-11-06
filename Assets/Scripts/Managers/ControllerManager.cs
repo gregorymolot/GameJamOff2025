@@ -22,6 +22,9 @@ public class ControllerManager : MonoBehaviour
     [SerializeField]
     InteractablePlayerController interactableController;
 
+    [SerializeField]
+    DialogueController dialogueController;
+
     void Awake()
     {
         if (_instance == null)
@@ -48,6 +51,10 @@ public class ControllerManager : MonoBehaviour
                 interactableController.enabled = true;
                 Time.timeScale = 0f;
                 break;
+            case ControllerType.Dialogue:
+                dialogueController.enabled = true;
+                //Time.timeScale = 0f;
+                break;
         }
     }
     
@@ -55,6 +62,7 @@ public class ControllerManager : MonoBehaviour
     {
         playerController.enabled = false;
         interactableController.enabled = false;
+        dialogueController.enabled = false;
     }
 }
 
@@ -62,6 +70,6 @@ public enum ControllerType
 {
     Gameplay,
     Interactable,
-    Talking,
+    Dialogue,
     Menu
 }

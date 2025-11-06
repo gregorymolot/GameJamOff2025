@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 
 public enum Name
 {
@@ -30,6 +32,9 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     [SerializeField]
     List<DialogueChoices> dialogueChoices;
+
+    [SerializeField]
+    TextMeshProUGUI nameLabel;
 
     public int returningLineIndex;
 
@@ -118,6 +123,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     void StartDialogue()
     {
+        nameLabel.text = characterName.ToString();
         DialogueManager.Instance.SetDialogue(this);
         ControllerManager.Instance.SwapCurrentController(ControllerType.Dialogue);
         npcCamera.enabled = true;

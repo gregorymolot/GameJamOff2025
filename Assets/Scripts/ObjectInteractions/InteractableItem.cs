@@ -7,7 +7,8 @@ using UnityEngine.UIElements.Experimental;
 
 public enum ItemKey
 {
-    Sponges
+    Sponges,
+    Receipt
 }
 
 public class InteractableItem : MonoBehaviour, IInteractable

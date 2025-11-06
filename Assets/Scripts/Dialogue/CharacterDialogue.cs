@@ -151,6 +151,15 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             yield return null;
         }
         isTyping = false;
+        //Check if there are choices and display
+        foreach(DialogueChoices dialogueChoice in dialogueChoices)
+        {
+            if (dialogueChoice.choiceIndex == dialogueIndex)
+            {
+                DisplayChoices(dialogueChoice);
+            }
+        }
+
     }
 
     void DisplayChoices(DialogueChoices choice)

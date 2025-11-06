@@ -140,6 +140,10 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         isTyping = true;
         dialogueManager.SetDialogueText(dialogueText);
 
+        if (piecesOfDialogue[dialogueIndex].hasClue)
+        {
+            EventManager.Unlocks.OnUnlockEvent(piecesOfDialogue[dialogueIndex].clue).unlockAction?.Invoke(piecesOfDialogue[dialogueIndex].clue);
+        }
 
         foreach (char letter in piecesOfDialogue[dialogueIndex].dialogueLine)
         {
@@ -166,7 +170,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     {
         for (int i = 0; i < choice.choices.Count; i++)
         {
-            if (choice.choices[i].unlocked)
+            if (choice.choices[i].unlockable.unlocked)
             {
                 int nextIndex = choice.choices[i].nextLineIndex;
                 //Add a delay here

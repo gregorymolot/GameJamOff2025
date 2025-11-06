@@ -2,15 +2,42 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum Clues
+{
+    Sponges,
+    Receipt
+}
+
 [System.Serializable]
 public class Choice
 {
     [TextArea(3,10)]
     public string choiceText;
     public int nextLineIndex;
-    public List<ItemKey> itemKeys;
+    public Unlockable unlockable;
+}
 
-    Dictionary<ItemKey, bool> lockedItems = new Dictionary<ItemKey, bool>();
+[System.Serializable]
+public class DialogueChoices
+{
+    public int choiceIndex;
+    public List<Choice> choices = new List<Choice>();
+
+    public void InitializeList()
+    {
+        foreach (Choice choice in choices)
+        {
+            choice.unlockable.InitializeList();
+        }
+    }
+}
+
+[System.Serializable]
+public class Unlockable
+{
+    public List<Clues> itemKeys;
+
+    Dictionary<Clues, bool> lockedItems = new Dictionary<Clues, bool>();
 
     public bool unlocked
     {
@@ -29,31 +56,15 @@ public class Choice
 
     public void InitializeList()
     {
-        foreach (ItemKey key in itemKeys)
+        foreach (Clues key in itemKeys)
         {
             lockedItems.Add(key, false);
             EventManager.Unlocks.OnUnlockEvent(key).unlockAction += Unlock;
         }
     }
 
-    public void Unlock(ItemKey key)
+    public void Unlock(Clues key)
     {
         lockedItems[key] = true;
-    }
-}
-
-
-[System.Serializable]
-public class DialogueChoices
-{
-    public int choiceIndex;
-    public List<Choice> choices = new List<Choice>();
-
-    public void InitializeList()
-    {
-        foreach(Choice choice in choices)
-        {
-            choice.InitializeList();
-        }
     }
 }

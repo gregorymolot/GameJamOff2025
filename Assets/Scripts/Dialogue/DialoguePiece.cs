@@ -14,4 +14,6 @@ public class DialoguePiece
     [TextArea(3,10)]
     public string dialogueLine;
     public NextLineBehaviour lineBehaviour;
+    public bool hasClue;
+    public Clues clue;
 }

@@ -1,28 +1,12 @@
-using System.Collections;
-using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-using UnityEngine.UIElements.Experimental;
-
-public enum ItemKey
-{
-    Sponges,
-    Receipt
-}
 
 public class InteractableItem : MonoBehaviour, IInteractable
 {
-
-    Vector3 initialPosition;
-    Vector3 targetPosition;
-    Quaternion initialRotation;
-    Quaternion spinningRotation;
     private bool returnable;
 
     [SerializeField]
-    private ItemKey key;
-    public ItemKey Key {get => key; }
+    private Clues key;
+    public Clues Key {get => key; }
 
     [Header("Text")]
     [SerializeField]

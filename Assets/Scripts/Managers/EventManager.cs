@@ -20,11 +20,11 @@ public static class EventManager
     public class UnlockEvents
     {
 
-        private Dictionary<ItemKey, UnlockEvent<ItemKey>> mapUnlock = new Dictionary<ItemKey, UnlockEvent<ItemKey>>();
+        private Dictionary<Clues, UnlockEvent<Clues>> mapUnlock = new Dictionary<Clues, UnlockEvent<Clues>>();
 
-        public UnlockEvent<ItemKey> OnUnlockEvent(ItemKey key)
+        public UnlockEvent<Clues> OnUnlockEvent(Clues key)
         {
-            mapUnlock.TryAdd(key, new UnlockEvent<ItemKey>());
+            mapUnlock.TryAdd(key, new UnlockEvent<Clues>());
             return mapUnlock[key];
 
         }

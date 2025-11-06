@@ -29,9 +29,10 @@ public class Choice
 
     public void InitializeList()
     {
-        foreach(ItemKey key in itemKeys)
+        foreach (ItemKey key in itemKeys)
         {
             lockedItems.Add(key, false);
+            EventManager.Unlocks.OnUnlockEvent(key).unlockAction += Unlock;
         }
     }
 

@@ -7930,7 +7930,7 @@ MonoBehaviour:
     choices:
     - choiceText: Your fat head
       nextLineIndex: 2
-      itemKeys: 
+      itemKeys: 00000000
     - choiceText: Your stupid face
       nextLineIndex: 3
       itemKeys: 

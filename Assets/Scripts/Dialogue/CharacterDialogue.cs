@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -28,7 +29,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     DialoguePiece[] piecesOfDialogue;
 
     [SerializeField]
-    DialogueChoices[] dialogueChoices;
+    List<DialogueChoices> dialogueChoices;
 
     public int returningLineIndex;
 
@@ -49,6 +50,10 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     void Awake()
     {
         npcCamera.enabled = false;
+        foreach(DialogueChoices choices in dialogueChoices)
+        {
+            choices.InitializeList();
+        }
     }
 
     void Start()
@@ -140,16 +145,18 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             yield return null;
         }
         isTyping = false;
-        //dialogueIndex++;
     }
 
     void DisplayChoices(DialogueChoices choice)
     {
-        for (int i = 0; i < choice.choices.Length; i++)
+        for (int i = 0; i < choice.choices.Count; i++)
         {
-            int nextIndex = choice.choices[i].nextLineIndex;
-            //Add a delay here
-            dialogueManager.CreateChoiceButton(choice.choices[i].choiceText, () => ChooseOption(nextIndex));
+            if (choice.choices[i].unlocked)
+            {
+                int nextIndex = choice.choices[i].nextLineIndex;
+                //Add a delay here
+                dialogueManager.CreateChoiceButton(choice.choices[i].choiceText, () => ChooseOption(nextIndex));
+            }
         }
     }
     

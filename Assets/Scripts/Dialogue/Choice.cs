@@ -8,17 +8,9 @@ public class Choice
     [TextArea(3,10)]
     public string choiceText;
     public int nextLineIndex;
-    public List<ItemKey> itemKeys = new List<ItemKey>();
+    public List<ItemKey> itemKeys;
 
     Dictionary<ItemKey, bool> lockedItems = new Dictionary<ItemKey, bool>();
-
-    public Choice()
-    {
-        foreach(ItemKey items in itemKeys)
-        {
-            lockedItems.Add(items, false);
-        }
-    }
 
     public bool unlocked
     {
@@ -35,6 +27,14 @@ public class Choice
         }
     }
 
+    public void InitializeList()
+    {
+        foreach(ItemKey key in itemKeys)
+        {
+            lockedItems.Add(key, false);
+        }
+    }
+
     public void Unlock(ItemKey key)
     {
         lockedItems[key] = true;
@@ -46,5 +46,13 @@ public class Choice
 public class DialogueChoices
 {
     public int choiceIndex;
-    public Choice[] choices;
+    public List<Choice> choices = new List<Choice>();
+
+    public void InitializeList()
+    {
+        foreach(Choice choice in choices)
+        {
+            choice.InitializeList();
+        }
+    }
 }

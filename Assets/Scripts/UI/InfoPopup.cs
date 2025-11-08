@@ -92,5 +92,7 @@ public class InfoPopup : MonoBehaviour
 
         isActivated = false;
 
+        UIManager.Instance.TurnOffCanvas();
+
     }
 }

@@ -7,6 +7,11 @@ public class UnlockEvent<ItemKey>
     public Action<ItemKey> unlockAction;
 }
 
+public class IdentifyEvent<Name>
+{
+    public Action<Name> identifyAction;
+}
+
 public static class EventManager
 {
     public static readonly ItemEvents Items = new ItemEvents();
@@ -27,6 +32,18 @@ public static class EventManager
             mapUnlock.TryAdd(key, new UnlockEvent<Clues>());
             return mapUnlock[key];
 
+        }
+    }
+
+    public class IdentifyEvents
+    {
+
+        private Dictionary<Clues, IdentifyEvent<Name>> mapIdentify = new Dictionary<Clues, IdentifyEvent<Name>>();
+
+        public IdentifyEvent<Name> OnIdentifyEvent(Clues key)
+        {
+            mapIdentify.TryAdd(key, new IdentifyEvent<Name>());
+            return mapIdentify[key];
         }
     }
 }

@@ -22,10 +22,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 {
     public Name characterName;
 
-    int startingIndex = 0;
-
     bool alreadyInteracted;
-
 
     [SerializeField]
     DialoguePiece[] piecesOfDialogue;
@@ -40,8 +37,6 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     int dialogueIndex = 0;
 
-    bool returnable = false;
-
     public bool Returnable { get { return false; } set { } }
 
     bool isTyping;
@@ -49,6 +44,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     public bool isDialogueActive { get; private set; }
 
     DialogueManager dialogueManager;
+
     [SerializeField]
     CinemachineCamera npcCamera;
 
@@ -80,6 +76,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     void NextLine()
     {
+        //Destroy sound emitter if there is one
         if (isTyping)
         {
             StopAllCoroutines();
@@ -128,9 +125,10 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         ControllerManager.Instance.SwapCurrentController(ControllerType.Dialogue);
         npcCamera.enabled = true;
         isDialogueActive = true;
-        dialogueIndex = 0;
+        dialogueIndex = alreadyInteracted ? returningLineIndex : 0;
         dialogueManager.SetNameText(characterName.ToString());
         dialogueManager.ShowDialogueUI(true);
+        alreadyInteracted = true;
         StartCoroutine(TypeSentence());
     }
 
@@ -143,6 +141,11 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         if (piecesOfDialogue[dialogueIndex].hasClue)
         {
             EventManager.Unlocks.OnUnlockEvent(piecesOfDialogue[dialogueIndex].clue).unlockAction?.Invoke(piecesOfDialogue[dialogueIndex].clue);
+        }
+
+        if (piecesOfDialogue[dialogueIndex].isLying)
+        {
+            //TODO: Spawn temporary sound emitter
         }
 
         foreach (char letter in piecesOfDialogue[dialogueIndex].dialogueLine)

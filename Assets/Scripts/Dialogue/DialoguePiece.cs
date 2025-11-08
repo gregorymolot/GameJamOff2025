@@ -16,4 +16,5 @@ public class DialoguePiece
     public NextLineBehaviour lineBehaviour;
     public bool hasClue;
     public Clues clue;
+    public bool isLying;
 }

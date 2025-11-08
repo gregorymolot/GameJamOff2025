@@ -25,6 +25,12 @@ public class ControllerManager : MonoBehaviour
     [SerializeField]
     DialogueController dialogueController;
 
+    [SerializeField]
+    ProfileController profileController;
+
+    ControllerType previousType;
+    ControllerType currentType;
+
     void Awake()
     {
         if (_instance == null)
@@ -36,10 +42,13 @@ public class ControllerManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        previousType = ControllerType.Menu;
     }
 
     public void SwapCurrentController(ControllerType controllerType)
     {
+        previousType = currentType;
+        currentType = controllerType;
         DeactivateAllControllers();
         switch (controllerType)
         {
@@ -55,7 +64,15 @@ public class ControllerManager : MonoBehaviour
                 dialogueController.enabled = true;
                 //Time.timeScale = 0f;
                 break;
+            case ControllerType.Profile:
+                profileController.enabled = true;
+                break;
         }
+    }
+
+    public void ReturnToPrevious()
+    {
+        SwapCurrentController(previousType);
     }
     
     public void DeactivateAllControllers()
@@ -63,6 +80,7 @@ public class ControllerManager : MonoBehaviour
         playerController.enabled = false;
         interactableController.enabled = false;
         dialogueController.enabled = false;
+        profileController.enabled = false;
     }
 }
 
@@ -71,5 +89,6 @@ public enum ControllerType
     Gameplay,
     Interactable,
     Dialogue,
+Profile,
     Menu
 }

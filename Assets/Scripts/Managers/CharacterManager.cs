@@ -85,10 +85,7 @@ public class CharacterManager : MonoBehaviour
 
     public void CloseTab()
     {
-        if (isInMindMap)
-        { 
             StartCoroutine(ClosingProfileTab());
-        }
     }
 
     IEnumerator ClosingProfileTab()
@@ -97,13 +94,12 @@ public class CharacterManager : MonoBehaviour
 
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("ProfileOut"));
 
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.5f);
-        ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
 
         yield return null;
 
 
+        ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
         UIManager.Instance.TurnOffProfileCanvas();
     }
     
@@ -169,9 +165,9 @@ public class ProfileLine
         {
             if (GameManager.Instance.CheckUnlock(clue) == false)
             {
-                return profileDescription;
+                return "";
             }
         }
-        return "";
+        return profileDescription;
     }
 }

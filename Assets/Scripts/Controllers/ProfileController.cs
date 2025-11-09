@@ -19,8 +19,7 @@ public class ProfileController : MonoBehaviour
     {
         if (context.performed)
         {
-            //Play animation and then when finished
-            ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
+            UIManager.Instance.DeactivateProfiles();
         }
 
     }

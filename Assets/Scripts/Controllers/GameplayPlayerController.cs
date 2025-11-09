@@ -47,6 +47,7 @@ public class GameplayPlayerController : MonoBehaviour
         if (context.performed)
         {
             UIManager.Instance.InitializeProfiles();
+            ControllerManager.Instance.SwapCurrentController(ControllerType.Profile);
         }
     }
     

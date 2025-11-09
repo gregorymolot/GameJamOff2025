@@ -23,6 +23,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     //public Name characterName;
 
     bool alreadyInteracted;
+    [SerializeField]
+    Name characterName;
 
     [SerializeField]
     DialoguePiece[] piecesOfDialogue;
@@ -45,18 +47,13 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     [SerializeField]
     CinemachineCamera npcCamera;
 
-    CharacterProfile profile;
 
     [SerializeField]
     TextMeshProUGUI nameLabel;
 
-    [SerializeField]
-    string characterName;
-
     void Awake()
     {
         npcCamera.enabled = false;
-        profile = GetComponent<CharacterProfile>();
     }
 
     void Start()
@@ -123,14 +120,14 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     void StartDialogue()
     {
         //nameLabel.text = characterName.ToString();
-        nameLabel.text = characterName;
+        nameLabel.text = characterName.ToString();
         DialogueManager.Instance.SetDialogue(this);
         ControllerManager.Instance.SwapCurrentController(ControllerType.Dialogue);
         npcCamera.enabled = true;
         isDialogueActive = true;
         dialogueIndex = alreadyInteracted ? returningLineIndex : 0;
-        EventManager.Unlocks.Interacted?.Invoke(profile.characterName);
-        dialogueManager.SetNameText(characterName);
+        EventManager.Unlocks.Interacted?.Invoke(characterName);
+        dialogueManager.SetNameText(characterName.ToString());
         dialogueManager.ShowDialogueUI(true);
         alreadyInteracted = true;
         StartCoroutine(TypeSentence());

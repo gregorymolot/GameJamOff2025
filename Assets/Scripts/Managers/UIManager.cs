@@ -71,6 +71,11 @@ public class UIManager : MonoBehaviour
 
     public void DeactivateProfiles()
     {
+        CharacterManager.Instance.CloseTab();
+    }
+
+    public void TurnOffProfileCanvas()
+    {
         profileCanvas.SetActive(false);
     }
 }

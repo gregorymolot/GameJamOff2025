@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,11 +30,13 @@ public class CharacterManager : MonoBehaviour
     TextMeshProUGUI descriptionText;
     [SerializeField]
     TextMeshProUGUI clueText;
+
+    bool isInMindMap = true;
     
 
     void Awake()
     {
-        if (_instance = null)
+        if (_instance == null)
         {
             _instance = this;
         }
@@ -57,6 +60,7 @@ public class CharacterManager : MonoBehaviour
             profile.CheckInteracted();
         }
         animator.SetTrigger("ProfileIn");
+        animator.ResetTrigger("ProfileIn");
     }
 
     public void InitializeProfile(CharacterProfile profile)
@@ -70,20 +74,48 @@ public class CharacterManager : MonoBehaviour
             clueText.text += line.CheckUnlock();
             clueText.text += "\n\n";
         }
-
         animator.SetTrigger("SwapIn");
-
+        isInMindMap = false;
     }
 
     public void CloseProfile()
     {
-        animator.SetTrigger("SwapOut");
-        //Play animator and when finished, go to the other image and play that animator
+        StartCoroutine(ToMindMap());
     }
-    
+
     public void CloseTab()
     {
+        if (isInMindMap)
+        { 
+            StartCoroutine(ClosingProfileTab());
+        }
+    }
+
+    IEnumerator ClosingProfileTab()
+    {
         animator.SetTrigger("ProfileOut");
+
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("ProfileOut"));
+
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.5f);
+        ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        yield return null;
+
+
+        UIManager.Instance.TurnOffProfileCanvas();
+    }
+    
+    IEnumerator ToMindMap()
+    {
+        animator.SetTrigger("SwapOut");
+
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("ProfileSwapOut"));
+
+        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
+
+        isInMindMap = true;
     }
 }
 
@@ -121,18 +153,6 @@ public class CharacterProfile
             button.enabled = false;
         }
     }
-
-    public string CheckUnlocked()
-    {
-        foreach (ProfileLine line in profilePieces)
-        {
-            if (line.CheckUnlock())
-            {
-                return line.profileDescription;
-            }
-        }
-        return "";
-    }
 }
 
 [System.Serializable]
@@ -143,15 +163,15 @@ public class ProfileLine
     [TextArea(3, 10)]
     public string profileDescription;
 
-    public bool CheckUnlock()
+    public string CheckUnlock()
     {
         foreach (Clues clue in neededClues)
         {
             if (GameManager.Instance.CheckUnlock(clue) == false)
             {
-                return false;
+                return profileDescription;
             }
         }
-        return true;
+        return "";
     }
 }

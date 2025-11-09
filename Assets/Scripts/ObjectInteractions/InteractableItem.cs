@@ -32,7 +32,7 @@ public class InteractableItem : MonoBehaviour, IInteractable
     {
         returnable = false;
         EventManager.Items.ShowItem?.Invoke(this);
-        EventManager.Unlocks.OnUnlockEvent(key).unlockAction?.Invoke(key);
+        EventManager.Unlocks.Unlock?.Invoke(key);
     }
 
     public void Return()

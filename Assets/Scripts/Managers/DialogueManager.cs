@@ -17,8 +17,6 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject dialoguePanel;
 
-    CharacterDialogue currentDialogue;
-
     public static DialogueManager Instance
     {
         get

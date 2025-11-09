@@ -20,7 +20,7 @@ public enum Name
 
 public class CharacterDialogue : MonoBehaviour, IInteractable
 {
-    public Name characterName;
+    //public Name characterName;
 
     bool alreadyInteracted;
 
@@ -29,9 +29,6 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     [SerializeField]
     List<DialogueChoices> dialogueChoices;
-
-    [SerializeField]
-    TextMeshProUGUI nameLabel;
 
     public int returningLineIndex;
 
@@ -48,13 +45,18 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     [SerializeField]
     CinemachineCamera npcCamera;
 
+    CharacterProfile profile;
+
+    [SerializeField]
+    TextMeshProUGUI nameLabel;
+
+    [SerializeField]
+    string characterName;
+
     void Awake()
     {
         npcCamera.enabled = false;
-        foreach(DialogueChoices choices in dialogueChoices)
-        {
-            choices.InitializeList();
-        }
+        profile = GetComponent<CharacterProfile>();
     }
 
     void Start()
@@ -120,13 +122,15 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     void StartDialogue()
     {
-        nameLabel.text = characterName.ToString();
+        //nameLabel.text = characterName.ToString();
+        nameLabel.text = characterName;
         DialogueManager.Instance.SetDialogue(this);
         ControllerManager.Instance.SwapCurrentController(ControllerType.Dialogue);
         npcCamera.enabled = true;
         isDialogueActive = true;
         dialogueIndex = alreadyInteracted ? returningLineIndex : 0;
-        dialogueManager.SetNameText(characterName.ToString());
+        EventManager.Unlocks.Interacted?.Invoke(profile.characterName);
+        dialogueManager.SetNameText(characterName);
         dialogueManager.ShowDialogueUI(true);
         alreadyInteracted = true;
         StartCoroutine(TypeSentence());
@@ -140,7 +144,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
         if (piecesOfDialogue[dialogueIndex].hasClue)
         {
-            EventManager.Unlocks.OnUnlockEvent(piecesOfDialogue[dialogueIndex].clue).unlockAction?.Invoke(piecesOfDialogue[dialogueIndex].clue);
+            EventManager.Unlocks.Unlock?.Invoke(piecesOfDialogue[dialogueIndex].clue);
         }
 
         if (piecesOfDialogue[dialogueIndex].isLying)
@@ -173,7 +177,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     {
         for (int i = 0; i < choice.choices.Count; i++)
         {
-            if (choice.choices[i].unlockable.unlocked)
+            if (choice.choices[i].Unlocked())
             {
                 int nextIndex = choice.choices[i].nextLineIndex;
                 //Add a delay here

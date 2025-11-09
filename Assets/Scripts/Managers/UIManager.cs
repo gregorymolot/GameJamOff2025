@@ -63,4 +63,14 @@ public class UIManager : MonoBehaviour
     {
         discoverCanvas.SetActive(false);
     }
+
+    public void InitializeProfiles()
+    {
+        profileCanvas.SetActive(true);
+    }
+
+    public void DeactivateProfiles()
+    {
+        profileCanvas.SetActive(false);
+    }
 }

@@ -41,6 +41,14 @@ public class GameplayPlayerController : MonoBehaviour
             player.Interact();
         }
     }
+
+    public void OpenProfileTab(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            UIManager.Instance.InitializeProfiles();
+        }
+    }
     
 
 }

@@ -24,15 +24,18 @@ public static class EventManager
 
     public class UnlockEvents
     {
+        public Action<Clues> Unlock;
 
-        private Dictionary<Clues, UnlockEvent<Clues>> mapUnlock = new Dictionary<Clues, UnlockEvent<Clues>>();
+        public Action<Name> Interacted;
 
-        public UnlockEvent<Clues> OnUnlockEvent(Clues key)
-        {
-            mapUnlock.TryAdd(key, new UnlockEvent<Clues>());
-            return mapUnlock[key];
+        // private Dictionary<Clues, UnlockEvent<Clues>> mapUnlock = new Dictionary<Clues, UnlockEvent<Clues>>();
 
-        }
+        // public UnlockEvent<Clues> OnUnlockEvent(Clues key)
+        // {
+        //     mapUnlock.TryAdd(key, new UnlockEvent<Clues>());
+        //     return mapUnlock[key];
+
+        // }
     }
 
     public class IdentifyEvents

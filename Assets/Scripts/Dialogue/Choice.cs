@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum Clues
 {
+    None,
     Sponges,
     Receipt
 }
@@ -14,7 +15,20 @@ public class Choice
     [TextArea(3,10)]
     public string choiceText;
     public int nextLineIndex;
-    public Unlockable unlockable;
+    [SerializeField]
+    List<Clues> unlockable;
+
+    public bool Unlocked()
+    {
+        foreach(Clues clues in unlockable)
+        {
+            if (GameManager.Instance.CheckUnlock(clues) == false)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
 [System.Serializable]
@@ -22,49 +36,41 @@ public class DialogueChoices
 {
     public int choiceIndex;
     public List<Choice> choices = new List<Choice>();
-
-    public void InitializeList()
-    {
-        foreach (Choice choice in choices)
-        {
-            choice.unlockable.InitializeList();
-        }
-    }
 }
 
-[System.Serializable]
-public class Unlockable
-{
-    public List<Clues> itemKeys;
+// [System.Serializable]
+// public class Unlockable
+// {
+//     public List<Clues> itemKeys;
 
-    Dictionary<Clues, bool> lockedItems = new Dictionary<Clues, bool>();
+//     Dictionary<Clues, bool> lockedItems = new Dictionary<Clues, bool>();
 
-    public bool unlocked
-    {
-        get
-        {
-            foreach (bool unlocked in lockedItems.Values)
-            {
-                if (unlocked == false)
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-    }
+//     public bool unlocked
+//     {
+//         get
+//         {
+//             foreach (bool unlocked in lockedItems.Values)
+//             {
+//                 if (unlocked == false)
+//                 {
+//                     return false;
+//                 }
+//             }
+//             return true;
+//         }
+//     }
 
-    public void InitializeList()
-    {
-        foreach (Clues key in itemKeys)
-        {
-            lockedItems.Add(key, false);
-            EventManager.Unlocks.OnUnlockEvent(key).unlockAction += Unlock;
-        }
-    }
+//     public void InitializeList()
+//     {
+//         foreach (Clues key in itemKeys)
+//         {
+//             lockedItems.Add(key, false);
+//             EventManager.Unlocks.OnUnlockEvent(key).unlockAction += Unlock;
+//         }
+//     }
 
-    public void Unlock(Clues key)
-    {
-        lockedItems[key] = true;
-    }
-}
+//     public void Unlock(Clues key)
+//     {
+//         lockedItems[key] = true;
+//     }
+//}

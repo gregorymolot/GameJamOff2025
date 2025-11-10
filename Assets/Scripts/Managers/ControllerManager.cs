@@ -28,6 +28,9 @@ public class ControllerManager : MonoBehaviour
     [SerializeField]
     ProfileController profileController;
 
+    [SerializeField]
+    MenuController menuController;
+
     ControllerType previousType;
     ControllerType currentType;
 
@@ -54,18 +57,33 @@ public class ControllerManager : MonoBehaviour
         {
             case ControllerType.Gameplay:
                 playerController.enabled = true;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = 1f;
                 break;
             case ControllerType.Interactable:
                 interactableController.enabled = true;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = 0f;
                 break;
             case ControllerType.Dialogue:
                 dialogueController.enabled = true;
-                //Time.timeScale = 0f;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 1f;
                 break;
             case ControllerType.Profile:
                 profileController.enabled = true;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 1f;
+                break;
+            case ControllerType.Menu:
+                menuController.enabled = true;
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                Time.timeScale = 0f;
                 break;
         }
     }
@@ -81,6 +99,7 @@ public class ControllerManager : MonoBehaviour
         interactableController.enabled = false;
         dialogueController.enabled = false;
         profileController.enabled = false;
+        menuController.enabled = false;
     }
 }
 

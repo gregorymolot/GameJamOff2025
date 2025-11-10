@@ -40,7 +40,6 @@ public class LevelLoader : MonoBehaviour
     public void LoadNextScene(string sceneName)
     {
         StartCoroutine(LoadScene(sceneName));
-        Time.timeScale = 1f;
     }
 
     IEnumerator LoadScene(string sceneName)
@@ -58,6 +57,8 @@ public class LevelLoader : MonoBehaviour
             yield return null;
         }
         timer = 0f;
+
+        Time.timeScale = 1f;
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
         do

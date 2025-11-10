@@ -29,10 +29,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI descriptionText;
     [SerializeField]
-    TextMeshProUGUI clueText;
-
-    bool isInMindMap = true;
-    
+    TextMeshProUGUI clueText;    
 
     void Awake()
     {
@@ -75,7 +72,6 @@ public class CharacterManager : MonoBehaviour
             clueText.text += "\n\n";
         }
         animator.SetTrigger("SwapIn");
-        isInMindMap = false;
     }
 
     public void CloseProfile()
@@ -111,7 +107,6 @@ public class CharacterManager : MonoBehaviour
 
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
 
-        isInMindMap = true;
     }
 }
 

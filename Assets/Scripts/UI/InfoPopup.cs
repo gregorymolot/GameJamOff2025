@@ -2,6 +2,7 @@ using System.Collections;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InfoPopup : MonoBehaviour
 {

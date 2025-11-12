@@ -38,8 +38,12 @@ public class SoundEmitter : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        other.GetComponent<Dissolve>().TryStartDissolve(transform);
+        if (other.CompareTag("Findable"))
+        {
+            other.GetComponent<Dissolve>().TryStartDissolve(transform);
+        }
     }
+        
 
     void OnDrawGizmos()
     {

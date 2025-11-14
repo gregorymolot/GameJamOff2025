@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.Properties;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<Clues, bool> unlockedClues = new Dictionary<Clues, bool>();
     public Dictionary<Name, bool> interactedCharacters = new Dictionary<Name, bool>();
+
+    public Material baseMaterial;
 
 
 
@@ -47,6 +50,34 @@ public class GameManager : MonoBehaviour
         foreach (Name name in names)
         {
             interactedCharacters.Add(name, false);
+        }
+        ApplyRandomColorsToRenderers();
+    }
+
+    void ApplyRandomColorsToRenderers()
+    {
+        // Get all active MeshRenderers and SpriteRenderers in the scene
+        Renderer[] allRenderers = FindObjectsByType<Renderer>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+
+        MaterialPropertyBlock block = new MaterialPropertyBlock();
+
+        for (int i = 0; i < allRenderers.Length; i++)
+        {
+            Renderer currentRenderer = allRenderers[i];
+            if (currentRenderer.material.name.Contains("Dissolve"))
+            {
+                continue;
+            }
+            else
+            {
+                currentRenderer.material = baseMaterial;
+            }    
+            currentRenderer.GetPropertyBlock(block);
+
+            Color assignedColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+
+            block.SetColor("_Color", assignedColor);
+            currentRenderer.SetPropertyBlock(block);
         }
     }
 

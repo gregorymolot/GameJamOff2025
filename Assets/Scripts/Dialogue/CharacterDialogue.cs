@@ -41,6 +41,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     bool isTyping;
 
     public bool isDialogueActive { get; private set; }
+    public bool Interactable { get => interactable; set => interactable = value; }
+    private bool interactable = true;
 
     DialogueManager dialogueManager;
 

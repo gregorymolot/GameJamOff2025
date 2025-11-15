@@ -64,18 +64,20 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < allRenderers.Length; i++)
         {
             Renderer currentRenderer = allRenderers[i];
+            Color assignedColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
             if (currentRenderer.material.name.Contains("Dissolve"))
             {
+                currentRenderer.GetPropertyBlock(block);
+                block.SetColor("_Base", assignedColor);
+                currentRenderer.SetPropertyBlock(block);
                 continue;
             }
             else
             {
                 currentRenderer.material = baseMaterial;
-            }    
+            }
+
             currentRenderer.GetPropertyBlock(block);
-
-            Color assignedColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-
             block.SetColor("_Color", assignedColor);
             currentRenderer.SetPropertyBlock(block);
         }
@@ -105,6 +107,10 @@ public class GameManager : MonoBehaviour
 
     void Unlock(Clues clue)
     {
+        if (unlockedClues[clue] == false)
+        {
+            EventManager.Unlocks.NewUnlock?.Invoke();
+        }
         unlockedClues[clue] = true;
     }
     

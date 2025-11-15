@@ -18,7 +18,7 @@ public static class EventManager
     public static readonly UnlockEvents Unlocks = new UnlockEvents();
     public class ItemEvents
     {
-        public Action<InteractableItem> ShowItem;
+        public Action<DiscoverableItem> ShowItem;
         public Action Return;
     }
 
@@ -27,6 +27,8 @@ public static class EventManager
         public Action<Clues> Unlock;
 
         public Action<Name> Interacted;
+
+        public Action NewUnlock;
 
         // private Dictionary<Clues, UnlockEvent<Clues>> mapUnlock = new Dictionary<Clues, UnlockEvent<Clues>>();
 

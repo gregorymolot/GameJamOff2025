@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
 
     public void Interact()
     {
-        if (interactable != null)
+        if (interactable != null && interactable.Interactable)
         {
             interactable.Interact();
         }
@@ -71,7 +71,22 @@ public class Player : MonoBehaviour
         else
         {
             interactable = null;
+            UIManager.Instance.TurnOffInteractText();
+            return;
         }
-        Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 2f);
+        if (interactable != null && interactable.Interactable == false)
+        {
+            interactable = null;
+            UIManager.Instance.TurnOffInteractText();
+            return;
+        }
+        if (interactable is CharacterDialogue)
+        {
+            UIManager.Instance.ShowTalkText();
+        }
+        else
+        {
+            UIManager.Instance.ShowInteractText();
+        }
     }
 }

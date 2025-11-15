@@ -36,7 +36,7 @@ public class InfoPopup : MonoBehaviour
         dissolveMaterial.SetFloat("_DissolveAmount", -2);
     }
 
-    public void Activate(InteractableItem item)
+    public void Activate(DiscoverableItem item)
     {
         if (!isActivated)
         {
@@ -51,7 +51,7 @@ public class InfoPopup : MonoBehaviour
         }
     }
 
-    IEnumerator Activation(InteractableItem item)
+    IEnumerator Activation(DiscoverableItem item)
     {
         float timer = 0;
         while (timer < 1f)

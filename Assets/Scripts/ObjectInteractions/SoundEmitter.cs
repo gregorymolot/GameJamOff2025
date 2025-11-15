@@ -32,7 +32,7 @@ public class SoundEmitter : MonoBehaviour
     {
         if (other.CompareTag("Findable"))
         {
-            other.GetComponent<Dissolve>().TryStartOutline(transform);
+            other.GetComponentInParent<Dissolve>().TryStartOutline(transform);
         }
     }
 
@@ -40,7 +40,7 @@ public class SoundEmitter : MonoBehaviour
     {
         if (other.CompareTag("Findable"))
         {
-            other.GetComponent<Dissolve>().TryStartDissolve(transform);
+            other.GetComponentInParent<Dissolve>().TryStartDissolve(transform);
         }
     }
         

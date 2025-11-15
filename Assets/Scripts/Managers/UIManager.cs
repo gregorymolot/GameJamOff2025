@@ -1,3 +1,5 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
@@ -10,6 +12,11 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     GameObject profileCanvas;
+    [SerializeField]
+    Animator discoverText;
+
+    [SerializeField]
+    TextMeshProUGUI interactText;
 
     public static UIManager Instance
     {
@@ -40,15 +47,17 @@ public class UIManager : MonoBehaviour
     {
         EventManager.Items.ShowItem += InitializeScreen;
         EventManager.Items.Return += DisappearScreen;
+        EventManager.Unlocks.NewUnlock += DisplayProfileText;
     }
 
     void OnDisable()
     {
         EventManager.Items.ShowItem -= InitializeScreen;
         EventManager.Items.Return -= DisappearScreen;
+        EventManager.Unlocks.NewUnlock -= DisplayProfileText;
     }
 
-    void InitializeScreen(InteractableItem item)
+    void InitializeScreen(DiscoverableItem item)
     {
         discoverCanvas.SetActive(true);
         infoPopup.Activate(item);
@@ -64,6 +73,21 @@ public class UIManager : MonoBehaviour
         discoverCanvas.SetActive(false);
     }
 
+    public void ShowInteractText()
+    {
+        interactText.text = "Left Click to Interact";
+    }
+
+    public void ShowTalkText()
+    {
+        interactText.text = "Left Click to Talk";
+    }
+
+    public void TurnOffInteractText()
+    {
+        interactText.text = "";
+    }
+
     public void InitializeProfiles()
     {
         profileCanvas.SetActive(true);
@@ -77,5 +101,24 @@ public class UIManager : MonoBehaviour
     public void TurnOffProfileCanvas()
     {
         profileCanvas.SetActive(false);
+    }
+
+    bool alreadytext;
+
+    void DisplayProfileText()
+    {
+        if (alreadytext == false)
+        {
+            alreadytext = true;
+            discoverText.SetTrigger("PopIn");
+            StartCoroutine(TextOut());
+        }
+    }
+
+    IEnumerator TextOut()
+    {
+        yield return new WaitForSeconds(3f);
+        discoverText.SetTrigger("PopOut");
+        alreadytext = false;
     }
 }

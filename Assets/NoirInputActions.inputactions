@@ -216,6 +216,76 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Safe",
+            "id": "03a7a517-f034-4b25-b034-9aba784fca75",
+            "actions": [
+                {
+                    "name": "UnlockSafe",
+                    "type": "Button",
+                    "id": "ff7bd404-345a-41a1-b012-9ed3b2bae652",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Return",
+                    "type": "Button",
+                    "id": "17fda16c-928c-4172-ac17-8e3a0fc34cbb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "1D Axis",
+                    "id": "e6a8d840-533a-42ba-b148-23b3cba55846",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UnlockSafe",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "1eb17944-7f9a-4d2b-8b9d-8a5a93e6aea0",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UnlockSafe",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "4be3c870-90de-4bc1-bac7-11a107a52cf9",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UnlockSafe",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "85d0e38a-3a71-4879-ac53-00a66db5c508",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Return",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

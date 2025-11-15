@@ -2,30 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Renderer))]
 public class Dissolve : MonoBehaviour
 {
-    Renderer dissolveRenderer;
+    Renderer[] dissolveRenderers;
     MaterialPropertyBlock propertyBlock;
 
     List<Transform> SoundLocations = new List<Transform>();
+
+    IInteractable interactable;
 
     [SerializeField]
     [Range(-2f, 2f)]
     public float dissolveAmount;
     void Start()
     {
-        dissolveRenderer = GetComponent<Renderer>();
+        interactable = GetComponentInChildren<IInteractable>() != null ? GetComponentInChildren<IInteractable>() : null;
+        dissolveRenderers = GetComponentsInChildren<Renderer>();
         propertyBlock = new MaterialPropertyBlock();
+        foreach(Renderer dissolveRenderer in dissolveRenderers)
+        {
+        
         dissolveRenderer.GetPropertyBlock(propertyBlock);
         dissolveAmount = -2f;
         propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
         dissolveRenderer.SetPropertyBlock(propertyBlock);
+        }
     }
 
     void OnApplicationQuit()
     {
-        dissolveRenderer.material.SetFloat("_DissolveAmount", 2f);
+        foreach(Renderer dissolveRenderer in dissolveRenderers)
+        {
+        
+        dissolveRenderer.GetPropertyBlock(propertyBlock);
+        dissolveAmount = 2f;
+        propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
+        dissolveRenderer.SetPropertyBlock(propertyBlock);
+        }
     }
 
     public void TryStartOutline(Transform direction)
@@ -33,7 +46,10 @@ public class Dissolve : MonoBehaviour
         if (SoundLocations.Count == 0)
         {
             propertyBlock.SetVector("_SoundOrigin", direction.position);
-            dissolveRenderer.SetPropertyBlock(propertyBlock);
+            foreach(Renderer dissolveRenderer in dissolveRenderers)
+            {
+                dissolveRenderer.SetPropertyBlock(propertyBlock);
+            }
             StopAllCoroutines();
             StartCoroutine(DissolveIn());
         }
@@ -46,7 +62,10 @@ public class Dissolve : MonoBehaviour
         if (SoundLocations.Count == 0)
         {
             propertyBlock.SetVector("_SoundOrigin", direction.position);
-            dissolveRenderer.SetPropertyBlock(propertyBlock);
+            foreach(Renderer dissolveRenderer in dissolveRenderers)
+            {
+                dissolveRenderer.SetPropertyBlock(propertyBlock);
+            }
             StopAllCoroutines();
             StartCoroutine(DissolveOut());
         }
@@ -54,22 +73,36 @@ public class Dissolve : MonoBehaviour
 
     IEnumerator DissolveIn()
     {
+        if (interactable != null)
+        {
+            interactable.Interactable = true;
+        }
         while (dissolveAmount < 2f)
         {
             dissolveAmount += Time.deltaTime * 3f;
             propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
-            dissolveRenderer.SetPropertyBlock(propertyBlock);
+            foreach(Renderer dissolveRenderer in dissolveRenderers)
+            {
+                dissolveRenderer.SetPropertyBlock(propertyBlock);
+            }
             yield return null;
         }
     }
 
     IEnumerator DissolveOut()
     {
+        if (interactable != null)
+        {
+            interactable.Interactable = false;
+        }    
         while (dissolveAmount > -2f)
         {
             dissolveAmount -= Time.deltaTime * 3f;
             propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
-            dissolveRenderer.SetPropertyBlock(propertyBlock);
+            foreach(Renderer dissolveRenderer in dissolveRenderers)
+            {
+                dissolveRenderer.SetPropertyBlock(propertyBlock);
+            }
             yield return null;
         }
     }

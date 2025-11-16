@@ -1,16 +1,42 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SafeController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    Safe safe;
+    [SerializeField] PlayerInput input;
+    void OnEnable()
     {
-        
+        input.enabled = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDisable()
     {
-        
+        input.enabled = false;
+    }
+
+    public void Rotate(InputAction.CallbackContext context)
+    {
+        if (!context.started)
+        {
+            safe.Rotate(context.ReadValue<float>());
+        }
+    }
+
+    public void Return(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            safe.Return();
+        }
+    }
+
+    public void Restart(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            safe.Restart();
+        }
     }
 }

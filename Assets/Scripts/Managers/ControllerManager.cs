@@ -30,6 +30,8 @@ public class ControllerManager : MonoBehaviour
 
     [SerializeField]
     MenuController menuController;
+    [SerializeField]
+    SafeController safeController;
 
     ControllerType previousType;
     ControllerType currentType;
@@ -85,6 +87,12 @@ public class ControllerManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.None;
                 Time.timeScale = 0f;
                 break;
+            case ControllerType.Safe:
+                safeController.enabled = true;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1f;
+                break;
         }
     }
 
@@ -100,6 +108,7 @@ public class ControllerManager : MonoBehaviour
         dialogueController.enabled = false;
         profileController.enabled = false;
         menuController.enabled = false;
+        safeController.enabled = false;
     }
 }
 
@@ -109,5 +118,6 @@ public enum ControllerType
     Interactable,
     Dialogue,
 Profile,
+Safe,
     Menu
 }

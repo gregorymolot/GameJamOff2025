@@ -39,6 +39,7 @@ public class GameplayPlayerController : MonoBehaviour
             tilt.enabled = false;
         }
         GetComponent<PlayerInput>().enabled = false;
+        UIManager.Instance.TurnOffInteractText();
     }
 
     public void Walk(InputAction.CallbackContext context)
@@ -61,6 +62,27 @@ public class GameplayPlayerController : MonoBehaviour
         {
             UIManager.Instance.InitializeProfiles();
             ControllerManager.Instance.SwapCurrentController(ControllerType.Profile);
+        }
+    }
+
+    void Update()
+    {
+        CheckText();
+    }
+
+    void CheckText()
+    {
+        if (player.interactable == null || player.interactable.Interactable == false)
+        {
+            UIManager.Instance.TurnOffInteractText();
+        }
+        else if (player.interactable is CharacterDialogue)
+        {
+            UIManager.Instance.ShowTalkText();
+        }
+        else
+        {
+            UIManager.Instance.ShowInteractText();
         }
     }
 

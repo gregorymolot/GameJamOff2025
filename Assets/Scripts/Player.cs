@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,9 +12,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     LayerMask interactableMask;
 
-    IInteractable interactable;
+    public IInteractable interactable { get; private set;}
 
     CharacterController character;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -71,22 +73,11 @@ public class Player : MonoBehaviour
         else
         {
             interactable = null;
-            UIManager.Instance.TurnOffInteractText();
             return;
         }
         if (interactable != null && interactable.Interactable == false)
         {
             interactable = null;
-            UIManager.Instance.TurnOffInteractText();
-            return;
-        }
-        if (interactable is CharacterDialogue)
-        {
-            UIManager.Instance.ShowTalkText();
-        }
-        else
-        {
-            UIManager.Instance.ShowInteractText();
         }
     }
 }

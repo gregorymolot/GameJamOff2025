@@ -21,11 +21,14 @@ public class Dissolve : MonoBehaviour
         propertyBlock = new MaterialPropertyBlock();
         foreach(Renderer dissolveRenderer in dissolveRenderers)
         {
-        
-        dissolveRenderer.GetPropertyBlock(propertyBlock);
-        dissolveAmount = -2f;
-        propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
-        dissolveRenderer.SetPropertyBlock(propertyBlock);
+            dissolveRenderer.GetPropertyBlock(propertyBlock);
+            dissolveAmount = -2f;
+            propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
+            dissolveRenderer.SetPropertyBlock(propertyBlock);
+        }
+        if (interactable != null)
+        {
+            interactable.Interactable = false;
         }
     }
 

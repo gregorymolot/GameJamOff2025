@@ -53,9 +53,12 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     [SerializeField]
     TextMeshProUGUI nameLabel;
 
+    Animator animator;
+
     void Awake()
     {
         npcCamera.enabled = false;
+        animator = GetComponent<Animator>();
     }
 
     void Start()
@@ -67,6 +70,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     {
         if (isDialogueActive)
         {
+            animator.Play("Talk", -1, 0);
             NextLine();
         }
         else
@@ -122,6 +126,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     void StartDialogue()
     {
         //nameLabel.text = characterName.ToString();
+        animator.SetBool("Talking", true);
         nameLabel.text = characterName.ToString();
         DialogueManager.Instance.SetDialogue(this);
         ControllerManager.Instance.SwapCurrentController(ControllerType.Dialogue);
@@ -195,6 +200,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     public void Return()
     {
+        animator.SetBool("Talking", false);
         StopAllCoroutines();
         npcCamera.enabled = false;
         isDialogueActive = false;

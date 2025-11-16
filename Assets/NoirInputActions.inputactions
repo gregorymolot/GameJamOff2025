@@ -223,12 +223,12 @@
             "actions": [
                 {
                     "name": "UnlockSafe",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "ff7bd404-345a-41a1-b012-9ed3b2bae652",
-                    "expectedControlType": "",
+                    "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Return",

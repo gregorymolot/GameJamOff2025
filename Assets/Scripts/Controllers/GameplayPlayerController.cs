@@ -20,7 +20,6 @@ public class GameplayPlayerController : MonoBehaviour
             float sensitivity = PlayerPrefs.GetFloat("Sensitivity", 1);
         foreach(var controller in tilt.Controllers)
         {
-            Debug.Log(controller.Name);
             if (controller.Name == "Look X (Pan)")
             {
                 controller.Input.Gain = sensitivity;

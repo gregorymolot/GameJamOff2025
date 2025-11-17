@@ -33,6 +33,9 @@ public class ControllerManager : MonoBehaviour
     [SerializeField]
     SafeController safeController;
 
+    [SerializeField]
+    CutsceneController cutsceneController;
+
     ControllerType previousType;
     ControllerType currentType;
 
@@ -93,6 +96,18 @@ public class ControllerManager : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Locked;
                 Time.timeScale = 1f;
                 break;
+            case ControllerType.Cutscene:
+                cutsceneController.enabled = true;
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1f;
+                break;
+            case ControllerType.None:
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Time.timeScale = 1f;
+                break;
+
         }
     }
 
@@ -109,6 +124,7 @@ public class ControllerManager : MonoBehaviour
         profileController.enabled = false;
         menuController.enabled = false;
         safeController.enabled = false;
+        cutsceneController.enabled = false;
     }
 }
 
@@ -117,7 +133,9 @@ public enum ControllerType
     Gameplay,
     Interactable,
     Dialogue,
-Profile,
-Safe,
-    Menu
+    Profile,
+    Safe,
+    Menu,
+    Cutscene,
+    None
 }

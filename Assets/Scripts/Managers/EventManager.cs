@@ -20,6 +20,8 @@ public static class EventManager
     {
         public Action<DiscoverableItem> ShowItem;
         public Action Return;
+
+        public Action<bool> ToggleSwitch;
     }
 
     public class UnlockEvents

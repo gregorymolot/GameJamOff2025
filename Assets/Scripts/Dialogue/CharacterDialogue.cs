@@ -70,7 +70,6 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     {
         if (isDialogueActive)
         {
-            animator.Play("Talk", -1, 0);
             NextLine();
         }
         else
@@ -121,11 +120,12 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         {
             Return();
         }
+                    animator.Play("Talk", -1, 0);
+
     }
 
     void StartDialogue()
     {
-        //nameLabel.text = characterName.ToString();
         animator.SetBool("Talking", true);
         nameLabel.text = characterName.ToString();
         DialogueManager.Instance.SetDialogue(this);
@@ -185,7 +185,14 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             {
                 int nextIndex = choice.choices[i].nextLineIndex;
                 //Add a delay here
-                dialogueManager.CreateChoiceButton(choice.choices[i].choiceText, () => ChooseOption(nextIndex));
+                if (choice.choices[i].accusation.accusation)
+                {
+                    dialogueManager.CreateChoiceButton(choice.choices[i].choiceText, () => ChooseAccusation(choice.choices[i].accusation.characterName));
+                }
+                else
+                {
+                    dialogueManager.CreateChoiceButton(choice.choices[i].choiceText, () => ChooseOption(nextIndex));
+                }
             }
         }
     }
@@ -198,8 +205,14 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         StartCoroutine(TypeSentence());
     }
 
+    void ChooseAccusation(Name name)
+    {
+        UIManager.Instance.ShowEndScreen(name);
+    }
+
     public void Return()
     {
+        //Destroy sound emitter if there is one
         animator.SetBool("Talking", false);
         StopAllCoroutines();
         npcCamera.enabled = false;

@@ -115,6 +115,18 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void ShowEndScreen(Name name)
+    {
+        if (name == Name.Anthony)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
+
     IEnumerator TextOut()
     {
         yield return new WaitForSeconds(3f);

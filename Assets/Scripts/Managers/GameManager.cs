@@ -112,10 +112,27 @@ public class GameManager : MonoBehaviour
             EventManager.Unlocks.NewUnlock?.Invoke();
         }
         unlockedClues[clue] = true;
+        CheckAllUnlock();
     }
     
     public bool CheckUnlock(Clues clue)
     {
         return unlockedClues[clue];
+    }
+
+    void CheckAllUnlock()
+    {
+        foreach(Clues clue in unlockedClues.Keys)
+        {
+            if (clue == Clues.All)
+            {
+                break;
+            }
+            if (unlockedClues[clue] == false)
+            {
+                return;
+            }
+        }
+        unlockedClues[Clues.All] = true;
     }
 }

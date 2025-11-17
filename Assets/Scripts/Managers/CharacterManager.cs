@@ -160,7 +160,7 @@ public class ProfileLine
         {
             if (GameManager.Instance.CheckUnlock(clue) == false)
             {
-                return "";
+                return "???";
             }
         }
         return profileDescription;

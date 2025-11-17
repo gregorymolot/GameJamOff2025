@@ -6,7 +6,8 @@ public enum Clues
 {
     None,
     Sponges,
-    Receipt
+    Receipt,
+    All
 }
 
 [System.Serializable]
@@ -17,6 +18,8 @@ public class Choice
     public int nextLineIndex;
     [SerializeField]
     List<Clues> unlockable;
+
+    public Accusation accusation;
 
     public bool Unlocked()
     {
@@ -32,45 +35,15 @@ public class Choice
 }
 
 [System.Serializable]
+public class Accusation
+{
+    public Name characterName;
+    public bool accusation;
+}
+
+[System.Serializable]
 public class DialogueChoices
 {
     public int choiceIndex;
     public List<Choice> choices = new List<Choice>();
 }
-
-// [System.Serializable]
-// public class Unlockable
-// {
-//     public List<Clues> itemKeys;
-
-//     Dictionary<Clues, bool> lockedItems = new Dictionary<Clues, bool>();
-
-//     public bool unlocked
-//     {
-//         get
-//         {
-//             foreach (bool unlocked in lockedItems.Values)
-//             {
-//                 if (unlocked == false)
-//                 {
-//                     return false;
-//                 }
-//             }
-//             return true;
-//         }
-//     }
-
-//     public void InitializeList()
-//     {
-//         foreach (Clues key in itemKeys)
-//         {
-//             lockedItems.Add(key, false);
-//             EventManager.Unlocks.OnUnlockEvent(key).unlockAction += Unlock;
-//         }
-//     }
-
-//     public void Unlock(Clues key)
-//     {
-//         lockedItems[key] = true;
-//     }
-//}

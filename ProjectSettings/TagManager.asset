@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Findable
   - Emitter
+  - Floor
   layers:
   - Default
   - TransparentFX

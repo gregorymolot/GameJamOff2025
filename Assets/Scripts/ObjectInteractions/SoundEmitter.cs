@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
@@ -6,22 +7,7 @@ using UnityEngine;
 public class SoundEmitter : MonoBehaviour
 {
     SphereCollider sphere;
-
-
-    [SerializeField]
-    public bool constant;
-
-    [NonSerialized]
-    public float startingSize;
-
-    [NonSerialized]
-    public float maxSize;
-
-    [NonSerialized]
-    public float timeToReachMaxSize;
-
-    [NonSerialized]
-    public float timeAtMaxSize;
+    float timeToMax;
 
     void Start()
     {
@@ -43,6 +29,60 @@ public class SoundEmitter : MonoBehaviour
             other.GetComponentInParent<Dissolve>().TryStartDissolve(transform);
         }
     }
+
+    public void StartSoundGrowth(float maxSize, float timeToMax)
+    {
+        this.timeToMax = timeToMax;
+        StartCoroutine(GrowToMax(maxSize));
+    }
+
+    public void StartSoundGrowth(float maxSize, float timeToMax, float timeAtMax)
+    {
+        this.timeToMax = timeToMax;
+        StartCoroutine(GrowToMax(maxSize, timeAtMax));
+    }
+
+    public void EndSound()
+    {
+        StopAllCoroutines();
+        StartCoroutine(Shrink());
+    }
+
+    IEnumerator GrowToMax(float max)
+    {
+        float timer = 0f;
+        while(timer < timeToMax)
+        {
+            sphere.radius = Mathf.Lerp(0, max, timer/timeToMax);
+            timer+=Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    IEnumerator GrowToMax(float max, float timeAtMax)
+    {
+        float timer = 0f;
+        while(timer < timeToMax)
+        {
+            sphere.radius = Mathf.Lerp(0, max, timer/timeToMax);
+            timer+=Time.deltaTime;
+            yield return null;
+        }
+        yield return new WaitForSeconds(timeAtMax);
+        StartCoroutine(Shrink());
+    }
+
+    IEnumerator Shrink()
+    {
+        float timer = 0f;
+        float currentSize = sphere.radius;
+        while(timer < timeToMax)
+        {
+            sphere.radius = Mathf.Lerp(0, currentSize, timer/timeToMax);
+            timer+=Time.deltaTime;
+            yield return null;
+        }
+    }
         
 
     void OnDrawGizmos()
@@ -52,35 +92,3 @@ public class SoundEmitter : MonoBehaviour
     }
 }
 
-[CustomEditor(typeof(SoundEmitter))]
-public class EmitterEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        SoundEmitter emitter = (SoundEmitter)target;
-
-        DrawDefaultInspector();
-
-        if (emitter.constant)
-        {
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Constant Size Options", EditorStyles.boldLabel);
-
-            emitter.startingSize = EditorGUILayout.FloatField("Constant Start Size", emitter.startingSize);
-        }
-        else
-        {
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Growing Size Options", EditorStyles.boldLabel);
-
-            emitter.maxSize = EditorGUILayout.FloatField("Growing Max Size", emitter.maxSize);
-            emitter.timeToReachMaxSize = EditorGUILayout.FloatField("Time To Reach Max", emitter.timeToReachMaxSize);
-            emitter.timeAtMaxSize = EditorGUILayout.FloatField("Time At Max", emitter.timeAtMaxSize);
-        }
-
-        if (GUI.changed)
-        {
-            EditorUtility.SetDirty(emitter);
-        }
-    }
-}

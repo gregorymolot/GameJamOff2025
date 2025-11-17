@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         {
             interactedCharacters.Add(name, false);
         }
-        ApplyRandomColorsToRenderers();
+        //ApplyRandomColorsToRenderers();
     }
 
     void ApplyRandomColorsToRenderers()
@@ -70,16 +70,7 @@ public class GameManager : MonoBehaviour
                 currentRenderer.GetPropertyBlock(block);
                 block.SetColor("_Base", assignedColor);
                 currentRenderer.SetPropertyBlock(block);
-                continue;
             }
-            else
-            {
-                currentRenderer.material = baseMaterial;
-            }
-
-            currentRenderer.GetPropertyBlock(block);
-            block.SetColor("_Color", assignedColor);
-            currentRenderer.SetPropertyBlock(block);
         }
     }
 

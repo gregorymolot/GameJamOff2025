@@ -9,7 +9,7 @@ public class SoundEmitter : MonoBehaviour
     SphereCollider sphere;
     float timeToMax;
 
-    void Start()
+    void Awake()
     {
         sphere = GetComponent<SphereCollider>();
     }
@@ -50,6 +50,7 @@ public class SoundEmitter : MonoBehaviour
 
     IEnumerator GrowToMax(float max)
     {
+        yield return null;
         float timer = 0f;
         while(timer < timeToMax)
         {
@@ -61,6 +62,7 @@ public class SoundEmitter : MonoBehaviour
 
     IEnumerator GrowToMax(float max, float timeAtMax)
     {
+        yield return null;
         float timer = 0f;
         while(timer < timeToMax)
         {
@@ -78,10 +80,11 @@ public class SoundEmitter : MonoBehaviour
         float currentSize = sphere.radius;
         while(timer < timeToMax)
         {
-            sphere.radius = Mathf.Lerp(0, currentSize, timer/timeToMax);
+            sphere.radius = Mathf.Lerp(currentSize, 0, timer/timeToMax);
             timer+=Time.deltaTime;
             yield return null;
         }
+        Destroy(gameObject);
     }
         
 

@@ -31,6 +31,8 @@ public class Safe : MonoBehaviour, IInteractable
 
     SafeState safeState = SafeState.FirstNum;
 
+    bool playedSound;
+
     public bool Returnable { get => returnable; set => returnable = value; }
     public bool Interactable { get => interactable; set => interactable = value; }
     private bool interactable = true;
@@ -113,29 +115,43 @@ public class Safe : MonoBehaviour, IInteractable
                 case SafeState.FirstNum:
                 if (Approximately(dial.transform.localRotation.eulerAngles.x, firstRotation, 5f) && direction >= 0f)
                     {
-                        Debug.Log("In range!");
+                        if (playedSound==false)
+                        {
+                            playedSound = true;
+                            SoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, 0.5f);
+                        }
                         if (direction == 0)
                         {
                             Debug.Log("Locked In!");
                             safeState = SafeState.SecondNum;
+                            playedSound = false;
                         }
                     }
                 break;
                 case SafeState.SecondNum:
                 if (Approximately(dial.transform.localRotation.eulerAngles.x, secondRotation, 5f) && direction <= 0f)
                     {
-                        Debug.Log("In range!");
+                        if (playedSound==false)
+                        {
+                            playedSound = true;
+                            SoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, 0.5f);
+                        }
                         if (direction == 0)
                         {
                             Debug.Log("Locked In!");
                             safeState = SafeState.ThirdNum;
+                            playedSound = false;
                         }
                     }
                 break;
                 case SafeState.ThirdNum:
                 if (Approximately(dial.transform.localRotation.eulerAngles.x, thirdRotation, 5f) && direction >= 0f)
                     {
-                        Debug.Log("In range!");
+                        if (playedSound==false)
+                        {
+                            playedSound = true;
+                            SoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, 0.5f);
+                        }
                         if (direction == 0)
                         {
                             UnlockSafe();
@@ -157,6 +173,7 @@ public class Safe : MonoBehaviour, IInteractable
     IEnumerator ReturnDial()
     {
         returning = true;
+        playedSound = false;
         float timer = 0f;
         Quaternion startingRotation = dial.transform.localRotation;
         while (timer < 1f)

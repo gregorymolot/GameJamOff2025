@@ -14,7 +14,8 @@ public class Dissolve : MonoBehaviour
     [SerializeField]
     [Range(-2f, 2f)]
     public float dissolveAmount;
-    void Start()
+
+    public void Initialize()
     {
         interactable = GetComponentInChildren<IInteractable>() != null ? GetComponentInChildren<IInteractable>() : null;
         dissolveRenderers = GetComponentsInChildren<Renderer>();
@@ -34,6 +35,10 @@ public class Dissolve : MonoBehaviour
 
     void OnApplicationQuit()
     {
+        if (dissolveRenderers == null)
+        {
+            return;
+        }
         foreach(Renderer dissolveRenderer in dissolveRenderers)
         {
         

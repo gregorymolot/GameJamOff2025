@@ -16,9 +16,12 @@ public class Player : MonoBehaviour
 
     CharacterController character;
 
+    Inventory inventory;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        inventory = GetComponent<Inventory>();
         character = GetComponent<CharacterController>();
     }
 
@@ -58,6 +61,11 @@ public class Player : MonoBehaviour
         {
             interactable.Return();
         }
+    }
+
+    public void CycleInventory(float direction)
+    {
+        inventory.CycleInventory(direction);
     }
     
     void LookForInteractable()

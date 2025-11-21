@@ -15,6 +15,11 @@ public class Dissolve : MonoBehaviour
     [Range(-2f, 2f)]
     public float dissolveAmount;
 
+    void Start()
+    {
+        //Initialize();
+    }
+
     public void Initialize()
     {
         interactable = GetComponentInChildren<IInteractable>() != null ? GetComponentInChildren<IInteractable>() : null;
@@ -31,6 +36,7 @@ public class Dissolve : MonoBehaviour
         {
             interactable.Interactable = false;
         }
+        gameObject.tag = "Findable";
     }
 
     void OnApplicationQuit()

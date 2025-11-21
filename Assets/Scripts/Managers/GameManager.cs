@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Unity.Properties;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
 
     public Material baseMaterial;
 
+    Inventory inventory;
+
 
 
     void Awake()
@@ -37,6 +40,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        inventory = GameObject.FindAnyObjectByType(typeof(Inventory)).GetComponent<Inventory>();
 
         var values = (Clues[])System.Enum.GetValues(typeof(Clues));
         // Iterate through the array and add each value to the list
@@ -72,6 +77,21 @@ public class GameManager : MonoBehaviour
                 currentRenderer.SetPropertyBlock(block);
             }
         }
+    }
+
+    public void AddToInventory(InventoryItem item)
+    {
+        inventory.AddItemToInventory(item);
+    }
+
+    public bool CheckCurrentlyEquippedItem(ItemType item)
+    {
+        return inventory.CheckCurrentlyEquippedItem(item);
+    }
+
+    public void RemoveFromInventory(ItemType item)
+    {
+        inventory.RemoveFromInventory(item);
     }
 
     void OnEnable()

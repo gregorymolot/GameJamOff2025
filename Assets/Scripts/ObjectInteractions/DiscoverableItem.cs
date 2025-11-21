@@ -22,6 +22,8 @@ public class DiscoverableItem : MonoBehaviour, IInteractable
     string itemOwner;
     public string ItemOwner { get => itemOwner; }
 
+    public bool hasOwner;
+
     // [SerializeField]
     // ParticleSystem particles;
 
@@ -32,13 +34,13 @@ public class DiscoverableItem : MonoBehaviour, IInteractable
     [SerializeField]
     private bool interactable;
 
-    public void Interact()
+    public virtual void Interact()
     {
         returnable = false;
         EventManager.Items.ShowItem?.Invoke(this);
     }
 
-    public void Return()
+    public virtual void Return()
     {
         // var main = particles.main;
         // var lifetime = main.startLifetime;

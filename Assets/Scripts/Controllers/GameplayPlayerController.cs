@@ -64,6 +64,14 @@ public class GameplayPlayerController : MonoBehaviour
         }
     }
 
+    public void CycleInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            player.CycleInventory(context.ReadValue<float>());
+        }
+    }
+
     void Update()
     {
         CheckText();

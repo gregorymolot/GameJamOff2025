@@ -45,7 +45,7 @@ public class InfoPopup : MonoBehaviour
             displayMesh.mesh = item.GetComponent<MeshFilter>().mesh;
             description.text = item.Description;
             title.text = item.ItemName;
-            question.text = "You can now ask " + item.ItemOwner + " about " + item.ItemName;
+            question.text = item.hasOwner ? "You can now ask " + item.ItemOwner + " about " + item.ItemName : "";
 
         StartCoroutine(Activation(item));
         }

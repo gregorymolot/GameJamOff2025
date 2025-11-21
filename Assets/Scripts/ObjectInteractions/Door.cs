@@ -20,6 +20,8 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+                    animator.ResetTrigger("Open");
+            animator.ResetTrigger("Close");
         if (opened)
         {
             animator.SetTrigger("Close");

@@ -25,6 +25,8 @@ public class Roomba : MonoBehaviour
         normal = normal.normalized;
         velocity = Vector3.Reflect(velocity, normal);
         velocity.y = 0;
+        velocity.x += Random.Range(-0.1f,0.1f);
+        velocity.z += Random.Range(-0.1f,0.1f);
         velocity = velocity.normalized;
         velocity = velocity * speed;
 

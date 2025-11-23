@@ -8,6 +8,7 @@ public class Roomba : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.maxLinearVelocity = 5f;
         velocity = new Vector3(Random.Range(-1f,1f), 0f, Random.Range(-1f,1f));
         velocity = velocity.normalized;
         velocity = velocity * speed;
@@ -26,8 +27,10 @@ public class Roomba : MonoBehaviour
         velocity.y = 0;
         velocity = velocity.normalized;
         velocity = velocity * speed;
-        rb.linearVelocity = velocity;        
+
+        rb.linearVelocity = velocity;
     }
+    
     public void Reflect(Vector3 normal)
     {
         

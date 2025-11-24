@@ -1,12 +1,12 @@
 using UnityEditor.Rendering;
 using UnityEngine;
 
-public class SoundEmitterManager : MonoBehaviour
+public class SphereSoundEmitterManager : MonoBehaviour
 {
     [SerializeField]
     GameObject soundEmitter;
 
-    public static SoundEmitterManager Instance
+    public static SphereSoundEmitterManager Instance
     {
         get
         {
@@ -17,7 +17,7 @@ public class SoundEmitterManager : MonoBehaviour
             return _instance;
         }
     }
-    private static SoundEmitterManager _instance;
+    private static SphereSoundEmitterManager _instance;
 
     void Awake()
     {
@@ -31,17 +31,17 @@ public class SoundEmitterManager : MonoBehaviour
         }
     }
 
-    public SoundEmitter SpawnSoundEmitter(Vector3 position, float maxSize, float timeToMax)
+    public SphereSoundEmitter SpawnSoundEmitter(Vector3 position, float maxSize, float timeToMax)
     {
         GameObject emitter =  Instantiate(soundEmitter, position, Quaternion.identity);
-        emitter.GetComponent<SoundEmitter>().StartSoundGrowth(maxSize, timeToMax);
-        return emitter.GetComponent<SoundEmitter>();
+        emitter.GetComponent<SphereSoundEmitter>().StartSoundGrowth(maxSize, timeToMax);
+        return emitter.GetComponent<SphereSoundEmitter>();
     }
 
-    public SoundEmitter SpawnSoundEmitter(Vector3 position, float maxSize, float timeToMax, float timeAtMax)
+    public SphereSoundEmitter SpawnSoundEmitter(Vector3 position, float maxSize, float timeToMax, Room room, float timeAtMax)
     {
         GameObject emitter =  Instantiate(soundEmitter, position, Quaternion.identity);
-        emitter.GetComponent<SoundEmitter>().StartSoundGrowth(maxSize, timeToMax, timeAtMax);
-        return emitter.GetComponent<SoundEmitter>();
+        emitter.GetComponent<SphereSoundEmitter>().StartSoundGrowth(maxSize, timeToMax, room, timeAtMax);
+        return emitter.GetComponent<SphereSoundEmitter>();
     }
 }

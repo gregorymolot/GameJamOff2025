@@ -1,0 +1,11 @@
+using UnityEngine;
+
+public class SinkEmitter : MonoBehaviour
+{
+    [SerializeField]
+    AreaSoundEmitter areaSound;
+    private void OnParticleCollision(GameObject other)
+    {
+        SphereSoundEmitterManager.Instance.SpawnSoundEmitter(other.transform.position, 1f, 0.75f, Room.MasterBathroom,  1f);
+    }
+}

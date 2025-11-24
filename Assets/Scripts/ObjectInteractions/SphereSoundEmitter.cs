@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
-public class SoundEmitter : MonoBehaviour
+public class SphereSoundEmitter : BaseSoundEmitter
 {
     SphereCollider sphere;
     float timeToMax;
@@ -14,30 +14,15 @@ public class SoundEmitter : MonoBehaviour
         sphere = GetComponent<SphereCollider>();
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Findable"))
-        {
-            other.GetComponentInParent<Dissolve>().TryStartOutline(transform);
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Findable"))
-        {
-            other.GetComponentInParent<Dissolve>().TryStartDissolve(transform);
-        }
-    }
-
     public void StartSoundGrowth(float maxSize, float timeToMax)
     {
         this.timeToMax = timeToMax;
         StartCoroutine(GrowToMax(maxSize));
     }
 
-    public void StartSoundGrowth(float maxSize, float timeToMax, float timeAtMax)
+    public void StartSoundGrowth(float maxSize, float timeToMax, Room room, float timeAtMax)
     {
+        this.assignedRoom = room;
         this.timeToMax = timeToMax;
         StartCoroutine(GrowToMax(maxSize, timeAtMax));
     }

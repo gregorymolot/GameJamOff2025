@@ -118,7 +118,7 @@ public class Safe : MonoBehaviour, IInteractable
                         if (playedSound==false)
                         {
                             playedSound = true;
-                            SoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, 0.5f);
+                            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, Room.Office, 0.5f);
                         }
                         if (direction == 0)
                         {
@@ -134,7 +134,7 @@ public class Safe : MonoBehaviour, IInteractable
                         if (playedSound==false)
                         {
                             playedSound = true;
-                            SoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, 0.5f);
+                            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, Room.Office, 0.5f);
                         }
                         if (direction == 0)
                         {
@@ -150,7 +150,7 @@ public class Safe : MonoBehaviour, IInteractable
                         if (playedSound==false)
                         {
                             playedSound = true;
-                            SoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, 0.5f);
+                            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, Room.Office, 0.5f);
                         }
                         if (direction == 0)
                         {

@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 3450370622158339281}
   - component: {fileID: 8404842010238871129}
   - component: {fileID: 3684971896358503083}
+  - component: {fileID: 360669508944432204}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Findable
@@ -208,6 +209,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingDoor: 0
+--- !u!114 &360669508944432204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380192933199462619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e2ba3a623f8df4aae8b164615223b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dissolveAmount: 0
+  room: 0
 --- !u!1 &2577072271054203861
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Room
+{
+    MasterBedroom,
+    WalkInCloset,
+    MasterBathroom,
+    Office
+}
+
 public class Dissolve : MonoBehaviour
 {
     Renderer[] dissolveRenderers;
@@ -15,18 +23,23 @@ public class Dissolve : MonoBehaviour
     [Range(-2f, 2f)]
     public float dissolveAmount;
 
+    [SerializeField]
+    public Room room;
+
     void Start()
     {
-        //Initialize();
+        Initialize();
     }
 
     public void Initialize()
     {
+        Material dissolveMaterial = Resources.Load<Material>("DissolveMaterial");
         interactable = GetComponentInChildren<IInteractable>() != null ? GetComponentInChildren<IInteractable>() : null;
         dissolveRenderers = GetComponentsInChildren<Renderer>();
         propertyBlock = new MaterialPropertyBlock();
         foreach(Renderer dissolveRenderer in dissolveRenderers)
         {
+            dissolveRenderer.material = dissolveMaterial;
             dissolveRenderer.GetPropertyBlock(propertyBlock);
             dissolveAmount = -2f;
             propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
@@ -37,6 +50,11 @@ public class Dissolve : MonoBehaviour
             interactable.Interactable = false;
         }
         gameObject.tag = "Findable";
+        if (!TryGetComponent<Rigidbody>(out Rigidbody rb))
+        {
+            rb = gameObject.AddComponent<Rigidbody>();
+            rb.isKinematic = true;
+        }
     }
 
     void OnApplicationQuit()
@@ -57,6 +75,10 @@ public class Dissolve : MonoBehaviour
 
     public void TryStartOutline(Transform direction)
     {
+        if (SoundLocations.Contains(direction))
+        {
+            return;
+        }
         if (SoundLocations.Count == 0)
         {
             propertyBlock.SetVector("_SoundOrigin", direction.position);

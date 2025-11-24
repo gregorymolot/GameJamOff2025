@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Unity.Properties;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -40,8 +38,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+    }
+    private void Start() {
 
-        inventory = GameObject.FindAnyObjectByType(typeof(Inventory)).GetComponent<Inventory>();
+        inventory = FindAnyObjectByType<Inventory>();
 
         var values = (Clues[])System.Enum.GetValues(typeof(Clues));
         // Iterate through the array and add each value to the list
@@ -118,6 +118,10 @@ public class GameManager : MonoBehaviour
 
     void Unlock(Clues clue)
     {
+        if (clue == Clues.None || clue == Clues.All)
+        {
+            return;
+        }
         if (unlockedClues[clue] == false)
         {
             EventManager.Unlocks.NewUnlock?.Invoke();

@@ -30,7 +30,7 @@ MonoBehaviour:
   m_RendererFeatureMap: 40e581e742452e2e7805bfa8b968a43a
   m_UseNativeRenderPass: 0
   xrSystemData: {fileID: 0}
-  postProcessData: {fileID: 0}
+  postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   m_AssetVersion: 2
   m_OpaqueLayerMask:
     serializedVersion: 2
@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: Outlines
   m_EditorClassIdentifier: 
   m_Active: 1
-  injectionPoint: 450
+  injectionPoint: 550
   fetchColorBuffer: 1
   requirements: 6
   passMaterial: {fileID: 2100000, guid: be118451587e0d4409799c4bc77f22ee, type: 2}
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: RenderObjects
-    Event: 450
+    Event: 600
     filterSettings:
       RenderQueueType: 0
       LayerMask:

@@ -14,8 +14,9 @@ public class SphereSoundEmitter : BaseSoundEmitter
         sphere = GetComponent<SphereCollider>();
     }
 
-    public void StartSoundGrowth(float maxSize, float timeToMax)
+    public void StartSoundGrowth(float maxSize, float timeToMax, Room room)
     {
+        assignedRoom = room;
         this.timeToMax = timeToMax;
         StartCoroutine(GrowToMax(maxSize));
     }
@@ -37,9 +38,10 @@ public class SphereSoundEmitter : BaseSoundEmitter
     {
         yield return null;
         float timer = 0f;
+        float currentRadius = sphere.radius;
         while(timer < timeToMax)
         {
-            sphere.radius = Mathf.Lerp(0, max, timer/timeToMax);
+            sphere.radius = Mathf.Lerp(currentRadius, max, timer/timeToMax);
             timer+=Time.deltaTime;
             yield return null;
         }
@@ -49,9 +51,10 @@ public class SphereSoundEmitter : BaseSoundEmitter
     {
         yield return null;
         float timer = 0f;
+        float currentRadius = sphere.radius;
         while(timer < timeToMax)
         {
-            sphere.radius = Mathf.Lerp(0, max, timer/timeToMax);
+            sphere.radius = Mathf.Lerp(currentRadius, max, timer/timeToMax);
             timer+=Time.deltaTime;
             yield return null;
         }
@@ -69,14 +72,9 @@ public class SphereSoundEmitter : BaseSoundEmitter
             timer+=Time.deltaTime;
             yield return null;
         }
+        EndAction?.Invoke(transform);
+        EndAction = null;
         Destroy(gameObject);
-    }
-        
-
-    void OnDrawGizmos()
-    {
-        if (sphere != null)
-            Gizmos.DrawSphere(transform.position, sphere.radius);
     }
 }
 

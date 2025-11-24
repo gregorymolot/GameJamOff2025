@@ -31,10 +31,10 @@ public class SphereSoundEmitterManager : MonoBehaviour
         }
     }
 
-    public SphereSoundEmitter SpawnSoundEmitter(Vector3 position, float maxSize, float timeToMax)
+    public SphereSoundEmitter SpawnSoundEmitter(Vector3 position, float maxSize, float timeToMax, Room room)
     {
         GameObject emitter =  Instantiate(soundEmitter, position, Quaternion.identity);
-        emitter.GetComponent<SphereSoundEmitter>().StartSoundGrowth(maxSize, timeToMax);
+        emitter.GetComponent<SphereSoundEmitter>().StartSoundGrowth(maxSize, timeToMax, room);
         return emitter.GetComponent<SphereSoundEmitter>();
     }
 

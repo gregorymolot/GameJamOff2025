@@ -11,17 +11,36 @@ public class InteractableLock : MonoBehaviour, IInteractable
     ItemType requiredItem;
     [SerializeField]
     bool removesItem;
+    protected bool isUnlocked = false;
 
-    public void Interact()
+    public virtual void Interact()
     {
-        if (GameManager.Instance.CheckCurrentlyEquippedItem(requiredItem))
+        if (!isUnlocked)
         {
-            interactable = false;
-            if (removesItem)
+            if (GameManager.Instance.CheckCurrentlyEquippedItem(requiredItem))
             {
-                GameManager.Instance.RemoveFromInventory(requiredItem);
+                isUnlocked = true;
+                UnlockAction();
+                if (removesItem)
+                {
+                    GameManager.Instance.RemoveFromInventory(requiredItem);
+                }
             }
         }
+        else
+        {
+            UnlockedAction();
+        }
+    }
+
+    protected virtual void UnlockedAction()
+    {
+        
+    }
+
+    protected virtual void UnlockAction()
+    {
+        
     }
 
     public void Return()

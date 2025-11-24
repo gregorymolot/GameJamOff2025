@@ -1,6 +1,5 @@
 using UnityEngine;
 using FMODUnity;
-using Unity.VisualScripting;
 
 public class FMODEvents : MonoBehaviour
 {

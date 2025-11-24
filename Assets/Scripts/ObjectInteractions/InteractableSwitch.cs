@@ -9,12 +9,26 @@ public class InteractableSwitch : MonoBehaviour, IInteractable
     bool isOn = false;
 
     public bool Returnable { get => false; set{} }
-    public bool Interactable { get => true; set{} }
+    public bool Interactable { get => interactable; set=>interactable = value; }
+    private bool interactable;
+    [SerializeField]
+    Room room;
+    [SerializeField]
+    Transform bulb;
+    SphereSoundEmitter emitter;
 
     public void Interact()
     {
         isOn = !isOn;
-        EventManager.Items.ToggleSwitch?.Invoke(isOn);
+        if (isOn)
+        {
+            emitter = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(bulb.transform.position, 5f, 2f, room);
+        }
+        else
+        {
+            emitter.EndSound();
+            emitter = null;
+        }
         transform.localRotation = isOn ? Quaternion.Euler(onPosition) : Quaternion.Euler(offPosition);
     }
 

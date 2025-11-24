@@ -14,6 +14,7 @@ public class AreaSoundEmitter : BaseSoundEmitter
 
     float timeToMax;
 
+
     void Awake()
     {
         box = GetComponent<BoxCollider>();
@@ -34,6 +35,11 @@ public class AreaSoundEmitter : BaseSoundEmitter
         box.enabled = true;
         this.timeToMax = timeToMax;
         StartCoroutine(GrowToMax(timeAtMax));
+    }
+
+    public void EndSound()
+    {
+        StartCoroutine(Shrink());
     }
 
     IEnumerator GrowToMax()
@@ -67,18 +73,14 @@ public class AreaSoundEmitter : BaseSoundEmitter
     IEnumerator Shrink()
     {
         float timer = 0f;
+        Vector3 currentSize = box.size;
         while(timer < timeToMax)
         {
-            box.size = Vector3.Lerp(target, Vector3.zero, timer/timeToMax);
+            box.size = Vector3.Lerp(currentSize, Vector3.zero, timer/timeToMax);
             timer+=Time.deltaTime;
             yield return null;
         }
         box.enabled = false;
-                Collider[] colliders = Physics.OverlapBox(gameObject.transform.position, box.size/2f, Quaternion.identity, LayerMask.NameToLayer("Findable"));
-        foreach(Collider collider in colliders)
-        {
-            collider.GetComponentInParent<Dissolve>().TryStartDissolve(transform);
-        }
     }
 }
 

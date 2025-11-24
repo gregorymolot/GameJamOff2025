@@ -6,6 +6,6 @@ public class SinkEmitter : MonoBehaviour
     AreaSoundEmitter areaSound;
     private void OnParticleCollision(GameObject other)
     {
-        SphereSoundEmitterManager.Instance.SpawnSoundEmitter(other.transform.position, 1f, 0.75f, Room.MasterBathroom,  1f);
+        SphereSoundEmitterManager.Instance.SpawnSoundEmitter(other.transform.position, 1f, 0.5f, Room.MasterBathroom,  1f);
     }
 }

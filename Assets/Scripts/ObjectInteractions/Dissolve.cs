@@ -4,10 +4,18 @@ using UnityEngine;
 
 public enum Room
 {
+    OpenSpace,
     MasterBedroom,
     WalkInCloset,
     MasterBathroom,
-    Office
+    Office,
+    TVRoom,
+    Bedroom,
+    Bathroom,
+    Garage,
+    MechanicalRoom,
+    LaundryRoom,
+    Safe
 }
 
 public class Dissolve : MonoBehaviour
@@ -26,7 +34,7 @@ public class Dissolve : MonoBehaviour
     [SerializeField]
     public Room room;
 
-    void Start()
+    void Awake()
     {
         Initialize();
     }
@@ -79,6 +87,10 @@ public class Dissolve : MonoBehaviour
         {
             return;
         }
+        if (propertyBlock == null)
+        {
+            return;
+        }
         if (SoundLocations.Count == 0)
         {
             propertyBlock.SetVector("_SoundOrigin", direction.position);
@@ -94,6 +106,10 @@ public class Dissolve : MonoBehaviour
 
     public void TryStartDissolve(Transform direction)
     {
+                if (propertyBlock == null)
+        {
+            return;
+        }
         SoundLocations.Remove(direction);
         if (SoundLocations.Count == 0)
         {
@@ -127,10 +143,6 @@ public class Dissolve : MonoBehaviour
 
     IEnumerator DissolveOut()
     {
-        if (interactable != null)
-        {
-            interactable.Interactable = false;
-        }    
         while (dissolveAmount > -2f)
         {
             dissolveAmount -= Time.deltaTime * 3f;
@@ -141,5 +153,9 @@ public class Dissolve : MonoBehaviour
             }
             yield return null;
         }
+        if (interactable != null)
+        {
+            interactable.Interactable = false;
+        }    
     }
 }

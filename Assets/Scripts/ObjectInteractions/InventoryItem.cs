@@ -3,7 +3,10 @@ using UnityEngine;
 public enum ItemType
 {
     None,
-    HairDryer
+    HairDryer,
+    Record,
+    Batteries,
+    Key
 }
 
 public class InventoryItem : DiscoverableItem

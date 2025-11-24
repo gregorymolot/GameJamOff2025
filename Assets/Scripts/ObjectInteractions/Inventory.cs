@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting.ReorderableList;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -24,7 +23,7 @@ public class Inventory : MonoBehaviour
     public void AddItemToInventory(InventoryItem item)
     {
         inventoryItems.Add(item.ItemType);
-        inventoryMeshes.Add(item.ItemType, item.GetComponent<MeshFilter>().mesh);
+        inventoryMeshes.Add(item.ItemType, item.GetComponent<MeshFilter>().sharedMesh);
     }
 
     public void RemoveFromInventory(ItemType item)
@@ -46,6 +45,7 @@ public class Inventory : MonoBehaviour
     }
     public bool CheckCurrentlyEquippedItem(ItemType item)
     {
+        Debug.Log(currentItem);
         return item == currentItem;
     }
 }

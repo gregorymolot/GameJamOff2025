@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class BaseSoundEmitter : MonoBehaviour
 {
     public Room assignedRoom;
+
+    public Action<Transform> EndAction;
 
     void OnTriggerEnter(Collider other)
     {
@@ -11,6 +14,7 @@ public class BaseSoundEmitter : MonoBehaviour
             Dissolve dissolve = other.GetComponentInParent<Dissolve>();
             if (dissolve.room == assignedRoom)
             {
+                EndAction += dissolve.TryStartDissolve;
                 dissolve.TryStartOutline(transform);
             }
         }
@@ -23,6 +27,7 @@ public class BaseSoundEmitter : MonoBehaviour
             Dissolve dissolve = other.GetComponentInParent<Dissolve>();
             if (dissolve.room == assignedRoom)
             {
+                EndAction -= dissolve.TryStartDissolve;
                 dissolve.TryStartDissolve(transform);
             }
         }

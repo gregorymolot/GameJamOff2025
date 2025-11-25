@@ -25,7 +25,7 @@ public class Dissolve : MonoBehaviour
 
     List<Transform> SoundLocations = new List<Transform>();
 
-    IInteractable interactable;
+    IInteractable[] interactables;
 
     [SerializeField]
     [Range(-2f, 2f)]
@@ -36,13 +36,13 @@ public class Dissolve : MonoBehaviour
 
     void Awake()
     {
-        Initialize();
+        //Initialize();
     }
 
     public void Initialize()
     {
         Material dissolveMaterial = Resources.Load<Material>("DissolveMaterial");
-        interactable = GetComponentInChildren<IInteractable>() != null ? GetComponentInChildren<IInteractable>() : null;
+        interactables = GetComponentsInChildren<IInteractable>() != null ? GetComponentsInChildren<IInteractable>() : null;
         dissolveRenderers = GetComponentsInChildren<Renderer>();
         propertyBlock = new MaterialPropertyBlock();
         foreach(Renderer dissolveRenderer in dissolveRenderers)
@@ -53,9 +53,12 @@ public class Dissolve : MonoBehaviour
             propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
             dissolveRenderer.SetPropertyBlock(propertyBlock);
         }
-        if (interactable != null)
+        if (interactables != null)
         {
-            interactable.Interactable = false;
+            foreach(IInteractable interactable in interactables)
+            {
+                interactable.Interactable = false;
+            }
         }
         gameObject.tag = "Findable";
         if (!TryGetComponent<Rigidbody>(out Rigidbody rb))
@@ -125,9 +128,12 @@ public class Dissolve : MonoBehaviour
 
     IEnumerator DissolveIn()
     {
-        if (interactable != null)
+        if (interactables != null)
         {
-            interactable.Interactable = true;
+            foreach(IInteractable interactable in interactables)
+            {
+                interactable.Interactable = false;
+            }
         }
         while (dissolveAmount < 2f)
         {
@@ -153,9 +159,12 @@ public class Dissolve : MonoBehaviour
             }
             yield return null;
         }
-        if (interactable != null)
+        if (interactables != null)
         {
-            interactable.Interactable = false;
-        }    
+            foreach(IInteractable interactable in interactables)
+            {
+                interactable.Interactable = false;
+            }
+        }
     }
 }

@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: Outlines
   m_EditorClassIdentifier: 
   m_Active: 1
-  injectionPoint: 550
+  injectionPoint: 450
   fetchColorBuffer: 1
   requirements: 6
   passMaterial: {fileID: 2100000, guid: be118451587e0d4409799c4bc77f22ee, type: 2}
@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Active: 1
   settings:
     passTag: RenderObjects
-    Event: 600
+    Event: 500
     filterSettings:
       RenderQueueType: 0
       LayerMask:

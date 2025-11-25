@@ -24,6 +24,9 @@ public class Inventory : MonoBehaviour
     {
         inventoryItems.Add(item.ItemType);
         inventoryMeshes.Add(item.ItemType, item.GetComponent<MeshFilter>().sharedMesh);
+        itemIndex = inventoryItems.Count - 1;
+        currentItem = inventoryItems[itemIndex];
+        itemSlot.mesh = inventoryMeshes[currentItem];
     }
 
     public void RemoveFromInventory(ItemType item)

@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a42c3ca335b8cc94eb5f026d29923ea4, type: 2}
+  - {fileID: 2100000, guid: 300ec4ab667aec145a54645baabe8e3c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 360669508944432204}
   m_Layer: 3
   m_Name: Cube
-  m_TagString: Findable
+  m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

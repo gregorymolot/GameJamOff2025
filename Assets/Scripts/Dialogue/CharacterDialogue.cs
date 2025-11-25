@@ -32,6 +32,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     [SerializeField]
     List<DialogueChoices> dialogueChoices;
 
+    NavMeshController controller;
+
     public int returningLineIndex;
 
     int dialogueIndex = 0;
@@ -64,6 +66,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     void Start()
     {
         dialogueManager = DialogueManager.Instance;
+        TryGetComponent<NavMeshController>(out controller);
     }
 
     public void Interact()
@@ -138,6 +141,10 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         dialogueManager.ShowDialogueUI(true);
         alreadyInteracted = true;
         StartCoroutine(TypeSentence());
+        if (controller != null)
+        {
+            controller.Stop();
+        }
     }
 
     IEnumerator TypeSentence()
@@ -221,5 +228,9 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         dialogueManager.SetNameText("");
         dialogueManager.ShowDialogueUI(false);
         ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
+        if (controller != null)
+        {
+            controller.Resume();
+        }
     }
 }

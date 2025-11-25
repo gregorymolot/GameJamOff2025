@@ -36,7 +36,7 @@ public class Dissolve : MonoBehaviour
 
     void Awake()
     {
-        //Initialize();
+        Initialize();
     }
 
     public void Initialize()
@@ -60,7 +60,10 @@ public class Dissolve : MonoBehaviour
                 interactable.Interactable = false;
             }
         }
-        gameObject.tag = "Findable";
+        if (gameObject.tag != "Door")
+        {
+            gameObject.tag = "Findable";
+        }
         if (!TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
             rb = gameObject.AddComponent<Rigidbody>();

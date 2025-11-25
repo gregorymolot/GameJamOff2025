@@ -9,7 +9,7 @@ public class BaseSoundEmitter : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Findable"))
+        if (other.CompareTag("Findable") || other.CompareTag("Door"))
         {
             Dissolve dissolve = other.GetComponentInParent<Dissolve>();
             if (dissolve.room == assignedRoom)
@@ -22,7 +22,7 @@ public class BaseSoundEmitter : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Findable"))
+        if (other.CompareTag("Findable") || other.CompareTag("Door"))
         {
             Dissolve dissolve = other.GetComponentInParent<Dissolve>();
             if (dissolve.room == assignedRoom)

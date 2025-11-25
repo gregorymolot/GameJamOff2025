@@ -889,7 +889,7 @@ GameObject:
   - component: {fileID: 5181232969954240669}
   - component: {fileID: 3244835414670540481}
   - component: {fileID: 6552726429874835704}
-  - component: {fileID: 5283021493231518355}
+  - component: {fileID: 8821522466983587754}
   m_Layer: 3
   m_Name: WalkingPerson
   m_TagString: Untagged
@@ -905,7 +905,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2844875145628239417}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9998613, z: -0, w: -0.016657742}
+  m_LocalRotation: {x: -0, y: -0.99986124, z: 0, w: -0.016658425}
   m_LocalPosition: {x: -52.22, y: -0.03, z: 14.57}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
@@ -1015,7 +1015,7 @@ Animator:
   m_GameObject: {fileID: 2844875145628239417}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 29b964186d913b04ba3ef1184ec8b831, type: 2}
+  m_Controller: {fileID: 9100000, guid: d8d5014c687d50d408404d72bf1828e7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1049,7 +1049,7 @@ NavMeshAgent:
   m_BaseOffset: 2.2
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5283021493231518355
+--- !u!114 &8821522466983587754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1062,8 +1062,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   positions:
-  - {fileID: 0}
-  - {fileID: 0}
+  - transform: {x: 0, y: 0, z: 0}
+    stopping: 0
 --- !u!1 &3287956014987569063
 GameObject:
   m_ObjectHideFlags: 0

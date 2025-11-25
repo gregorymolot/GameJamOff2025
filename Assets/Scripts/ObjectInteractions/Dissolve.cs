@@ -15,7 +15,8 @@ public enum Room
     Garage,
     MechanicalRoom,
     LaundryRoom,
-    Safe
+    Safe,
+    Person
 }
 
 public class Dissolve : MonoBehaviour
@@ -47,7 +48,10 @@ public class Dissolve : MonoBehaviour
         propertyBlock = new MaterialPropertyBlock();
         foreach(Renderer dissolveRenderer in dissolveRenderers)
         {
-            dissolveRenderer.material = dissolveMaterial;
+            if (!dissolveRenderer.material.name.Contains("Dissolve"))
+            {
+                dissolveRenderer.material = dissolveMaterial;
+            }
             dissolveRenderer.GetPropertyBlock(propertyBlock);
             dissolveAmount = -2f;
             propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);

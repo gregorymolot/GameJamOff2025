@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class NavMeshController : MonoBehaviour
 {
-    [SerializeReference]
+    [SerializeField]
     List<Destination> positions;
     int positionIndex = 0;
     Destination currentDestination;
@@ -64,11 +64,4 @@ public class NavMeshController : MonoBehaviour
         agent.speed = startingSpeed;
     }
 
-}
-
-[System.Serializable]
-public class Destination
-{
-    public Transform transform;
-    public bool stopping;
 }

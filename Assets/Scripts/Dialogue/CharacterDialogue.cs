@@ -46,6 +46,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     public bool Interactable { get => interactable; set => interactable = value; }
     private bool interactable = true;
 
+    SphereSoundEmitter emitter;
+
     DialogueManager dialogueManager;
 
     [SerializeField]
@@ -123,7 +125,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         {
             Return();
         }
-                    animator.Play("Talk", -1, 0);
+        animator.Play("Talk", -1, 0);
 
     }
 
@@ -160,7 +162,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
         if (piecesOfDialogue[dialogueIndex].isLying)
         {
-            //TODO: Spawn temporary sound emitter
+            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 7f, 1f, Room.Person, 1f);
         }
 
         foreach (char letter in piecesOfDialogue[dialogueIndex].dialogueLine)

@@ -29,7 +29,13 @@ public class CharacterManager : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI descriptionText;
     [SerializeField]
-    TextMeshProUGUI clueText;    
+    TextMeshProUGUI clueText;
+
+    [SerializeField]
+    TextMeshProUGUI houseProfileText;
+    [SerializeField]
+    HouseProfile houseProfile;
+    bool inHouse;
 
     void Awake()
     {
@@ -48,6 +54,7 @@ public class CharacterManager : MonoBehaviour
         {
             profile.SetButton();
         }
+        houseProfile.SetButton();
     }
 
     void OnEnable()
@@ -68,10 +75,32 @@ public class CharacterManager : MonoBehaviour
 
         foreach (ProfileLine line in profile.profilePieces)
         {
-            clueText.text += line.CheckUnlock();
+            if (line.CheckUnlock())
+            {
+                clueText.text += line.profileDescription;
+            }
+            else
+            {
+                clueText.text += "???";
+            }
             clueText.text += "\n\n";
         }
         animator.SetTrigger("SwapIn");
+    }
+
+    public void InitializeHouseProfile()
+    {
+        houseProfileText.text = "";
+        foreach (ProfileLine line in houseProfile.profileLines)
+        {
+            if (line.CheckUnlock())
+            {
+                houseProfileText.text += line.profileDescription;
+            }
+            houseProfileText.text += "\n\n";
+        }
+        animator.SetTrigger("HouseSwapIn");
+        inHouse = true;
     }
 
     public void CloseProfile()
@@ -101,12 +130,18 @@ public class CharacterManager : MonoBehaviour
     
     IEnumerator ToMindMap()
     {
-        animator.SetTrigger("SwapOut");
-
-        yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("ProfileSwapOut"));
-
+        if (inHouse)
+        {
+            animator.SetTrigger("HouseSwapOut");
+            yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("HouseSwapOut"));
+            inHouse = false;
+        }
+        else
+        {
+            animator.SetTrigger("SwapOut");
+            yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("ProfileSwapOut"));
+        }
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
-
     }
 }
 
@@ -147,6 +182,20 @@ public class CharacterProfile
 }
 
 [System.Serializable]
+public class HouseProfile
+{
+    public List<ProfileLine> profileLines;
+
+    [SerializeField]
+    Button button;
+
+        public void SetButton()
+    {
+        button.onClick.AddListener(()=>CharacterManager.Instance.InitializeHouseProfile());
+    }
+}
+
+[System.Serializable]
 public class ProfileLine
 {
     public List<Clues> neededClues;
@@ -154,15 +203,15 @@ public class ProfileLine
     [TextArea(3, 10)]
     public string profileDescription;
 
-    public string CheckUnlock()
+    public bool CheckUnlock()
     {
         foreach (Clues clue in neededClues)
         {
             if (GameManager.Instance.CheckUnlock(clue) == false)
             {
-                return "???";
+                return false;
             }
         }
-        return profileDescription;
+        return true;
     }
 }

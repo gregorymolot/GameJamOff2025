@@ -85,7 +85,6 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     void NextLine()
     {
-        //Destroy sound emitter if there is one
         if (isTyping)
         {
             StopAllCoroutines();
@@ -96,7 +95,6 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         //Clear chocies
         dialogueManager.ClearChoices();
 
-        //Check if an end line and return line maybe?
         if (piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.ReturningLine)
         {
             dialogueIndex = returningLineIndex;
@@ -104,6 +102,10 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         else if(piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.EndLine)
         {
             Return();
+        }
+        else if (piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.AccusingLine)
+        {
+            UIManager.Instance.ShowEndScreen(piecesOfDialogue[dialogueIndex].accusingName);
         }
 
         //Check if there are choices and display
@@ -194,14 +196,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             {
                 int nextIndex = choice.choices[i].nextLineIndex;
                 //Add a delay here
-                if (choice.choices[i].accusation.accusation)
-                {
-                    dialogueManager.CreateChoiceButton(choice.choices[i].choiceText, () => ChooseAccusation(choice.choices[i].accusation.characterName));
-                }
-                else
-                {
-                    dialogueManager.CreateChoiceButton(choice.choices[i].choiceText, () => ChooseOption(nextIndex));
-                }
+                dialogueManager.CreateChoiceButton(choice.choices[i].choiceText, () => ChooseOption(nextIndex));
             }
         }
     }
@@ -212,11 +207,6 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         dialogueManager.ClearChoices();
         StopAllCoroutines();
         StartCoroutine(TypeSentence());
-    }
-
-    void ChooseAccusation(Name name)
-    {
-        UIManager.Instance.ShowEndScreen(name);
     }
 
     public void Return()

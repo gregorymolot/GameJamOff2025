@@ -5,7 +5,8 @@ public enum NextLineBehaviour
 {
     Normal,
     ReturningLine,
-    EndLine
+    EndLine,
+    AccusingLine
 }
 
 [System.Serializable]
@@ -17,4 +18,5 @@ public class DialoguePiece
     public bool hasClue;
     public Clues clue;
     public bool isLying;
+    public Name accusingName;
 }

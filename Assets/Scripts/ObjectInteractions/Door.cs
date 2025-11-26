@@ -5,6 +5,8 @@ public class Door : MonoBehaviour, IInteractable
     public bool Returnable { get => false; set => Returnable = false; }
     public bool Interactable { get => interactable; set => interactable = value; }
     private bool interactable = true;
+    [SerializeField]
+    Room room;
 
     Animator animator;
 
@@ -20,8 +22,9 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-                    animator.ResetTrigger("Open");
-            animator.ResetTrigger("Close");
+        SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, room);
+        animator.ResetTrigger("Open");
+        animator.ResetTrigger("Close");
         if (opened)
         {
             animator.SetTrigger("Close");

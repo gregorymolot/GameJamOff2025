@@ -1,35 +1,81 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Roomba : BaseSoundEmitter
 {
-    Rigidbody rb;
-    Vector3 velocity;
-    float speed = 5f;
+    [SerializeField]
+    List<Destination> positions;
+    int positionIndex = 0;
+    Destination currentDestination;
+    NavMeshAgent agent;
+    float startingSpeed;
+    bool stopping;
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.maxLinearVelocity = 2f;
-        velocity = new Vector3(Random.Range(-1f,1f), 0f, Random.Range(-1f,1f));
-        velocity = velocity.normalized;
-        velocity = velocity * speed;
-        rb.AddForce(velocity, ForceMode.VelocityChange);
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateUpAxis = false;
+        agent.updateRotation = false;
+        currentDestination = positions[positionIndex];
+        agent.SetDestination(currentDestination.transform.position);
+        startingSpeed = agent.speed;
     }
-    void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("Floor"))
-        {
-            return;
-        }
-        Vector3 normal = collision.contacts[0].normal;
-        normal.y = 0;
-        normal = normal.normalized;
-        velocity = Vector3.Reflect(velocity, normal);
-        velocity.y = 0;
-        velocity.x += Random.Range(-0.1f,0.1f);
-        velocity.z += Random.Range(-0.1f,0.1f);
-        velocity = velocity.normalized;
-        velocity = velocity * speed;
 
-        rb.linearVelocity = velocity;
+        void Update()
+    {
+        if (agent.remainingDistance < agent.stoppingDistance && stopping == false && currentDestination.stopping)
+        {
+            StartCoroutine(Wait());
+        }
+        else if(agent.remainingDistance < agent.stoppingDistance)
+        {
+            positionIndex = Random.Range(0, positions.Count);
+            currentDestination = positions[positionIndex];
+            agent.SetDestination(currentDestination.transform.position);
+
+        }
     }
+
+    IEnumerator Wait()
+    {
+        stopping = true;
+        agent.speed = 0f;
+        yield return new WaitForSeconds(1.5f);
+        Debug.Log("Done");
+        agent.speed = startingSpeed;
+        positionIndex = Random.Range(0, positions.Count);
+        currentDestination = positions[positionIndex];
+        agent.SetDestination(currentDestination.transform.position);
+        stopping = false;
+    }
+
+    // void Start()
+    // {
+    //     rb = GetComponent<Rigidbody>();
+    //     rb.maxLinearVelocity = 2f;
+    //     velocity = new Vector3(Random.Range(-1f,1f), 0f, Random.Range(-1f,1f));
+    //     velocity = velocity.normalized;
+    //     velocity = velocity * speed;
+    //     rb.AddForce(velocity, ForceMode.VelocityChange);
+    // }
+    // void OnCollisionEnter(Collision collision)
+    // {
+    //     if(collision.collider.CompareTag("Floor"))
+    //     {
+    //         return;
+    //     }
+    //     Vector3 normal = collision.contacts[0].normal;
+    //     normal.y = 0;
+    //     normal = normal.normalized;
+    //     velocity = Vector3.Reflect(velocity, normal);
+    //     velocity.y = 0;
+    //     velocity.x += Random.Range(-0.1f,0.1f);
+    //     velocity.z += Random.Range(-0.1f,0.1f);
+    //     velocity = velocity.normalized;
+    //     velocity = velocity * speed;
+
+    //     rb.linearVelocity = velocity;
+    // }
 }

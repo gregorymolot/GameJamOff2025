@@ -119,11 +119,11 @@ public class UIManager : MonoBehaviour
     {
         if (name == Name.Anthony)
         {
-            
+            Debug.Log("You got it right!");
         }
         else
         {
-            
+            Debug.Log("Dumbass");
         }
     }
 

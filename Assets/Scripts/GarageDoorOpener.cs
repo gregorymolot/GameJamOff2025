@@ -17,16 +17,16 @@ public class GarageDoorOpener : InteractableLock
 
     protected override void UnlockedAction()
     {
-        isOpen = !isOpen;
         if (isOpen)
         {
             animator.SetTrigger("Close");
-            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(garageDoor.position, 20f, 5f, Room.Garage, 5f);
+            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(garageDoor.position, 20f, 10f, Room.Garage, 10f);
         }
         else
         {
             animator.SetTrigger("Open");
-            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(garageDoor.position, 20f, 5f, Room.Garage, 5f);
+            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(garageDoor.position, 20f, 10f, Room.Garage, 10f);
         }
+        isOpen = !isOpen;
     }
 }

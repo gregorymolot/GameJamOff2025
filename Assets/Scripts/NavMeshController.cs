@@ -18,7 +18,7 @@ public class NavMeshController : MonoBehaviour
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        TryGetComponent<Animator>(out animator);
         agent = GetComponent<NavMeshAgent>();
         currentDestination = positions[positionIndex];
         agent.SetDestination(currentDestination.transform.position);
@@ -31,24 +31,26 @@ public class NavMeshController : MonoBehaviour
         {
             StartCoroutine(Wait());
         }
-        else if(agent.remainingDistance < agent.stoppingDistance)
+        else if(agent.remainingDistance < agent.stoppingDistance && currentDestination.stopping == false)
         {
             positionIndex = (positionIndex + 1 + positions.Count) % positions.Count;
             currentDestination = positions[positionIndex];
             agent.SetDestination(currentDestination.transform.position);
-
         }
     }
 
     IEnumerator Wait()
     {
         stopping = true;
-        animator.SetBool("AtDestination", true);
+        if (animator != null)
+            animator.SetBool("AtDestination", true);
         agent.speed = 0f;
         yield return new WaitForSeconds(3f);
         Debug.Log("Done");
         agent.speed = startingSpeed;
-        animator.SetBool("AtDestination", false);
+        if (animator != null)
+            animator.SetBool("AtDestination", false);
+        positionIndex = (positionIndex + 1 + positions.Count) % positions.Count;
         currentDestination = positions[positionIndex];
         agent.SetDestination(currentDestination.transform.position);
         stopping = false;

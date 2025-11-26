@@ -18,8 +18,6 @@ public class Choice
     [SerializeField]
     List<Clues> unlockable;
 
-    public Accusation accusation;
-
     public bool Unlocked()
     {
         foreach(Clues clues in unlockable)
@@ -31,13 +29,6 @@ public class Choice
         }
         return true;
     }
-}
-
-[System.Serializable]
-public class Accusation
-{
-    public Name characterName;
-    public bool accusation;
 }
 
 [System.Serializable]

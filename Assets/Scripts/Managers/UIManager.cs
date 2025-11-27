@@ -18,6 +18,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI interactText;
 
+    [SerializeField]
+    EndgamePopup endGame;
+
     public static UIManager Instance
     {
         get
@@ -117,14 +120,8 @@ public class UIManager : MonoBehaviour
 
     public void ShowEndScreen(Name name)
     {
-        if (name == Name.Anthony)
-        {
-            Debug.Log("You got it right!");
-        }
-        else
-        {
-            Debug.Log("Dumbass");
-        }
+        endGame.gameObject.SetActive(true);
+        endGame.Activate(name);
     }
 
     IEnumerator TextOut()

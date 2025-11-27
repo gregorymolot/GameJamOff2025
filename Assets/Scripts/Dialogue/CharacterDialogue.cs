@@ -105,8 +105,10 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         }
         else if (piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.AccusingLine)
         {
-            //works but should probably be a game manager thing
+            dialogueManager.ShowDialogueUI(false);
             UIManager.Instance.ShowEndScreen(piecesOfDialogue[dialogueIndex].accusingName);
+            ControllerManager.Instance.SwapCurrentController(ControllerType.None);
+            return;
         }
 
         //Check if there are choices and display

@@ -81,7 +81,7 @@ public class Dissolve : MonoBehaviour
         {
             foreach(IInteractable interactable in interactables)
             {
-                interactable.Interactable = false;
+                interactable.Interactable = startIn;
             }
         }
         if (gameObject.tag != "Door")

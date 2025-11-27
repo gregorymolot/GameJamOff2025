@@ -9,6 +9,8 @@ public class Inventory : MonoBehaviour
     ItemType currentItem;
     int itemIndex;
 
+    bool pickedUpItem = false;
+
     List<ItemType> inventoryItems = new List<ItemType>();
 
     void Start()
@@ -22,6 +24,12 @@ public class Inventory : MonoBehaviour
 
     public void AddItemToInventory(InventoryItem item)
     {
+        if (pickedUpItem == false)
+        {
+            pickedUpItem = true;
+            Debug.Log("PickedUpItem!");
+            //Show item inventory thing
+        }
         inventoryItems.Add(item.ItemType);
         inventoryMeshes.Add(item.ItemType, item.GetComponent<MeshFilter>().sharedMesh);
         itemIndex = inventoryItems.Count - 1;

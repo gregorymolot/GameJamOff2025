@@ -893,7 +893,7 @@ GameObject:
   - component: {fileID: 5021947914169448871}
   m_Layer: 3
   m_Name: WalkingPerson
-  m_TagString: Untagged
+  m_TagString: Person
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -46,6 +46,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     public bool Interactable { get => interactable; set => interactable = value; }
     private bool interactable = true;
 
+    static bool liedBefore = false;
+
     SphereSoundEmitter emitter;
 
     DialogueManager dialogueManager;
@@ -167,7 +169,13 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
         if (piecesOfDialogue[dialogueIndex].isLying)
         {
+            if (liedBefore == false)
+            {
+                liedBefore = true;
+                //Show lying text thing
+            }
             SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 7f, 1f, Room.Person, 1f);
+
         }
 
         foreach (char letter in piecesOfDialogue[dialogueIndex].dialogueLine)

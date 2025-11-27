@@ -9,6 +9,7 @@ TagManager:
   - Floor
   - Blank
   - Door
+  - Person
   layers:
   - Default
   - TransparentFX

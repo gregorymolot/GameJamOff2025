@@ -84,7 +84,7 @@ public class Dissolve : MonoBehaviour
                 interactable.Interactable = startIn;
             }
         }
-        if (gameObject.tag != "Door")
+        if (gameObject.tag != "Door" && gameObject.tag != "Person")
         {
             gameObject.tag = "Findable";
         }
@@ -135,7 +135,7 @@ public class Dissolve : MonoBehaviour
 
     public void TryStartDissolve(Transform direction)
     {
-                if (propertyBlock == null)
+        if (propertyBlock == null)
         {
             return;
         }

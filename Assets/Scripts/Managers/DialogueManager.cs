@@ -13,9 +13,9 @@ public class DialogueManager : MonoBehaviour
 
     public Transform choiceContainer;
 
-    public Animator dialogueAnimator;
-
     public GameObject dialoguePanel;
+
+    bool firstTimeTalking = true;
 
     public static DialogueManager Instance
     {
@@ -44,6 +44,10 @@ public class DialogueManager : MonoBehaviour
 
     public void SetDialogue(CharacterDialogue dialogue)
     {
+        if (firstTimeTalking)
+        {
+            //Show tutorial talking thing
+        }
         dialogueController.SetCharacterDialogue(dialogue);
     }
 

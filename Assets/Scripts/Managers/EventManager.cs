@@ -16,6 +16,7 @@ public static class EventManager
 {
     public static readonly ItemEvents Items = new ItemEvents();
     public static readonly UnlockEvents Unlocks = new UnlockEvents();
+    public static readonly GameEvents Game = new GameEvents();
     public class ItemEvents
     {
         public Action<DiscoverableItem> ShowItem;

@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
     public Dictionary<Name, bool> interactedCharacters = new Dictionary<Name, bool>();
 
     public Material baseMaterial;
+    public Material dissolveMaterial;
+    public GameObject player;
 
     Inventory inventory;
 
@@ -41,6 +44,9 @@ public class GameManager : MonoBehaviour
     }
     private void Start() {
 
+        dissolveMaterial.SetFloat("_DissolveAmount", 2f);
+
+
         inventory = FindAnyObjectByType<Inventory>();
 
         var values = (Clues[])System.Enum.GetValues(typeof(Clues));
@@ -57,6 +63,24 @@ public class GameManager : MonoBehaviour
             interactedCharacters.Add(name, false);
         }
         //ApplyRandomColorsToRenderers();
+    }
+
+    public void StartDissolve()
+    {
+        StartCoroutine(DissolveCutscene());
+    }
+
+    IEnumerator DissolveCutscene()
+    {
+        float timer = 0f;
+        dissolveMaterial.SetVector("_SoundOrigin", player.transform.position);
+        while (timer < 2f)
+        {
+            dissolveMaterial.SetFloat("_DissolveAmount", Mathf.Lerp(2f, -2f, timer/2f));
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        EventManager.Game.BeginGame?.Invoke();
     }
 
     void ApplyRandomColorsToRenderers()

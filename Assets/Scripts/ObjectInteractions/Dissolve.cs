@@ -29,6 +29,9 @@ public class Dissolve : MonoBehaviour
     IInteractable[] interactables;
 
     [SerializeField]
+    bool startIn;
+
+    [SerializeField]
     [Range(-2f, 2f)]
     public float dissolveAmount;
 
@@ -37,23 +40,40 @@ public class Dissolve : MonoBehaviour
 
     void Awake()
     {
-        //Initialize();
+        InitializeMaterial();
     }
 
-    public void Initialize()
+    void OnEnable()
+    {
+        EventManager.Game.BeginGame += InitializeDissolve;
+    }
+
+    void OnDisable()
+    {
+        EventManager.Game.BeginGame -= InitializeDissolve;
+    }
+
+    void InitializeMaterial()
     {
         Material dissolveMaterial = Resources.Load<Material>("DissolveMaterial");
-        interactables = GetComponentsInChildren<IInteractable>() != null ? GetComponentsInChildren<IInteractable>() : null;
         dissolveRenderers = GetComponentsInChildren<Renderer>();
+        foreach(Renderer dissolveRenderer in dissolveRenderers)
+        {
+            if (!dissolveRenderer.sharedMaterial.name.Contains("Dissolve"))
+            {
+                dissolveRenderer.sharedMaterial = dissolveMaterial;
+            }
+        }
+    }
+
+    public void InitializeDissolve()
+    {
+        interactables = GetComponentsInChildren<IInteractable>() != null ? GetComponentsInChildren<IInteractable>() : null;
         propertyBlock = new MaterialPropertyBlock();
         foreach(Renderer dissolveRenderer in dissolveRenderers)
         {
-            if (!dissolveRenderer.material.name.Contains("Dissolve"))
-            {
-                dissolveRenderer.material = dissolveMaterial;
-            }
             dissolveRenderer.GetPropertyBlock(propertyBlock);
-            dissolveAmount = -2f;
+            dissolveAmount = startIn ? 2f : -2f;
             propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
             dissolveRenderer.SetPropertyBlock(propertyBlock);
         }
@@ -77,17 +97,16 @@ public class Dissolve : MonoBehaviour
 
     void OnApplicationQuit()
     {
-        if (dissolveRenderers == null)
+        if (dissolveRenderers == null || propertyBlock == null)
         {
             return;
         }
         foreach(Renderer dissolveRenderer in dissolveRenderers)
         {
-        
-        dissolveRenderer.GetPropertyBlock(propertyBlock);
-        dissolveAmount = 2f;
-        propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
-        dissolveRenderer.SetPropertyBlock(propertyBlock);
+            dissolveRenderer.GetPropertyBlock(propertyBlock);
+            dissolveAmount = 2f;
+            propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
+            dissolveRenderer.SetPropertyBlock(propertyBlock);
         }
     }
 

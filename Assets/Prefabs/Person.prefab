@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6464889124988661779}
   - component: {fileID: 7936995696207627313}
   - component: {fileID: 5053235558929837704}
+  - component: {fileID: 6553007605413617882}
   m_Layer: 3
   m_Name: Person
   m_TagString: Untagged
@@ -82,48 +83,40 @@ MonoBehaviour:
     hasClue: 0
     clue: 0
     isLying: 0
+    accusingName: 0
   - dialogueLine: What are you looking at?gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg
     lineBehaviour: 0
     hasClue: 0
     clue: 0
     isLying: 0
+    accusingName: 0
   - dialogueLine: What did you just say to me?
     lineBehaviour: 1
     hasClue: 0
     clue: 0
     isLying: 0
+    accusingName: 0
   - dialogueLine: That's what I thought
     lineBehaviour: 2
     hasClue: 0
     clue: 0
     isLying: 0
+    accusingName: 0
   dialogueChoices:
   - choiceIndex: 1
     choices:
     - choiceText: Your fat head
       nextLineIndex: 2
       unlockable: 00000000
-      accusation:
-        characterName: 0
-        accusation: 0
     - choiceText: Your stupid face
       nextLineIndex: 3
       unlockable: 
-      accusation:
-        characterName: 0
-        accusation: 0
     - choiceText: My stupid face
       nextLineIndex: 2
       unlockable: 
-      accusation:
-        characterName: 0
-        accusation: 0
     - choiceText: Boom
       nextLineIndex: 3
       unlockable: 
-      accusation:
-        characterName: 0
-        accusation: 0
   returningLineIndex: 1
   npcCamera: {fileID: 415235978647232610}
   nameLabel: {fileID: 9191083208595715201}
@@ -149,6 +142,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6553007605413617882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54896138336073821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1e2ba3a623f8df4aae8b164615223b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startIn: 1
+  dissolveAmount: 0
+  room: 0
 --- !u!1 &108389410830737575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1050,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: a42c3ca335b8cc94eb5f026d29923ea4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

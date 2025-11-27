@@ -22,8 +22,9 @@ public class CutsceneManager : MonoBehaviour
     Transform cutscenePosition;
     [SerializeField]
     GameObject player;
-    [SerializeField]
     CinemachinePanTilt tilt;
+    [SerializeField]
+    CutscenePopup cutscenePopup;
 
     void Awake()
     {
@@ -57,7 +58,7 @@ public class CutsceneManager : MonoBehaviour
         float timer = 0;
         while (cutscenePosition.position !=player.transform.position || tilt.PanAxis.Value != 0 || tilt.TiltAxis.Value != 0)
         {
-            player.transform.position = Vector3.MoveTowards(player.transform.position, cutscenePosition.position, Time.deltaTime );
+            player.transform.position = Vector3.MoveTowards(player.transform.position, cutscenePosition.position, Time.deltaTime/2f );
             tilt.PanAxis.Value = Mathf.Lerp(initialPan, 0, timer);
             tilt.TiltAxis.Value = Mathf.Lerp(initialTilt, 0, timer);
             timer+=Time.deltaTime;
@@ -68,6 +69,7 @@ public class CutsceneManager : MonoBehaviour
 
     public void OnCutsceneEnd()
     {
-        ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
+        cutscenePopup.gameObject.SetActive(true);
+        cutscenePopup.Activate();
     }
 }

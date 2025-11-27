@@ -80,7 +80,6 @@ public class GameManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
-        EventManager.Game.BeginGame?.Invoke();
     }
 
     void ApplyRandomColorsToRenderers()

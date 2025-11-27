@@ -22,7 +22,7 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, room);
+        SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, room, 3f);
         animator.ResetTrigger("Open");
         animator.ResetTrigger("Close");
         if (opened)

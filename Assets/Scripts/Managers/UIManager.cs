@@ -68,7 +68,7 @@ public class UIManager : MonoBehaviour
         infoPopup.Deactivate();
     }
 
-    public void TurnOffCanvas()
+    public void TurnOffDiscoverCanvas()
     {
         discoverCanvas.SetActive(false);
     }

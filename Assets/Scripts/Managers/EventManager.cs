@@ -28,6 +28,7 @@ public static class EventManager
     public class GameEvents
     {
         public Action BeginGame;
+        public Action EndCutscene;
     }
 
     public class UnlockEvents

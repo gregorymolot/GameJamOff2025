@@ -328,6 +328,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Cutscene",
+            "id": "ee61a4e7-de1e-4764-9ccf-ec0c72e8f86e",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "3bd994f7-cfb6-49cf-98be-a34f6e66a541",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "323bbaf8-84a8-4f36-aef3-8e2ba12378dc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

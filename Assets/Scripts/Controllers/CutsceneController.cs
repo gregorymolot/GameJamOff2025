@@ -1,16 +1,24 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CutsceneController : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    void OnEnable()
     {
-        
+        GetComponent<PlayerInput>().enabled = true;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDisable()
     {
-        
+        GetComponent<PlayerInput>().enabled = false;
+    }
+
+    public void EndCutscene(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            EventManager.Game.EndCutscene?.Invoke();
+        }
     }
 }

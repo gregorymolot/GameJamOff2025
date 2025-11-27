@@ -37,7 +37,7 @@ public class Dissolve : MonoBehaviour
 
     void Awake()
     {
-        Initialize();
+        //Initialize();
     }
 
     public void Initialize()

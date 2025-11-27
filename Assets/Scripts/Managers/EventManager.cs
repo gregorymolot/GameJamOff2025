@@ -24,6 +24,11 @@ public static class EventManager
         public Action<bool> ToggleSwitch;
     }
 
+    public class GameEvents
+    {
+        public Action BeginGame;
+    }
+
     public class UnlockEvents
     {
         public Action<Clues> Unlock;

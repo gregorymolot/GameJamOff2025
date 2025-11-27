@@ -43,7 +43,6 @@ public class Roomba : BaseSoundEmitter
         stopping = true;
         agent.speed = 0f;
         yield return new WaitForSeconds(1.5f);
-        Debug.Log("Done");
         agent.speed = startingSpeed;
         positionIndex = Random.Range(0, positions.Count);
         currentDestination = positions[positionIndex];

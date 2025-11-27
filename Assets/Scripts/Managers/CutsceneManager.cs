@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -18,11 +19,11 @@ public class CutsceneManager : MonoBehaviour
     private static CutsceneManager _instance;
     PlayableDirector cutsceneDirector;
     [SerializeField]
-    Vector3 cutsceneStartPosition;
-    [SerializeField]
-    Vector3 cutsceneStartRotation;
+    Transform cutscenePosition;
     [SerializeField]
     GameObject player;
+    [SerializeField]
+    CinemachinePanTilt tilt;
 
     void Awake()
     {
@@ -35,20 +36,31 @@ public class CutsceneManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void Start()
+    {
+        cutsceneDirector = GetComponent<PlayableDirector>();
+        tilt = player.GetComponentInChildren<CinemachinePanTilt>();
+    }
     public void StartCutscene()
     {
         ControllerManager.Instance.SwapCurrentController(ControllerType.None);
+        //cutsceneDirector.Play();
         StartCoroutine(PrepareCutscene());
     }
 
     IEnumerator PrepareCutscene()
     {
         //Have the same thing for cinemachine pan tilt
-        float speed = 5f;
-        while (cutsceneStartPosition !=player.transform.position && cutsceneStartRotation != player.transform.rotation.eulerAngles)
+        float initialTilt = tilt.TiltAxis.Value;
+        float initialPan = tilt.PanAxis.Value;
+        float timer = 0;
+        while (cutscenePosition.position !=player.transform.position || tilt.PanAxis.Value != 0 || tilt.TiltAxis.Value != 0)
         {
-            player.transform.position = Vector3.MoveTowards(player.transform.position, cutsceneStartPosition, Time.deltaTime * speed );
-            player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, Quaternion.Euler(cutsceneStartRotation), Time.deltaTime * speed);
+            player.transform.position = Vector3.MoveTowards(player.transform.position, cutscenePosition.position, Time.deltaTime );
+            tilt.PanAxis.Value = Mathf.Lerp(initialPan, 0, timer);
+            tilt.TiltAxis.Value = Mathf.Lerp(initialTilt, 0, timer);
+            timer+=Time.deltaTime;
             yield return null;
         }
         cutsceneDirector.Play();
@@ -56,6 +68,6 @@ public class CutsceneManager : MonoBehaviour
 
     public void OnCutsceneEnd()
     {
-        ControllerManager.Instance.SwapCurrentController(ControllerType.Cutscene);
+        ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
     }
 }

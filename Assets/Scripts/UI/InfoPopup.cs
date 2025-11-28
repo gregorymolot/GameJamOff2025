@@ -99,5 +99,7 @@ public class InfoPopup : MonoBehaviour
 
         UIManager.Instance.TurnOffDiscoverCanvas();
 
+        EventManager.Items.ShowInInventory?.Invoke();
+
     }
 }

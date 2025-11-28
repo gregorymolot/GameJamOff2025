@@ -21,6 +21,10 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     EndgamePopup endGame;
 
+    [SerializeField]
+    TextMeshProUGUI failText;
+    string currentFailText;
+
     public static UIManager Instance
     {
         get
@@ -74,6 +78,20 @@ public class UIManager : MonoBehaviour
     public void TurnOffDiscoverCanvas()
     {
         discoverCanvas.SetActive(false);
+    }
+
+    public void ShowFailedText(string text)
+    {
+        StopCoroutine(DisplayFailedText(currentFailText));
+        StartCoroutine(DisplayFailedText(text));
+    }
+
+    IEnumerator DisplayFailedText(string text)
+    {
+        currentFailText = text;
+        failText.text = text;
+        yield return new WaitForSeconds(3f);
+        failText.text = "";
     }
 
     public void ShowInteractText()

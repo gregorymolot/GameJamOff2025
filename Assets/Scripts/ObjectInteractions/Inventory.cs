@@ -13,6 +13,16 @@ public class Inventory : MonoBehaviour
 
     List<ItemType> inventoryItems = new List<ItemType>();
 
+    void OnEnable()
+    {
+        EventManager.Items.ShowInInventory += ShowNewItem;
+    }
+
+    void OnDisable()
+    {
+        EventManager.Items.ShowInInventory -= ShowNewItem;
+    }
+
     void Start()
     {
         itemIndex = 0;
@@ -20,6 +30,13 @@ public class Inventory : MonoBehaviour
         currentItem = inventoryItems[itemIndex];
         inventoryMeshes.Add(ItemType.None, null);
         itemSlot.mesh = inventoryMeshes[ItemType.None];
+    }
+
+    void ShowNewItem()
+    {
+        itemIndex = inventoryItems.Count - 1;
+        currentItem = inventoryItems[itemIndex];
+        itemSlot.mesh = inventoryMeshes[currentItem];
     }
 
     public void AddItemToInventory(InventoryItem item)
@@ -32,9 +49,9 @@ public class Inventory : MonoBehaviour
         }
         inventoryItems.Add(item.ItemType);
         inventoryMeshes.Add(item.ItemType, item.GetComponent<MeshFilter>().sharedMesh);
-        itemIndex = inventoryItems.Count - 1;
-        currentItem = inventoryItems[itemIndex];
-        itemSlot.mesh = inventoryMeshes[currentItem];
+        // itemIndex = inventoryItems.Count - 1;
+        // currentItem = inventoryItems[itemIndex];
+        // itemSlot.mesh = inventoryMeshes[currentItem];
     }
 
     public void RemoveFromInventory(ItemType item)

@@ -23,6 +23,8 @@ public static class EventManager
         public Action Return;
 
         public Action<bool> ToggleSwitch;
+
+        public Action ShowInInventory;
     }
 
     public class GameEvents

@@ -38,9 +38,13 @@ public class Dissolve : MonoBehaviour
     [SerializeField]
     public Room room;
 
+
+    ParticleSystem particles;
+
     void Awake()
     {
         InitializeMaterial();
+        particles = GetComponentInChildren<ParticleSystem>();
     }
 
     void OnEnable()
@@ -161,6 +165,10 @@ public class Dissolve : MonoBehaviour
                 interactable.Interactable = true;
             }
         }
+        if (particles != null)
+        {
+            particles.Play();
+        }
         while (dissolveAmount < 2f)
         {
             dissolveAmount += Time.deltaTime * 3f;
@@ -191,6 +199,11 @@ public class Dissolve : MonoBehaviour
             {
                 interactable.Interactable = false;
             }
+        }
+        if (particles != null)
+        {
+            particles.Stop();
+            particles.Clear();
         }
     }
 }

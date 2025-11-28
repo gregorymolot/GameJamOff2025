@@ -26,7 +26,7 @@ public class NewtonsCradleInteractable : MonoBehaviour, IInteractable
         if (!soundOn)
         {
             animator.SetTrigger("Interact");
-            emitter = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 10f, 3f, room);
+            emitter = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 5f, 3f, room);
             soundOn = true;
         }
         else

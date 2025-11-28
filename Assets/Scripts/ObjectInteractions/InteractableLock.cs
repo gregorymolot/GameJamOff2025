@@ -8,6 +8,9 @@ public class InteractableLock : MonoBehaviour, IInteractable
     private bool interactable;
 
     [SerializeField]
+    string failedString;
+
+    [SerializeField]
     ItemType requiredItem;
     [SerializeField]
     bool removesItem;
@@ -25,6 +28,10 @@ public class InteractableLock : MonoBehaviour, IInteractable
                 {
                     GameManager.Instance.RemoveFromInventory(requiredItem);
                 }
+            }
+            else
+            {
+                UIManager.Instance.ShowFailedText(failedString);
             }
         }
         else

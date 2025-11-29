@@ -13,6 +13,8 @@ public class Roomba : BaseSoundEmitter
     float startingSpeed;
     bool stopping;
 
+    bool increasing = true;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -29,13 +31,17 @@ public class Roomba : BaseSoundEmitter
         {
             StartCoroutine(Wait());
         }
-        else if(agent.remainingDistance < agent.stoppingDistance)
-        {
-            positionIndex = Random.Range(0, positions.Count);
-            currentDestination = positions[positionIndex];
-            agent.SetDestination(currentDestination.transform.position);
+        // else if(agent.remainingDistance < agent.stoppingDistance)
+        // {
+        //     if ((positionIndex == 0 && increasing == false )|| (positionIndex == positions.Count-1 && increasing == true))
+        //     {
+        //         increasing = !increasing;
+        //     }
+        //     positionIndex = increasing ? positionIndex + 1 : positionIndex - 1;
+        //     currentDestination = positions[positionIndex];
+        //     agent.SetDestination(currentDestination.transform.position);
 
-        }
+        // }
     }
 
     IEnumerator Wait()
@@ -44,7 +50,11 @@ public class Roomba : BaseSoundEmitter
         agent.speed = 0f;
         yield return new WaitForSeconds(1.5f);
         agent.speed = startingSpeed;
-        positionIndex = Random.Range(0, positions.Count);
+        if ((positionIndex == 0 && increasing == false )|| (positionIndex == positions.Count-1 && increasing == true))
+        {
+            increasing = !increasing;
+        }
+        positionIndex = increasing ? positionIndex + 1 : positionIndex - 1;
         currentDestination = positions[positionIndex];
         agent.SetDestination(currentDestination.transform.position);
         stopping = false;

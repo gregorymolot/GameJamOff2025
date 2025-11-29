@@ -26,4 +26,10 @@ public class InterackableLockedDrawer : InteractableLock
     {
         UnlockedAction();
     }
+
+    protected override void FailedAction()
+    {
+        base.FailedAction();
+        EventManager.Unlocks.Unlock(Clues.LockedDrawer);
+    }
 }

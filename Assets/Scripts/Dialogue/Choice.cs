@@ -36,7 +36,7 @@ public enum Clues
     Key,
     Vent,
     LockedDrawer,
-
+    Batteries,
     All
 }
 

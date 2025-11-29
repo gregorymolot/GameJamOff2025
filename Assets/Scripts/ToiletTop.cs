@@ -1,19 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
-public class InteractCabinet : MonoBehaviour, IInteractable
+public class ToiletTop : MonoBehaviour
 {
-    [SerializeField]
-    float targetX;
+        [SerializeField]
+    float targetZ;
 
     public bool Returnable { get => false; set => Returnable = false; }
     public bool Interactable { get => interactable; set => interactable = value; }
     [SerializeField]
     private bool interactable;
     private bool isOpen = false;
-    Vector3 target;
 
-    public virtual void Interact()
+    public void Interact()
     {
         StopAllCoroutines();
         if (isOpen)
@@ -34,17 +33,17 @@ public class InteractCabinet : MonoBehaviour, IInteractable
 
     IEnumerator Open()
     {
-        while(transform.localPosition.x != targetX)
+        while(transform.localEulerAngles.z != targetZ)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(targetX,0,0), Time.deltaTime * 2f);
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(-90,0, 0), Time.deltaTime * 60f);
             yield return null;
         }
     }
     IEnumerator Close()
     {
-        while(transform.localPosition.x != 0)
+        while(transform.localEulerAngles.z != 0)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0,0,0), Time.deltaTime * 2f);
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(0,0, 0), Time.deltaTime * 60f);
             yield return null;
         }
     }

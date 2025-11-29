@@ -7,10 +7,14 @@ public class ToiletEmitter : MonoBehaviour, IInteractable
     private bool interactable;
     SphereSoundEmitter sphereSound;
 
+    GameObject topOfToilet;
+
     public void Interact()
     {
         if (sphereSound == null)
         {
+            UIManager.Instance.ShowFailedText("Hmm... that toilet didn't sound normal...");
+            topOfToilet.SetActive(true);
             sphereSound = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 8f, 1f, Room.Bathroom, 15f);
         }
         else

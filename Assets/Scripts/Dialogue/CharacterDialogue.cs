@@ -36,6 +36,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     public int returningLineIndex;
 
+    public int alreadyInteractedLineIndex;
+
     int dialogueIndex = 0;
 
     public bool Returnable { get { return false; } set { } }
@@ -92,6 +94,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             StopAllCoroutines();
             dialogueManager.SetDialogueText(piecesOfDialogue[dialogueIndex].dialogueLine);
             isTyping = false;
+            NewMethod();
+            return;
         }
 
         //Clear chocies
@@ -101,9 +105,10 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         {
             dialogueIndex = returningLineIndex;
         }
-        else if(piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.EndLine)
+        else if (piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.EndLine)
         {
             Return();
+            return;
         }
         else if (piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.AccusingLine)
         {
@@ -113,16 +118,11 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             return;
         }
 
-        //Check if there are choices and display
-        foreach(DialogueChoices dialogueChoice in dialogueChoices)
+        bool flowControl = NewMethod();
+        if (!flowControl)
         {
-            if (dialogueChoice.choiceIndex == dialogueIndex)
-            {
-                DisplayChoices(dialogueChoice);
-                return;
-            }
+            return;
         }
-
 
         if (++dialogueIndex < piecesOfDialogue.Length)
         {
@@ -134,6 +134,21 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         }
         animator.Play("Talk", -1, 0);
 
+    }
+
+    private bool NewMethod()
+    {
+        //Check if there are choices and display
+        foreach (DialogueChoices dialogueChoice in dialogueChoices)
+        {
+            if (dialogueChoice.choiceIndex == dialogueIndex)
+            {
+                DisplayChoices(dialogueChoice);
+                return false;
+            }
+        }
+
+        return true;
     }
 
     void StartDialogue()
@@ -148,6 +163,10 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         EventManager.Unlocks.Interacted?.Invoke(characterName);
         dialogueManager.SetNameText(characterName.ToString());
         dialogueManager.ShowDialogueUI(true);
+        if (alreadyInteracted)
+        {
+            dialogueIndex = alreadyInteractedLineIndex;
+        }
         alreadyInteracted = true;
         StartCoroutine(TypeSentence());
         if (controller != null)
@@ -180,22 +199,13 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
         foreach (char letter in piecesOfDialogue[dialogueIndex].dialogueLine)
         {
-            if (Time.timeScale > 0f)
-            {
-                dialogueText += letter;
-                dialogueManager.SetDialogueText(dialogueText);
-            }
-            yield return null;
+            dialogueText += letter;
+            dialogueManager.SetDialogueText(dialogueText);
+            yield return new WaitForSeconds(0.05f);
         }
         isTyping = false;
         //Check if there are choices and display
-        foreach(DialogueChoices dialogueChoice in dialogueChoices)
-        {
-            if (dialogueChoice.choiceIndex == dialogueIndex)
-            {
-                DisplayChoices(dialogueChoice);
-            }
-        }
+        NewMethod();
 
     }
 
@@ -226,6 +236,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         animator.SetBool("Talking", false);
         StopAllCoroutines();
         npcCamera.enabled = false;
+        dialogueIndex = 0;
         isDialogueActive = false;
         dialogueManager.SetDialogueText("");
         dialogueManager.SetNameText("");

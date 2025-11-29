@@ -4,8 +4,23 @@ using UnityEngine;
 public enum Clues
 {
     None,
-    Sponges,
-    Receipt,
+    NewSponges,
+    ThrownOutSponges,
+    PaymentFight,
+    StolenMoney,
+    LyingAboutMoney,
+    Phonebook,
+    Tired,
+    NoOffice,
+    FightForPromotion,
+    Rivalry,
+    Promotion,
+    File,
+    StartUp,
+    Divorce,
+    EmptyCloset,
+    Stress,
+    BadStartUp,
     All
 }
 

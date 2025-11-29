@@ -55,7 +55,6 @@ public class Dissolve : MonoBehaviour
     void OnDisable()
     {
         EventManager.Game.BeginGame -= InitializeDissolve;
-        Debug.Log(gameObject.name);
     }
 
     void InitializeMaterial()

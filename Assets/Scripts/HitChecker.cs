@@ -9,7 +9,8 @@ public class HitChecker : MonoBehaviour
         if (canMakeSound)
         {
             canMakeSound = false;
-            Debug.Log("Ow!");
+            //Debug.Log("Ow!");
+            StartCoroutine(AllowHits());
         }
     }
 

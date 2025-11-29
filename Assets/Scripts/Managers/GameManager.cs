@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
             return;
         }
     }
+
     private void Start() {
 
         dissolveMaterial.SetFloat("_DissolveAmount", 2f);
@@ -127,6 +128,7 @@ public class GameManager : MonoBehaviour
     {
         EventManager.Unlocks.Unlock -= Unlock;
         EventManager.Unlocks.Interacted -= Interacted;
+        dissolveMaterial.SetFloat("_DissolveAmount", 2f);
     }
 
     void Interacted(Name name)

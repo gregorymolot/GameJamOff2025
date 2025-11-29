@@ -10,4 +10,10 @@ public class InteractableOutlet : InteractableLock
         hairDryer.SetActive(true);
         SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 15f, 2f, Room.MasterBathroom);
     }
+
+    protected override void FailedAction()
+    {
+        base.FailedAction();
+        EventManager.Unlocks.Unlock(Clues.Outlet);
+    }
 }

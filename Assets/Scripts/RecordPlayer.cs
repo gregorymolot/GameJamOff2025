@@ -41,4 +41,10 @@ public class RecordPlayer : InteractableLock
     {
         emitter = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 15f, 3f, room);
     }
+
+    protected override void FailedAction()
+    {
+        base.FailedAction();
+        EventManager.Unlocks.Unlock(Clues.RecordPlayer);
+    }
 }

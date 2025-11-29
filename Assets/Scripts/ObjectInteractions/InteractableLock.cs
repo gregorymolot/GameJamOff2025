@@ -22,22 +22,31 @@ public class InteractableLock : MonoBehaviour, IInteractable
         {
             if (GameManager.Instance.CheckCurrentlyEquippedItem(requiredItem))
             {
-                isUnlocked = true;
-                UnlockAction();
-                if (removesItem)
+                if (isUnlocked == false)
                 {
-                    GameManager.Instance.RemoveFromInventory(requiredItem);
+                    isUnlocked = true;
+                    UnlockAction();
+                    if (removesItem)
+                    {
+                        GameManager.Instance.RemoveFromInventory(requiredItem);
+                    }
                 }
             }
             else
             {
                 UIManager.Instance.ShowFailedText(failedString);
+                FailedAction();
             }
         }
         else
         {
             UnlockedAction();
         }
+    }
+
+    protected virtual void FailedAction()
+    {
+        
     }
 
     protected virtual void UnlockedAction()

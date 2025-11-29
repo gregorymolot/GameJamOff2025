@@ -38,6 +38,8 @@ public class Dissolve : MonoBehaviour
     [SerializeField]
     public Room room;
 
+    public bool randomizeColor;
+
 
     ParticleSystem particles;
 

@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
         {
             interactedCharacters.Add(name, false);
         }
-        //ApplyRandomColorsToRenderers();
     }
 
     public void StartDissolve()
@@ -81,24 +80,31 @@ public class GameManager : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+        ApplyRandomColorsToRenderers();
     }
 
     void ApplyRandomColorsToRenderers()
     {
         // Get all active MeshRenderers and SpriteRenderers in the scene
-        Renderer[] allRenderers = FindObjectsByType<Renderer>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        Dissolve[] allDissolves = FindObjectsByType<Dissolve>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         MaterialPropertyBlock block = new MaterialPropertyBlock();
 
-        for (int i = 0; i < allRenderers.Length; i++)
+        for (int i = 0; i < allDissolves.Length; i++)
         {
-            Renderer currentRenderer = allRenderers[i];
-            Color assignedColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
-            if (currentRenderer.material.name.Contains("Dissolve"))
+            Dissolve currentDissolve = allDissolves[i];
+            if (currentDissolve.randomizeColor)
             {
-                currentRenderer.GetPropertyBlock(block);
-                block.SetColor("_Base", assignedColor);
-                currentRenderer.SetPropertyBlock(block);
+                foreach(Renderer currentRenderer in currentDissolve.GetComponentsInChildren<Renderer>())
+                {
+                    if (currentRenderer.material.name.Contains("Dissolve"))
+                    {
+                        Color assignedColor = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));
+                        currentRenderer.GetPropertyBlock(block);
+                        block.SetColor("_Base", assignedColor);
+                        currentRenderer.SetPropertyBlock(block);
+                    }
+                }
             }
         }
     }

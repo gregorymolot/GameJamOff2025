@@ -26,6 +26,17 @@ public enum Clues
     Natasha,
     Jonathan,
     Anthony,
+    NatashaRealReason,
+    WaterHeaterNote,
+    Outlet,
+    HairDryer,
+    GarageDoorOpener,
+    Record,
+    RecordPlayer,
+    Key,
+    Vent,
+    LockedDrawer,
+
     All
 }
 

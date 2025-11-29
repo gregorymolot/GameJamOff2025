@@ -29,4 +29,10 @@ public class GarageDoorOpener : InteractableLock
         }
         isOpen = !isOpen;
     }
+
+    protected override void FailedAction()
+    {
+        base.FailedAction();
+        EventManager.Unlocks.Unlock(Clues.GarageDoorOpener);
+    }
 }

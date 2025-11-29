@@ -4,15 +4,15 @@ using UnityEngine;
 public enum Clues
 {
     None,
-    NewSponges,
-    ThrownOutSponges,
+    NewSponges, //done
+    ThrownOutSponges, //done
     PaymentFight,
     StolenMoney,
     LyingAboutMoney,
     Phonebook,
-    Tired,
-    NoOffice,
-    FightForPromotion,
+    Tired, //done
+    NoOffice, //done
+    FightForPromotion, //done
     Rivalry,
     Promotion,
     File,
@@ -21,6 +21,11 @@ public enum Clues
     EmptyCloset,
     Stress,
     BadStartUp,
+    WhoToTell,
+    HowDeath,
+    Natasha,
+    Jonathan,
+    Anthony,
     All
 }
 

@@ -16,27 +16,47 @@ public class NavMeshController : MonoBehaviour
     Animator animator;
     bool stopping;
 
+    bool started;
+
     void Start()
     {
         TryGetComponent<Animator>(out animator);
         agent = GetComponent<NavMeshAgent>();
-        currentDestination = positions[positionIndex];
-        agent.SetDestination(currentDestination.transform.position);
-        startingSpeed = agent.speed;
+    }
+
+    void OnEnable()
+    {
+        EventManager.Game.EndCutscene += StartRoute;
+    }
+
+    void OnDisable()
+    {
+        EventManager.Game.EndCutscene -= StartRoute;
     }
 
     void Update()
     {
-        if (agent.remainingDistance < agent.stoppingDistance && stopping == false && currentDestination.stopping)
-        {
-            StartCoroutine(Wait());
+        if (started)
+        { 
+            if (agent.remainingDistance < agent.stoppingDistance && stopping == false && currentDestination.stopping)
+            {
+                StartCoroutine(Wait());
+            }
+            else if(agent.remainingDistance < agent.stoppingDistance && currentDestination.stopping == false)
+            {
+                positionIndex = (positionIndex + 1 + positions.Count) % positions.Count;
+                currentDestination = positions[positionIndex];
+                agent.SetDestination(currentDestination.transform.position);
+            }
         }
-        else if(agent.remainingDistance < agent.stoppingDistance && currentDestination.stopping == false)
-        {
-            positionIndex = (positionIndex + 1 + positions.Count) % positions.Count;
-            currentDestination = positions[positionIndex];
-            agent.SetDestination(currentDestination.transform.position);
-        }
+    }
+
+    void StartRoute()
+    {
+        started = true;
+        currentDestination = positions[positionIndex];
+        agent.SetDestination(currentDestination.transform.position);
+        startingSpeed = agent.speed;
     }
 
     IEnumerator Wait()
@@ -46,7 +66,6 @@ public class NavMeshController : MonoBehaviour
             animator.SetBool("AtDestination", true);
         agent.speed = 0f;
         yield return new WaitForSeconds(3f);
-        Debug.Log("Done");
         agent.speed = startingSpeed;
         if (animator != null)
             animator.SetBool("AtDestination", false);

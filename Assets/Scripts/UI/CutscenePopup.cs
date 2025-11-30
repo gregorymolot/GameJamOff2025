@@ -42,7 +42,6 @@ public class CutscenePopup : MonoBehaviour
             timer += Time.unscaledDeltaTime;
             yield return null;
         }
-        EventManager.Game.BeginGame?.Invoke();
         animator.SetTrigger("Start");
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsName("CutsceneIn"));
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f);
@@ -68,6 +67,7 @@ public class CutscenePopup : MonoBehaviour
             timer += Time.unscaledDeltaTime;
             yield return null;
         }
+        EventManager.Game.BeginGame?.Invoke();
         ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
         gameObject.SetActive(false);
     }

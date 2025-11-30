@@ -65,7 +65,7 @@ public class NavMeshController : MonoBehaviour
         if (animator != null)
             animator.SetBool("AtDestination", true);
         agent.speed = 0f;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(currentDestination.stopTime);
         agent.speed = startingSpeed;
         if (animator != null)
             animator.SetBool("AtDestination", false);

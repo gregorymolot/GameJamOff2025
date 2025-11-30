@@ -193,7 +193,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
                 liedBefore = true;
                 //Show lying text thing
             }
-            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 7f, 1f, Room.Person, 1f);
+            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 8f, 0.5f, Room.Person, 1f);
 
         }
 

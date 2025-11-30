@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -83,6 +85,23 @@ public class GameManager : MonoBehaviour
         ApplyRandomColorsToRenderers();
     }
 
+    void Update()
+    {
+            if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            DEBUGONLY_UNLOCKALL();
+        }
+    }
+
+    void DEBUGONLY_UNLOCKALL()
+    {
+        Clues[] keys = unlockedClues.Keys.ToArray();
+        for(int i=0; i<keys.Length; i++)
+        {
+            unlockedClues[keys[i]] = true;
+        }
+    }
+
     void ApplyRandomColorsToRenderers()
     {
         // Get all active MeshRenderers and SpriteRenderers in the scene
@@ -156,6 +175,7 @@ public class GameManager : MonoBehaviour
         if (unlockedClues[clue] == false)
         {
             EventManager.Unlocks.NewUnlock?.Invoke();
+            Debug.Log(clue);
         }
         unlockedClues[clue] = true;
         CheckAllUnlock();

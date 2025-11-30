@@ -96,7 +96,7 @@ public class CharacterManager : MonoBehaviour
             if (line.CheckUnlock())
             {
                 houseProfileText.text += line.profileDescription;
-                houseProfileText.text += "\n";
+                houseProfileText.text += "\n\n";
             }
         }
         animator.SetTrigger("HouseSwapIn");

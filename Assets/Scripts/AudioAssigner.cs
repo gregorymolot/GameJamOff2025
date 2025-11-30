@@ -1,26 +1,17 @@
 using UnityEngine;
 
-public class RoomAssigner : MonoBehaviour
+public class AudioAssigner : MonoBehaviour
 {
     [SerializeField]
     Room room;
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Emitter"))
-        {
-            other.GetComponent<BaseSoundEmitter>().assignedRoom = room;
-        }
-        if (other.CompareTag("Findable"))
-        {
-            other.GetComponentInParent<Dissolve>().room = room;
-        }
         if (other.CompareTag("Player"))
         {
             GameAudioManager.Instance.NoLongerOccludeSounds(room);
         }
     }
-
     void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))

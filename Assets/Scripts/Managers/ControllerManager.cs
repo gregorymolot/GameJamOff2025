@@ -82,7 +82,7 @@ public class ControllerManager : MonoBehaviour
                 profileController.enabled = true;
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
-                Time.timeScale = 1f;
+                Time.timeScale = 0f;
                 break;
             case ControllerType.Menu:
                 menuController.enabled = true;

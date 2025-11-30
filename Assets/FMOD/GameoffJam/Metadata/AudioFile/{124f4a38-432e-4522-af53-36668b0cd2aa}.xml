@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{124f4a38-432e-4522-af53-36668b0cd2aa}">
+		<property name="assetPath">
+			<value>FireCrackle.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>8.0979591836734688</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fe681d7e-a7c5-428e-8ff1-d9efe263bc84}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -152,7 +152,10 @@ public class Dissolve : MonoBehaviour
             propertyBlock.SetVector("_SoundOrigin", direction.position);
             foreach(Renderer dissolveRenderer in dissolveRenderers)
             {
-                dissolveRenderer.SetPropertyBlock(propertyBlock);
+                if (dissolveRenderer != null)
+                { 
+                    dissolveRenderer.SetPropertyBlock(propertyBlock);
+                }
             }
             StopAllCoroutines();
             StartCoroutine(DissolveOut());

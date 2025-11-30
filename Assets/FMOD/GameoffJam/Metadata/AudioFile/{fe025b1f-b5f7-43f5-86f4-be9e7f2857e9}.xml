@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{fe025b1f-b5f7-43f5-86f4-be9e7f2857e9}">
+		<property name="assetPath">
+			<value>CabinetClose.mp3</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.6319999999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fe681d7e-a7c5-428e-8ff1-d9efe263bc84}</destination>
+		</relationship>
+	</object>
+</objects>

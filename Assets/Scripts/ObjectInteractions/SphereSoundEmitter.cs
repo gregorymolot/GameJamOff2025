@@ -23,7 +23,7 @@ public class SphereSoundEmitter : BaseSoundEmitter
 
     public void StartSoundGrowth(float maxSize, float timeToMax, Room room, float timeAtMax)
     {
-        this.assignedRoom = room;
+        assignedRoom = room;
         this.timeToMax = timeToMax;
         StartCoroutine(GrowToMax(maxSize, timeAtMax));
     }

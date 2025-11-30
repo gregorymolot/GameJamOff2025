@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ToiletTop : MonoBehaviour
+public class ToiletTop : MonoBehaviour, IInteractable
 {
         [SerializeField]
     float targetZ;
@@ -33,17 +33,17 @@ public class ToiletTop : MonoBehaviour
 
     IEnumerator Open()
     {
-        while(transform.localEulerAngles.z != targetZ)
+        while(transform.localEulerAngles.x != targetZ)
         {
-            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(-90,0, 0), Time.deltaTime * 60f);
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(targetZ,0, 0), Time.deltaTime * 90f);
             yield return null;
         }
     }
     IEnumerator Close()
     {
-        while(transform.localEulerAngles.z != 0)
+        while(transform.localEulerAngles.x != 0)
         {
-            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(0,0, 0), Time.deltaTime * 60f);
+            transform.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(0,0, 0), Time.deltaTime * 90f);
             yield return null;
         }
     }

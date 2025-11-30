@@ -11,12 +11,12 @@ public class Microwave : MonoBehaviour, IInteractable
     {
         if (sphereSound == null)
         {
-            sphereSound = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 8f, 1f, Room.OpenSpace, 15f);
+            sphereSound = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 8f, 1f, Room.OpenSpace, 30f);
         }
         else
         {
             sphereSound.EndSound();
-            sphereSound = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 8f, 1f, Room.OpenSpace, 15f);
+            sphereSound = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 8f, 1f, Room.OpenSpace, 30f);
         }
     }
 

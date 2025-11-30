@@ -72,7 +72,7 @@ public class LevelLoader : MonoBehaviour
         {
             dissolveAmount = Mathf.Lerp(2f, -2f, timer);
             image.material.SetFloat("_DissolveAmount", dissolveAmount);
-            timer += Time.unscaledDeltaTime;
+            timer += Time.deltaTime;
             yield return null;
         }
 

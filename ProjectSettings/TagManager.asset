@@ -10,6 +10,7 @@ TagManager:
   - Blank
   - Door
   - Person
+  - Roomba
   layers:
   - Default
   - TransparentFX

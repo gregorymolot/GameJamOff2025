@@ -48,7 +48,7 @@ public class Roomba : BaseSoundEmitter
     {
         stopping = true;
         agent.speed = 0f;
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         agent.speed = startingSpeed;
         if ((positionIndex == 0 && increasing == false )|| (positionIndex == positions.Count-1 && increasing == true))
         {

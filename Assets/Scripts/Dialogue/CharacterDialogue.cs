@@ -50,8 +50,6 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     static bool liedBefore = false;
 
-    SphereSoundEmitter emitter;
-
     DialogueManager dialogueManager;
 
     [SerializeField]
@@ -153,6 +151,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     void StartDialogue()
     {
+        hasClue = false;
         animator.SetBool("Talking", true);
         nameLabel.text = characterName.ToString();
         DialogueManager.Instance.SetDialogue(this);
@@ -175,6 +174,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         }
     }
 
+    bool hasClue;
+
     IEnumerator TypeSentence()
     {
         string dialogueText = "";
@@ -183,7 +184,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
         if (piecesOfDialogue[dialogueIndex].hasClue)
         {
-            EventManager.Unlocks.Unlock?.Invoke(piecesOfDialogue[dialogueIndex].clue);
+            hasClue = true;
         }
 
         if (piecesOfDialogue[dialogueIndex].isLying)
@@ -246,5 +247,10 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         {
             controller.Resume();
         }
+        if (hasClue)
+        {
+            EventManager.Unlocks.Unlock?.Invoke(piecesOfDialogue[dialogueIndex].clue);
+        }
+        hasClue = false;
     }
 }

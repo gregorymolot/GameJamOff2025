@@ -29,7 +29,7 @@ public class AlarmEmitter : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(timerAmount);
-            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 1f, 0.5f, Room.Bathroom, 4f);
+            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 3f, 1f, Room.Bathroom, 4f);
         }
     }
 }

@@ -83,6 +83,10 @@ public class Dissolve : MonoBehaviour
             dissolveAmount = startIn ? 2f : -2f;
             propertyBlock.SetFloat("_DissolveAmount", dissolveAmount);
             dissolveRenderer.SetPropertyBlock(propertyBlock);
+            if (!startIn)
+            {
+                dissolveRenderer.enabled = false;
+            }
         }
         if (interactables != null)
         {
@@ -164,6 +168,10 @@ public class Dissolve : MonoBehaviour
 
     IEnumerator DissolveIn()
     {
+        foreach(Renderer dissolveRenderer in dissolveRenderers)
+        {
+            dissolveRenderer.enabled = true;
+        }
         if (interactables != null)
         {
             foreach(IInteractable interactable in interactables)
@@ -210,6 +218,10 @@ public class Dissolve : MonoBehaviour
         {
             particles.Stop();
             particles.Clear();
+        }
+        foreach(Renderer dissolveRenderer in dissolveRenderers)
+        {
+            dissolveRenderer.enabled = false;
         }
     }
 }

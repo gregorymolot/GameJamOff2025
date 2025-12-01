@@ -59,6 +59,8 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
     [SerializeField]
     TextMeshProUGUI nameLabel;
 
+    List<int> clueIndexes = new List<int>();
+
     Animator animator;
 
     void Awake()
@@ -151,6 +153,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
     void StartDialogue()
     {
+        clueIndexes.Clear();
         hasClue = false;
         animator.SetBool("Talking", true);
         nameLabel.text = characterName.ToString();
@@ -185,6 +188,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         if (piecesOfDialogue[dialogueIndex].hasClue)
         {
             hasClue = true;
+            clueIndexes.Add(dialogueIndex);
         }
 
         if (piecesOfDialogue[dialogueIndex].isLying)
@@ -250,8 +254,12 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
         }
         if (hasClue)
         {
-            EventManager.Unlocks.Unlock?.Invoke(piecesOfDialogue[dialogueIndex].clue);
+            foreach(int index in clueIndexes)
+            {
+                EventManager.Unlocks.Unlock?.Invoke(piecesOfDialogue[index].clue);
+            }
         }
+        clueIndexes.Clear();
         hasClue = false;
     }
 }

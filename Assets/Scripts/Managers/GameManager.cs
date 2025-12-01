@@ -86,22 +86,22 @@ public class GameManager : MonoBehaviour
         ApplyRandomColorsToRenderers();
     }
 
-    void Update()
-    {
-            if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            DEBUGONLY_UNLOCKALL();
-        }
-    }
+    // void Update()
+    // {
+    //         if (Keyboard.current.spaceKey.wasPressedThisFrame)
+    //     {
+    //         DEBUGONLY_UNLOCKALL();
+    //     }
+    // }
 
-    void DEBUGONLY_UNLOCKALL()
-    {
-        Clues[] keys = unlockedClues.Keys.ToArray();
-        for(int i=0; i<keys.Length; i++)
-        {
-            unlockedClues[keys[i]] = true;
-        }
-    }
+    // void DEBUGONLY_UNLOCKALL()
+    // {
+    //     Clues[] keys = unlockedClues.Keys.ToArray();
+    //     for(int i=0; i<keys.Length; i++)
+    //     {
+    //         unlockedClues[keys[i]] = true;
+    //     }
+    // }
 
     void ApplyRandomColorsToRenderers()
     {

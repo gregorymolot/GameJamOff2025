@@ -146,6 +146,14 @@ public class GameAudioManager : MonoBehaviour
         return eventInstance;
     }
 
+    public EventInstance CreateInstance(EventReference eventReference, GameObject gameObject, Rigidbody value)
+    {
+        EventInstance eventInstance = RuntimeManager.CreateInstance(eventReference);
+        RuntimeManager.AttachInstanceToGameObject(eventInstance, gameObject, value);
+        return eventInstance;
+
+    }
+
     public void OccludeSounds(Room room)
     {
         foreach(EventInstance instance in eventInstances[room])

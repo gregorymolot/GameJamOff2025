@@ -92,6 +92,7 @@ public class Safe : MonoBehaviour, IInteractable
 
     IEnumerator RotateDial()
     {
+        float deltaDirection = 0;
         float previousDirection = 0;
         while (solved == false)
         {
@@ -108,7 +109,13 @@ public class Safe : MonoBehaviour, IInteractable
             {
                 speed = 1f;
             }
-            dial.transform.Rotate(-transform.right, direction * Time.deltaTime * speed);
+            deltaDirection += direction * Time.deltaTime * speed;
+            if (Mathf.Abs(deltaDirection) >=3)
+            {
+                GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.safeSmallClicks);
+                deltaDirection = 0;
+            }
+            dial.transform.Rotate(-transform.up, direction * Time.deltaTime * speed);
             yield return null;
             switch(safeState)
             {
@@ -118,11 +125,13 @@ public class Safe : MonoBehaviour, IInteractable
                         if (playedSound==false)
                         {
                             playedSound = true;
-                            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, Room.Office, 0.5f);
+                            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, Room.Safe, 0.5f);
+                            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.safeBigClicks);
                         }
                         if (direction == 0)
                         {
                             Debug.Log("Locked In!");
+                            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.safeBigClicks);
                             safeState = SafeState.SecondNum;
                             playedSound = false;
                         }
@@ -134,11 +143,13 @@ public class Safe : MonoBehaviour, IInteractable
                         if (playedSound==false)
                         {
                             playedSound = true;
-                            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, Room.Office, 0.5f);
+                            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, Room.Safe, 0.5f);
+                            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.safeBigClicks);
                         }
                         if (direction == 0)
                         {
                             Debug.Log("Locked In!");
+                            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.safeBigClicks);
                             safeState = SafeState.ThirdNum;
                             playedSound = false;
                         }
@@ -150,10 +161,12 @@ public class Safe : MonoBehaviour, IInteractable
                         if (playedSound==false)
                         {
                             playedSound = true;
-                            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, Room.Office, 0.5f);
+                            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 2f, 0.5f, Room.Safe, 0.5f);
+                            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.safeBigClicks);
                         }
                         if (direction == 0)
                         {
+                            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.safeOpen);
                             UnlockSafe();
                         }
                     }

@@ -2,12 +2,6 @@ using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
 
-public enum Type
-{
-    TV,
-    Bath,
-    Light
-}
 
 public class RemoteInteract : MonoBehaviour, IInteractable
 {
@@ -23,21 +17,28 @@ public class RemoteInteract : MonoBehaviour, IInteractable
     SphereSoundEmitter emitter;
 
     [SerializeField]
-    Type type;
-
-    [SerializeField]
     Room room;
+
+    EventInstance tvInstance;
+
+    void Start()
+    {
+        tvInstance = GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.tvEffect, tvTransform.gameObject);
+    }
 
     public void Interact()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.tvOn);
         if (!soundOn)
         {
+            tvInstance.start();
             emitter = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(tvTransform.position, 15f, 3f, room);
             soundOn = true;
         }
         else
         {
             emitter.EndSound();
+            tvInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             emitter = null;
             soundOn = false;
         }

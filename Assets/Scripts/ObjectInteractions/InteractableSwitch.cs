@@ -11,6 +11,7 @@ public class InteractableSwitch : MonoBehaviour, IInteractable
 
     public bool Returnable { get => false; set{} }
     public bool Interactable { get => interactable; set=>interactable = value; }
+    [SerializeField]
     private bool interactable;
     [SerializeField]
     Room room;
@@ -21,7 +22,7 @@ public class InteractableSwitch : MonoBehaviour, IInteractable
 
     private void Start() {
         transform.localRotation = Quaternion.Euler(offPosition);
-        GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.flickerLight, bulb.gameObject, Room.MechanicalRoom, true);
+        instance = GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.flickerLight, bulb.gameObject, Room.MechanicalRoom, true);
         instance.stop(STOP_MODE.IMMEDIATE);
     }
 

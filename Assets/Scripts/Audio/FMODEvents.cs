@@ -16,6 +16,14 @@ public class FMODEvents : MonoBehaviour
         }
     }
 
+    [field: Header("Safe")]
+    [field: SerializeField]
+    public EventReference safeSmallClicks { get; private set; }
+    [field: SerializeField]
+    public EventReference safeBigClicks { get; private set; }
+    [field: SerializeField]
+    public EventReference safeOpen { get; private set; }
+
     [field: Header("Music")]
     [field: SerializeField]
     public EventReference pauseMenuMusic { get; private set; }
@@ -27,8 +35,6 @@ public class FMODEvents : MonoBehaviour
     [field: Header("Ambience")]
     [field: SerializeField]
     public EventReference wind { get; private set; }
-    [field: SerializeField]
-    public EventReference airVent { get; private set; }
     [field: SerializeField]
     public EventReference fire { get; private set; }
     
@@ -91,6 +97,10 @@ public class FMODEvents : MonoBehaviour
     public EventReference discover { get; private set; }
     [field: SerializeField]
     public EventReference cutsceneWhoosh { get; private set; }
+    [field: SerializeField]
+    public EventReference tvEffect { get; private set; }
+    [field: SerializeField]
+    public EventReference tvOn { get; private set; }
 
     [field: Header("Emitters")]
     [field: SerializeField]
@@ -107,6 +117,12 @@ public class FMODEvents : MonoBehaviour
     public EventReference officer1Whistle { get; private set; }
     [field: SerializeField]
     public EventReference officer2Whistle { get; private set; }
+
+    [field: Header("AC")]
+    [field: SerializeField]
+    public EventReference acSwitch { get; private set; }
+    [field: SerializeField]
+    public EventReference acVent { get; private set; }
 
     void Awake()
     {

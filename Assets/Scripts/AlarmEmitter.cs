@@ -20,7 +20,7 @@ public class AlarmEmitter : MonoBehaviour
 
     void StartPlaying()
     {
-        GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.alarmClock, gameObject, Room.Bathroom, true);
+        GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.alarmClock, gameObject, Room.Bathroom, true).start();
         StartCoroutine(AlarmSound());
     }
 

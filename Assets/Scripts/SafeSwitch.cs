@@ -10,6 +10,7 @@ public class SafeSwitch : MonoBehaviour, IInteractable
 
     public bool Returnable { get => false; set => Returnable = false; }
     public bool Interactable { get => interactable; set => interactable = value; }
+    [SerializeField]
     private bool interactable;
 
     public void Interact()
@@ -23,10 +24,12 @@ public class SafeSwitch : MonoBehaviour, IInteractable
         }
         else
         {
+            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.paintingMove, paintingAnimator.transform.position);
             paintingAnimator.SetTrigger("Open");
             safe.Interactable = true;
 
         }
+        isOpen = !isOpen;
     }
 
     public void Return()

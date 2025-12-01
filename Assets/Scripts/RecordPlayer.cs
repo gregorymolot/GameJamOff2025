@@ -45,7 +45,7 @@ public class RecordPlayer : InteractableLock
 
     public void PlaySound()
     {
-        emitter = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 15f, 3f, room);
+        emitter = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 20f, 3f, room);
         instance.start();
     }
 

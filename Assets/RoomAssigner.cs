@@ -5,6 +5,8 @@ public class RoomAssigner : MonoBehaviour
     [SerializeField]
     Room room;
 
+    int amountIn = 0;
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Emitter"))
@@ -17,7 +19,11 @@ public class RoomAssigner : MonoBehaviour
         }
         if (other.CompareTag("Player"))
         {
-            GameAudioManager.Instance.NoLongerOccludeSounds(room);
+            if (amountIn == 0)
+            {
+                GameAudioManager.Instance.NoLongerOccludeSounds(room);
+            }
+            amountIn+=1;
         }
     }
 
@@ -25,7 +31,11 @@ public class RoomAssigner : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameAudioManager.Instance.OccludeSounds(room);
-        }    
+            amountIn -=1;
+            if (amountIn == 0)
+            {
+                GameAudioManager.Instance.OccludeSounds(room);
+            }
+        }     
     }
 }

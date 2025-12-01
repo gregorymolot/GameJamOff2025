@@ -10,7 +10,7 @@ public class CradleSound : MonoBehaviour
 
     void Start()
     {
-        instance = GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.newtonsCradle, gameObject, room, true);
+        instance = GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.newtonsCradle, gameObject, room, false);
     }
 
     public void PlayHit()

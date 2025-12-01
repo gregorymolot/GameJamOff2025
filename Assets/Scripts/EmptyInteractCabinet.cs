@@ -5,6 +5,6 @@ public class EmptyInteractCabinet : InteractCabinet
     public override void Interact()
     {
         base.Interact();
-        EventManager.Unlocks.Unlock(Clues.EmptyCloset);
+        EventManager.Unlocks.Unlock?.Invoke(Clues.EmptyCloset);
     }
 }

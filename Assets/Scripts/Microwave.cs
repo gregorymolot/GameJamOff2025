@@ -5,6 +5,7 @@ public class Microwave : MonoBehaviour, IInteractable
 {
     public bool Returnable { get => false; set => Returnable = false; }
     public bool Interactable { get => interactable; set => interactable = value; }
+    [SerializeField]
     private bool interactable;
     SphereSoundEmitter sphereSound;
 

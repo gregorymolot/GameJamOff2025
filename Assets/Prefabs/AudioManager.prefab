@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1adafef59d2dc7243b6b31f39182caa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: 0
   masterVolume: 1
   musicVolume: 1
   sfxVolume: 1
@@ -100,6 +101,146 @@ PrefabInstance:
     - target: {fileID: 4591059322866439223, guid: ea165a71f727de34f891835523be68d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvOn>k__BackingField.Path
+      value: event:/TVOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acVent>k__BackingField.Path
+      value: event:/AirVent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acSwitch>k__BackingField.Path
+      value: event:/ACOn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeOpen>k__BackingField.Path
+      value: event:/SafeOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvEffect>k__BackingField.Path
+      value: event:/TV
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvOn>k__BackingField.Guid.Data1
+      value: -220332640
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvOn>k__BackingField.Guid.Data2
+      value: 1096213217
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvOn>k__BackingField.Guid.Data3
+      value: -1958091842
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvOn>k__BackingField.Guid.Data4
+      value: 2129178425
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acVent>k__BackingField.Guid.Data1
+      value: -1855931766
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acVent>k__BackingField.Guid.Data2
+      value: 1284268195
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acVent>k__BackingField.Guid.Data3
+      value: -466846571
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acVent>k__BackingField.Guid.Data4
+      value: -659334441
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeBigClicks>k__BackingField.Path
+      value: event:/SafeBigClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acSwitch>k__BackingField.Guid.Data1
+      value: -2014240924
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acSwitch>k__BackingField.Guid.Data2
+      value: 1338839634
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acSwitch>k__BackingField.Guid.Data3
+      value: 363844267
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <acSwitch>k__BackingField.Guid.Data4
+      value: 1051849245
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeOpen>k__BackingField.Guid.Data1
+      value: -620594177
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeOpen>k__BackingField.Guid.Data2
+      value: 1230370036
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeOpen>k__BackingField.Guid.Data3
+      value: -1221167948
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeOpen>k__BackingField.Guid.Data4
+      value: -1434510758
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvEffect>k__BackingField.Guid.Data1
+      value: -1300886598
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvEffect>k__BackingField.Guid.Data2
+      value: 1290977668
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvEffect>k__BackingField.Guid.Data3
+      value: -1636878975
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <tvEffect>k__BackingField.Guid.Data4
+      value: -1964040682
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeSmallClicks>k__BackingField.Path
+      value: event:/SafeSmallClicks
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeBigClicks>k__BackingField.Guid.Data1
+      value: 532220666
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeBigClicks>k__BackingField.Guid.Data2
+      value: 1338656341
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeBigClicks>k__BackingField.Guid.Data3
+      value: -645018692
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeBigClicks>k__BackingField.Guid.Data4
+      value: -1903682358
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeSmallClicks>k__BackingField.Guid.Data1
+      value: -1846716433
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeSmallClicks>k__BackingField.Guid.Data2
+      value: 1145587812
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeSmallClicks>k__BackingField.Guid.Data3
+      value: -565825107
+      objectReference: {fileID: 0}
+    - target: {fileID: 8237352350824958573, guid: ea165a71f727de34f891835523be68d4, type: 3}
+      propertyPath: <safeSmallClicks>k__BackingField.Guid.Data4
+      value: 1075230977
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

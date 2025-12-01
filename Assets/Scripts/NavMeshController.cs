@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,11 +18,21 @@ public class NavMeshController : MonoBehaviour
     bool stopping;
 
     bool started;
+    EventInstance whistle;
+    [SerializeField]
+    bool officer1;
 
     void Start()
     {
         TryGetComponent<Animator>(out animator);
         agent = GetComponent<NavMeshAgent>();
+        StartCoroutine(StopWhistle());
+    }
+
+    IEnumerator StopWhistle()
+    {
+        yield return new WaitForSeconds(2f);
+        whistle.stop(STOP_MODE.IMMEDIATE);
     }
 
     void OnEnable()
@@ -57,6 +68,8 @@ public class NavMeshController : MonoBehaviour
         currentDestination = positions[positionIndex];
         agent.SetDestination(currentDestination.transform.position);
         startingSpeed = agent.speed;
+        whistle = officer1 ? GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.officer1Whistle, gameObject, Room.OpenSpace, false) : GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.officer2Whistle, gameObject, Room.OpenSpace, false);
+        whistle.start();
     }
 
     IEnumerator Wait()
@@ -78,11 +91,13 @@ public class NavMeshController : MonoBehaviour
     public void Stop()
     {
         agent.speed = 0f;
+        whistle.stop(STOP_MODE.IMMEDIATE);
     }
 
     public void Resume()
     {
         agent.speed = startingSpeed;
+        whistle.start();
     }
 
 }

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{c91064b2-06e6-4a99-baaf-4cd40ca8ba1f}">
+		<property name="assetPath">
+			<value>TV3.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>59.675291666666666</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fe681d7e-a7c5-428e-8ff1-d9efe263bc84}</destination>
+		</relationship>
+	</object>
+</objects>

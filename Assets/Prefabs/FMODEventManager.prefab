@@ -1,0 +1,298 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &272588062271925450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4591059322866439223}
+  - component: {fileID: 8237352350824958573}
+  m_Layer: 0
+  m_Name: FMODEventManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4591059322866439223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272588062271925450}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -32.21388, y: 3.47, z: -8.53625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8237352350824958573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272588062271925450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a0bc45e85bcd24419eaf675753e53ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <pauseMenuMusic>k__BackingField:
+    Guid:
+      Data1: 1258275483
+      Data2: 1249609108
+      Data3: 1689778311
+      Data4: 1268037712
+    Path: event:/PauseMenu
+  <mainMenuMusic>k__BackingField:
+    Guid:
+      Data1: 1400705079
+      Data2: 1198457219
+      Data3: 1808352137
+      Data4: 294933006
+    Path: event:/MainMenu
+  <recordMusic>k__BackingField:
+    Guid:
+      Data1: -240280241
+      Data2: 1116540250
+      Data3: 1778240407
+      Data4: 988748907
+    Path: event:/RecordMusic
+  <wind>k__BackingField:
+    Guid:
+      Data1: 1922055494
+      Data2: 1214790838
+      Data3: 1718274466
+      Data4: 910733555
+    Path: event:/Wind
+  <airVent>k__BackingField:
+    Guid:
+      Data1: -1855931766
+      Data2: 1284268195
+      Data3: -466846571
+      Data4: -659334441
+    Path: event:/AirVent
+  <fire>k__BackingField:
+    Guid:
+      Data1: 710073398
+      Data2: 1328226495
+      Data3: -800255068
+      Data4: -2008504835
+    Path: event:/Fire
+  <doorOpen>k__BackingField:
+    Guid:
+      Data1: 974666317
+      Data2: 1284179839
+      Data3: 182002854
+      Data4: 1172634964
+    Path: event:/DoorOpen
+  <doorClose>k__BackingField:
+    Guid:
+      Data1: 386952287
+      Data2: 1274652165
+      Data3: -391118712
+      Data4: 1809361719
+    Path: event:/DoorClose
+  <cabinetOpen>k__BackingField:
+    Guid:
+      Data1: 445407063
+      Data2: 1152623966
+      Data3: -820989523
+      Data4: -1368366668
+    Path: event:/CabinetOpen
+  <cabinetClose>k__BackingField:
+    Guid:
+      Data1: -1530818429
+      Data2: 1240640548
+      Data3: -329368643
+      Data4: 870795670
+    Path: event:/CabinetClose
+  <drawerOpen>k__BackingField:
+    Guid:
+      Data1: -2026629074
+      Data2: 1167978602
+      Data3: -1069799269
+      Data4: -1230136123
+    Path: event:/DrawerOpen
+  <drawerClose>k__BackingField:
+    Guid:
+      Data1: 1890770380
+      Data2: 1337922532
+      Data3: 1469368983
+      Data4: 1505203640
+    Path: event:/DrawerClose
+  <garageDoor>k__BackingField:
+    Guid:
+      Data1: 1397274787
+      Data2: 1201283021
+      Data3: 925661865
+      Data4: 1391476205
+    Path: event:/GarageDoor
+  <bump>k__BackingField:
+    Guid:
+      Data1: -2123232878
+      Data2: 1185942603
+      Data3: 1030568611
+      Data4: -1900214759
+    Path: event:/Bump
+  <footsteps>k__BackingField:
+    Guid:
+      Data1: -101122577
+      Data2: 1127802588
+      Data3: -651089772
+      Data4: -1520760267
+    Path: event:/Footsteps
+  <bath>k__BackingField:
+    Guid:
+      Data1: 1396610674
+      Data2: 1208115597
+      Data3: -1173808198
+      Data4: 617477161
+    Path: event:/Bath
+  <hairDryer>k__BackingField:
+    Guid:
+      Data1: -469511959
+      Data2: 1270233657
+      Data3: 1706293405
+      Data4: -1353957365
+    Path: event:/HairDryer
+  <toiletFlush>k__BackingField:
+    Guid:
+      Data1: 2122488126
+      Data2: 1131041797
+      Data3: 1034193286
+      Data4: -1419573013
+    Path: event:/ToiletFlush
+  <waterDrip>k__BackingField:
+    Guid:
+      Data1: 2030890245
+      Data2: 1323871181
+      Data3: -616015721
+      Data4: -828506777
+    Path: event:/WaterDrip
+  <alarmClock>k__BackingField:
+    Guid:
+      Data1: 1553851175
+      Data2: 1109498481
+      Data3: 1016482946
+      Data4: -387529723
+    Path: event:/AlarmClockTicking
+  <toiletBowlOpen>k__BackingField:
+    Guid:
+      Data1: -666837766
+      Data2: 1094794650
+      Data3: 33584795
+      Data4: -2077924160
+    Path: event:/ToiletBowlOpen
+  <clock>k__BackingField:
+    Guid:
+      Data1: -500974265
+      Data2: 1103680625
+      Data3: 810874014
+      Data4: -1470378515
+    Path: event:/Clock
+  <newtonsCradle>k__BackingField:
+    Guid:
+      Data1: 1771548077
+      Data2: 1306781144
+      Data3: 1162671793
+      Data4: -508443408
+    Path: event:/NewtonsCradle
+  <heartBeat>k__BackingField:
+    Guid:
+      Data1: 1574977612
+      Data2: 1139304344
+      Data3: 391778715
+      Data4: 474158176
+    Path: event:/Heartbeat
+  <flickSwitch>k__BackingField:
+    Guid:
+      Data1: -1083928888
+      Data2: 1185002309
+      Data3: -717892417
+      Data4: -130199858
+    Path: event:/FlickSwitch
+  <paintingMove>k__BackingField:
+    Guid:
+      Data1: 2010944557
+      Data2: 1239519332
+      Data3: -1316245869
+      Data4: -592396945
+    Path: event:/PaintingMove
+  <windowBang>k__BackingField:
+    Guid:
+      Data1: -1323031553
+      Data2: 1120082532
+      Data3: 569716400
+      Data4: -1079813858
+    Path: event:/WindowBanging
+  <whoosh>k__BackingField:
+    Guid:
+      Data1: 1053693782
+      Data2: 1091007792
+      Data3: 1709486752
+      Data4: 437533291
+    Path: event:/Whoosh
+  <discover>k__BackingField:
+    Guid:
+      Data1: -1273439662
+      Data2: 1104286825
+      Data3: 2126412942
+      Data4: -118172922
+    Path: event:/Discover
+  <cutsceneWhoosh>k__BackingField:
+    Guid:
+      Data1: 245332400
+      Data2: 1123623565
+      Data3: 1260792510
+      Data4: -587968693
+    Path: event:/CutsceneFadeIn
+  <flickerLight>k__BackingField:
+    Guid:
+      Data1: -409674776
+      Data2: 1083220368
+      Data3: -1842479428
+      Data4: 661776901
+    Path: event:/FlickeringLight
+  <microwave>k__BackingField:
+    Guid:
+      Data1: -183697778
+      Data2: 1165556977
+      Data3: 1041989519
+      Data4: -1146380757
+    Path: event:/Microwave
+  <roomba>k__BackingField:
+    Guid:
+      Data1: -1846959756
+      Data2: 1326419917
+      Data3: 337365124
+      Data4: -964734177
+    Path: event:/Roomba
+  <waterHeater>k__BackingField:
+    Guid:
+      Data1: 2030890245
+      Data2: 1323871181
+      Data3: -616015721
+      Data4: -828506777
+    Path: event:/WaterDrip
+  <officer1Whistle>k__BackingField:
+    Guid:
+      Data1: 1560061880
+      Data2: 1177366594
+      Data3: -1368842362
+      Data4: -1278281004
+    Path: event:/OfficerWhistle1
+  <officer2Whistle>k__BackingField:
+    Guid:
+      Data1: -563267383
+      Data2: 1224952457
+      Data3: -747335752
+      Data4: -881294725
+    Path: event:/OfficerWhistle2

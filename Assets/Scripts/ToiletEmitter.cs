@@ -11,6 +11,7 @@ public class ToiletEmitter : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.toiletFlush, transform.position);
         UIManager.Instance.ShowFailedText("Hmm... that toilet didn't sound normal...");
         if (sphereSound == null)
         {

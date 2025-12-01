@@ -1,4 +1,13 @@
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
+
+public enum Type
+{
+    TV,
+    Bath,
+    Light
+}
 
 public class RemoteInteract : MonoBehaviour, IInteractable
 {
@@ -12,6 +21,9 @@ public class RemoteInteract : MonoBehaviour, IInteractable
     bool soundOn = false;
 
     SphereSoundEmitter emitter;
+
+    [SerializeField]
+    Type type;
 
     [SerializeField]
     Room room;

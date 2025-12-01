@@ -14,8 +14,10 @@ public class SafeSwitch : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.flickSwitch, transform.position);
         if (isOpen)
         {
+            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.paintingMove, paintingAnimator.transform.position);
             paintingAnimator.SetTrigger("Close");
             safe.Interactable = false;
         }

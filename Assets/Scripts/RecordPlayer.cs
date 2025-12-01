@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using UnityEngine;
 
 public class RecordPlayer : InteractableLock
@@ -12,9 +13,13 @@ public class RecordPlayer : InteractableLock
 
     SphereSoundEmitter emitter; 
 
+    EventInstance instance;
+
     void Start()
     {
         animator = GetComponent<Animator>();
+        instance = GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.recordMusic, gameObject, room, false);
+        instance.stop(STOP_MODE.IMMEDIATE);
     }
 
     protected override void UnlockAction()
@@ -35,11 +40,13 @@ public class RecordPlayer : InteractableLock
     {
         record.SetActive(false);
         GameManager.Instance.AddToInventory(recordItem.GetComponent<InventoryItem>());
+        instance.stop(STOP_MODE.IMMEDIATE);
     }
 
     public void PlaySound()
     {
         emitter = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 15f, 3f, room);
+        instance.start();
     }
 
     protected override void FailedAction()

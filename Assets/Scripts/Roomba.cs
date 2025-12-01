@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMOD.Studio;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,6 +16,8 @@ public class Roomba : BaseSoundEmitter
 
     bool increasing = true;
 
+    EventInstance instance;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -23,6 +26,7 @@ public class Roomba : BaseSoundEmitter
         currentDestination = positions[positionIndex];
         agent.SetDestination(currentDestination.transform.position);
         startingSpeed = agent.speed;
+        GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.roomba, gameObject, Room.MasterBedroom, true).start();
     }
 
         void Update()

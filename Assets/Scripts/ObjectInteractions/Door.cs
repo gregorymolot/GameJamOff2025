@@ -12,9 +12,6 @@ public class Door : MonoBehaviour, IInteractable
 
     bool opened = false;
 
-    [SerializeField]
-    bool startingDoor;
-
     void Start()
     {
         animator = transform.parent.parent.GetComponent<Animator>();
@@ -27,11 +24,13 @@ public class Door : MonoBehaviour, IInteractable
         animator.ResetTrigger("Close");
         if (opened)
         {
+            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.doorClose, transform.position);
             animator.SetTrigger("Close");
             opened = false;
         }
         else
         {
+            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.doorOpen, transform.position);
             animator.SetTrigger("Open");
             opened = true;
         }

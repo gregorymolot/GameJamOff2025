@@ -34,6 +34,7 @@ public class InteractCabinet : MonoBehaviour, IInteractable
 
     IEnumerator Open()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.drawerClose, transform.position);
         while(transform.localPosition.x != targetX)
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(targetX,0,0), Time.deltaTime * 2f);
@@ -42,6 +43,7 @@ public class InteractCabinet : MonoBehaviour, IInteractable
     }
     IEnumerator Close()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.drawerClose, transform.position);
         while(transform.localPosition.x != 0)
         {
             transform.localPosition = Vector3.MoveTowards(transform.localPosition, new Vector3(0,0,0), Time.deltaTime * 2f);

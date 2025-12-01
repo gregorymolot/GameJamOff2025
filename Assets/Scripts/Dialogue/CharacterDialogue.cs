@@ -195,6 +195,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
                 //Show lying text thing
             }
             SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 8f, 0.5f, Room.Person, 1f);
+            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.heartBeat, transform.position);
 
         }
 

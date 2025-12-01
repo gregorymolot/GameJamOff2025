@@ -25,6 +25,7 @@ public class MenuManager : MonoBehaviour
     {
         if (pauseMenu.activeInHierarchy)
         {
+            GameAudioManager.Instance.Pause(false);
             if (optionsMenu.activeInHierarchy)
             {
                 optionsMenu.SetActive(false);
@@ -34,6 +35,7 @@ public class MenuManager : MonoBehaviour
         }
         else
         {
+            GameAudioManager.Instance.Pause(true);
             pauseMenu.SetActive(true);
             ControllerManager.Instance.SwapCurrentController(ControllerType.Menu);
         }

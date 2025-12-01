@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DissolveCutscene()
     {
+        GameAudioManager.Instance.StopWind();
         float timer = 0f;
         dissolveMaterial.SetVector("_SoundOrigin", player.transform.position);
         while (timer < 2f)

@@ -21,11 +21,13 @@ public class InteractDrawer : MonoBehaviour, IInteractable
     {
         if (open)
         {
+            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.cabinetClose, transform.position);
             animator.SetTrigger("Close");
             open = false;
         }
         else
         {
+            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.cabinetOpen, transform.position);
             animator.SetTrigger("Open");
             open = true;
         }

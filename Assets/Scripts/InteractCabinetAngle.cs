@@ -33,6 +33,7 @@ public class InteractCabinetAngle : MonoBehaviour, IInteractable
 
     IEnumerator Open()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.cabinetOpen, transform.position);
         while(transform.localEulerAngles.z != targetZ)
         {
             transform.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(0,0, targetZ), Time.deltaTime * 60f);
@@ -41,6 +42,7 @@ public class InteractCabinetAngle : MonoBehaviour, IInteractable
     }
     IEnumerator Close()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.cabinetClose, transform.position);
         while(transform.localEulerAngles.z != 0)
         {
             transform.localRotation = Quaternion.RotateTowards(transform.localRotation, Quaternion.Euler(0,0, 0), Time.deltaTime * 60f);

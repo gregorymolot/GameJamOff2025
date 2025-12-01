@@ -50,6 +50,21 @@ public class CutsceneManager : MonoBehaviour
         StartCoroutine(PrepareCutscene());
     }
 
+    public void OpenDoor()
+    {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.doorOpen, player.transform.position);
+    }
+
+    public void DoorClose()
+    {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.doorClose, player.transform.position);
+    }
+
+    public void Whoosh()
+    {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.cutsceneWhoosh, player.transform.position);
+    }
+
     IEnumerator PrepareCutscene()
     {
         //Have the same thing for cinemachine pan tilt

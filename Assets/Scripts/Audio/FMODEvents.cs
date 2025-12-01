@@ -18,7 +18,9 @@ public class FMODEvents : MonoBehaviour
 
     [field: Header("Music")]
     [field: SerializeField]
-    public EventReference menuMusic { get; private set; }
+    public EventReference pauseMenuMusic { get; private set; }
+    [field: SerializeField]
+    public EventReference mainMenuMusic { get; private set; }
     [field: SerializeField]
     public EventReference recordMusic { get; private set; }
 
@@ -85,6 +87,10 @@ public class FMODEvents : MonoBehaviour
     public EventReference windowBang { get; private set; }
     [field: SerializeField]
     public EventReference whoosh { get; private set; }
+    [field: SerializeField]
+    public EventReference discover { get; private set; }
+    [field: SerializeField]
+    public EventReference cutsceneWhoosh { get; private set; }
 
     [field: Header("Emitters")]
     [field: SerializeField]

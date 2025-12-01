@@ -17,6 +17,7 @@ public class GarageDoorOpener : InteractableLock
 
     protected override void UnlockedAction()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.garageDoor, garageDoor.transform.position);
         if (isOpen)
         {
             animator.SetTrigger("Close");

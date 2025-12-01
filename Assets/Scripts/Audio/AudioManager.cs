@@ -20,7 +20,12 @@ public class GameAudioManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    bool mainMenu;
+
     private EventInstance ambience;
+    private EventInstance pauseMusic;
+    private EventInstance mainMenuMusic;
 
     [field: Header("Volume")]
     [Range(0,1)]
@@ -37,13 +42,17 @@ public class GameAudioManager : MonoBehaviour
     private Bus sfxBus;
     private Bus ambienceBus;
 
-    [SerializeField]
-    private bool ambientNoise;
-
     void Awake()
     {
         _instance = this;
         eventInstances = new Dictionary<Room, List<EventInstance>>();
+                
+        var values = (Room[])System.Enum.GetValues(typeof(Room));
+        // Iterate through the array and add each value to the list
+        foreach (Room value in values)
+        {
+            eventInstances[value] = new List<EventInstance>();
+        }
 
         masterBus = RuntimeManager.GetBus("bus:/");
         musicBus = RuntimeManager.GetBus("bus:/Music");
@@ -53,7 +62,16 @@ public class GameAudioManager : MonoBehaviour
 
     void Start()
     {
-        InitializeAmbience(FMODEvents.Instance.wind);
+        if (mainMenu)
+        {
+            mainMenuMusic = CreateInstance(FMODEvents.Instance.mainMenuMusic, Camera.main.gameObject);
+            mainMenuMusic.start();
+        }
+        else
+        {
+            InitializeAmbience(FMODEvents.Instance.wind);
+            InitializePauseMusic(FMODEvents.Instance.pauseMenuMusic);   
+        }
     }
 
     void Update()
@@ -69,15 +87,44 @@ public class GameAudioManager : MonoBehaviour
 
     }
 
+    public void Pause(bool value)
+    {
+        ambienceBus.setPaused(value);
+        sfxBus.setPaused(value);
+        if (value)
+        {
+            pauseMusic.start();
+        }
+        else
+        {
+            pauseMusic.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        }
+    }
+
     private void InitializeAmbience(EventReference ambienceEventReference)
     {
         ambience = CreateInstance(ambienceEventReference, Camera.main.gameObject);
         ambience.start();
     }
 
+    private void InitializePauseMusic(EventReference ambienceEventReference)
+    {
+        pauseMusic = CreateInstance(ambienceEventReference, Camera.main.gameObject);
+    }
+
     public void PlayOneShot(EventReference sound, Vector3 position)
     {
         RuntimeManager.PlayOneShot(sound, position);
+    }
+
+    public void PlayOneShot(EventReference sound)
+    {
+        RuntimeManager.PlayOneShot(sound);
+    }
+
+    public void StopWind()
+    {
+        ambience.setParameterByName("Occlusion", 1);
     }
 
     public EventInstance CreateInstance(EventReference eventReference, GameObject gameObject, Room room, bool startsOccluded)
@@ -131,6 +178,8 @@ public class GameAudioManager : MonoBehaviour
             }
         }
         ambience.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        pauseMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        mainMenuMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
     }
 
     void OnDestroy()

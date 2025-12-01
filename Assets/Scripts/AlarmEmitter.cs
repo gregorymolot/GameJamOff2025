@@ -5,9 +5,22 @@ public class AlarmEmitter : MonoBehaviour
 {
     [SerializeField]
     float timerAmount;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    bool playing;
+
+    void OnEnable()
     {
+        EventManager.Game.BeginGame += StartPlaying;
+    }
+
+    void OnDisable()
+    {
+        EventManager.Game.BeginGame -= StartPlaying;
+    }
+
+    void StartPlaying()
+    {
+        GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.alarmClock, gameObject, Room.Bathroom, true);
         StartCoroutine(AlarmSound());
     }
 
@@ -16,7 +29,7 @@ public class AlarmEmitter : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(timerAmount);
-            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 3f, 0.5f, Room.Bathroom, 5f);
+            SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 1f, 0.5f, Room.Bathroom, 4f);
         }
     }
 }

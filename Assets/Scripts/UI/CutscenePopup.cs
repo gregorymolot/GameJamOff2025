@@ -67,6 +67,7 @@ public class CutscenePopup : MonoBehaviour
             timer += Time.unscaledDeltaTime;
             yield return null;
         }
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.whoosh);
         EventManager.Game.BeginGame?.Invoke();
         ControllerManager.Instance.SwapCurrentController(ControllerType.Gameplay);
         gameObject.SetActive(false);

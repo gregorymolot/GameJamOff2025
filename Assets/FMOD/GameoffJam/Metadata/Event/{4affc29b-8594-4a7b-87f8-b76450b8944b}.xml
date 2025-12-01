@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.03.00">
 	<object class="Event" id="{4affc29b-8594-4a7b-87f8-b76450b8944b}">
 		<property name="name">
-			<value>MenuMusic</value>
+			<value>PauseMenu</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
@@ -101,8 +101,14 @@
 	<object class="MixerBusPanner" id="{bbb64bdf-6423-4e83-8889-de7a06862ac2}" />
 	<object class="SingleSound" id="{e98c5073-d6cc-4b42-8760-0287633a9edb}">
 		<property name="length">
-			<value>120</value>
+			<value>119.60000000000002</value>
 		</property>
+		<property name="timelockedOffset">
+			<value>0.40000000000000002</value>
+		</property>
+		<relationship name="modulators">
+			<destination>{b845e324-f4d6-4848-a238-a4233c39b5d8}</destination>
+		</relationship>
 		<relationship name="audioFile">
 			<destination>{b9a7dd58-75f2-4d23-85a1-3ca28a52d635}</destination>
 		</relationship>
@@ -126,7 +132,7 @@
 			<value>0</value>
 		</property>
 		<property name="length">
-			<value>120</value>
+			<value>119.60000000000002</value>
 		</property>
 		<relationship name="timeline">
 			<destination>{77bc6e52-630a-422a-9672-5ff32fab1f54}</destination>
@@ -142,6 +148,17 @@
 	</object>
 	<object class="MixerBusPanner" id="{dc657946-f7a3-4e35-8aec-71d0d350b7c5}" />
 	<object class="MixerBusFader" id="{9a4d40a4-8ae2-410b-9b48-a3f0fc8122da}" />
+	<object class="ADSRModulator" id="{b845e324-f4d6-4848-a238-a4233c39b5d8}">
+		<property name="nameOfPropertyBeingModulated">
+			<value>volume</value>
+		</property>
+		<property name="initialValue">
+			<value>-80</value>
+		</property>
+		<property name="finalValue">
+			<value>-80</value>
+		</property>
+	</object>
 	<object class="MixerBusEffectChain" id="{2f00fe10-e635-4365-87e6-e64644bb4e67}">
 		<relationship name="effects">
 			<destination>{b07ae6c2-52a2-4318-975d-28748ef044c7}</destination>

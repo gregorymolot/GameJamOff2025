@@ -1,3 +1,4 @@
+using FMOD.Studio;
 using UnityEngine;
 
 public class InteractableSwitch : MonoBehaviour, IInteractable
@@ -16,16 +17,26 @@ public class InteractableSwitch : MonoBehaviour, IInteractable
     [SerializeField]
     Transform bulb;
     SphereSoundEmitter emitter;
+    EventInstance instance;
+
+    private void Start() {
+        transform.localRotation = Quaternion.Euler(offPosition);
+        GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.flickerLight, bulb.gameObject, Room.MechanicalRoom, true);
+        instance.stop(STOP_MODE.IMMEDIATE);
+    }
 
     public void Interact()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.flickSwitch, transform.position);
         isOn = !isOn;
         if (isOn)
         {
             emitter = SphereSoundEmitterManager.Instance.SpawnSoundEmitter(bulb.transform.position, 5f, 2f, room);
+            instance.start();
         }
         else
         {
+            instance.stop(STOP_MODE.IMMEDIATE);
             emitter.EndSound();
             emitter = null;
         }
@@ -36,9 +47,4 @@ public class InteractableSwitch : MonoBehaviour, IInteractable
     {
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        transform.localRotation = Quaternion.Euler(offPosition);
-    }
 }

@@ -36,6 +36,7 @@ public class DiscoverableItem : MonoBehaviour, IInteractable
 
     public virtual void Interact()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.discover);
         returnable = false;
         EventManager.Items.ShowItem?.Invoke(this);
     }

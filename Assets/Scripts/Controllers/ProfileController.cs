@@ -20,6 +20,7 @@ public class ProfileController : MonoBehaviour
         if (context.performed)
         {
             UIManager.Instance.DeactivateProfiles();
+            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.whoosh);
         }
 
     }

@@ -14,6 +14,7 @@ public class ToiletTop : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.toiletBowlOpen, transform.position);
         StopAllCoroutines();
         if (isOpen)
         {

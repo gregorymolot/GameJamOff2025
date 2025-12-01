@@ -1,7 +1,7 @@
+using FMOD.Studio;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
 
 public class GameplayPlayerController : MonoBehaviour
 {
@@ -12,6 +12,13 @@ public class GameplayPlayerController : MonoBehaviour
 
     [SerializeField]
     CinemachineInputAxisController tilt;
+
+    EventInstance playerFootsteps;
+
+    void Start()
+    {
+        playerFootsteps = GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.footsteps, gameObject);
+    }
 
     void OnEnable()
     {
@@ -45,6 +52,7 @@ public class GameplayPlayerController : MonoBehaviour
     {
         Vector2 movement = context.ReadValue<Vector2>();
         player.SetWalkDirection(movement);
+        UpdateSound(movement);
     }
 
     public void Interact(InputAction.CallbackContext context)
@@ -61,6 +69,7 @@ public class GameplayPlayerController : MonoBehaviour
         {
             UIManager.Instance.InitializeProfiles();
             ControllerManager.Instance.SwapCurrentController(ControllerType.Profile);
+            GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.whoosh);
         }
     }
 
@@ -90,6 +99,20 @@ public class GameplayPlayerController : MonoBehaviour
         else
         {
             UIManager.Instance.ShowInteractText();
+        }
+    }
+
+    void UpdateSound(Vector2 movementDirection)
+    {
+        PLAYBACK_STATE playbackState;
+        playerFootsteps.getPlaybackState(out playbackState);
+        if (playbackState.Equals(PLAYBACK_STATE.STOPPED) && movementDirection != Vector2.zero)
+        {
+            playerFootsteps.start();
+        }
+        else if (playbackState.Equals(PLAYBACK_STATE.PLAYING) && movementDirection == Vector2.zero)
+        {
+            playerFootsteps.stop(STOP_MODE.ALLOWFADEOUT);
         }
     }
 

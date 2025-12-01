@@ -25,6 +25,9 @@ public class Safe : MonoBehaviour, IInteractable
     GameObject dial;
 
     [SerializeField]
+    GameObject canvas;
+
+    [SerializeField]
     CinemachineCamera safeCamera;
 
     Animator animator;
@@ -58,6 +61,7 @@ public class Safe : MonoBehaviour, IInteractable
     {
         ControllerManager.Instance.SwapCurrentController(ControllerType.Safe);
         safeCamera.enabled = true;
+        canvas.SetActive(true);
         StopAllCoroutines();
         dial.transform.localRotation = Quaternion.identity;
         StartCoroutine(RotateDial());
@@ -75,6 +79,7 @@ public class Safe : MonoBehaviour, IInteractable
         StopCoroutine(RotateDial());
         safeState = SafeState.FirstNum;
         StartCoroutine(ReturnDial());
+        canvas.SetActive(true);
     }
 
     void UnlockSafe()
@@ -87,6 +92,10 @@ public class Safe : MonoBehaviour, IInteractable
 
     public void Rotate(float direction)
     {
+        if (returning == true)
+        {
+            return;
+        }
         this.direction = direction;
     }
 
@@ -187,6 +196,8 @@ public class Safe : MonoBehaviour, IInteractable
     {
         returning = true;
         playedSound = false;
+        safeState = SafeState.FirstNum;
+        direction = 0;
         float timer = 0f;
         Quaternion startingRotation = dial.transform.localRotation;
         while (timer < 1f)

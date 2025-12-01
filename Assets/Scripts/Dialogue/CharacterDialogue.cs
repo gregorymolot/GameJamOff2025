@@ -100,10 +100,15 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
 
         //Clear chocies
         dialogueManager.ClearChoices();
+        bool flowControl = NewMethod();
+        if (!flowControl)
+        {
+            return;
+        }
 
         if (piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.ReturningLine)
         {
-            dialogueIndex = returningLineIndex;
+            dialogueIndex = returningLineIndex-1;
         }
         else if (piecesOfDialogue[dialogueIndex].lineBehaviour == NextLineBehaviour.EndLine)
         {
@@ -118,11 +123,6 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             return;
         }
 
-        bool flowControl = NewMethod();
-        if (!flowControl)
-        {
-            return;
-        }
 
         if (++dialogueIndex < piecesOfDialogue.Length)
         {
@@ -196,7 +196,7 @@ public class CharacterDialogue : MonoBehaviour, IInteractable
             if (liedBefore == false)
             {
                 liedBefore = true;
-                //Show lying text thing
+                UIManager.Instance.ShowLyingTutorialText();
             }
             SphereSoundEmitterManager.Instance.SpawnSoundEmitter(transform.position, 8f, 0.5f, Room.Person, 1f);
             GameAudioManager.Instance.PlayOneShot(FMODEvents.Instance.heartBeat, transform.position);

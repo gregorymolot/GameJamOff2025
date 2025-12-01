@@ -6,11 +6,13 @@ public class MoveTutorialText : MonoBehaviour
     Canvas canvas;
     void OnTriggerEnter(Collider other)
     {
-        canvas.enabled = true;
+        if (other.CompareTag("Player"))
+            canvas.enabled = true;
     }
 
     void OnTriggerExit(Collider other)
     {
-        canvas.enabled = false;
+        if (other.CompareTag("Player"))
+            canvas.enabled = false;
     }
 }

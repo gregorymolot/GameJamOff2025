@@ -23,7 +23,7 @@ public class RemoteInteract : MonoBehaviour, IInteractable
 
     void Start()
     {
-        tvInstance = GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.tvEffect, tvTransform.gameObject);
+        tvInstance = GameAudioManager.Instance.CreateInstance(FMODEvents.Instance.tvEffect, tvTransform.gameObject, Room.TVRoom, false);
     }
 
     public void Interact()

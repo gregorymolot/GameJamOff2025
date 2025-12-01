@@ -25,6 +25,9 @@ public class UIManager : MonoBehaviour
     TextMeshProUGUI failText;
     string currentFailText;
 
+    [SerializeField]
+    TextMeshProUGUI tutorialText;
+
     public static UIManager Instance
     {
         get
@@ -82,8 +85,19 @@ public class UIManager : MonoBehaviour
 
     public void ShowFailedText(string text)
     {
-        StopCoroutine(DisplayFailedText(currentFailText));
         StartCoroutine(DisplayFailedText(text));
+    }
+
+    public void ShowLyingTutorialText()
+    {
+        tutorialText.gameObject.SetActive(true);
+        StartCoroutine(DisplayLyingTutorial());
+    }
+
+    IEnumerator DisplayLyingTutorial()
+    {
+        yield return new WaitForSeconds(2f);
+        tutorialText.gameObject.SetActive(false);
     }
 
     IEnumerator DisplayFailedText(string text)

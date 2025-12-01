@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,9 @@ public class Inventory : MonoBehaviour
     int itemIndex;
 
     bool pickedUpItem = false;
+
+    [SerializeField]
+    GameObject canvas;
 
     List<ItemType> inventoryItems = new List<ItemType>();
 
@@ -37,21 +41,25 @@ public class Inventory : MonoBehaviour
         itemIndex = inventoryItems.Count - 1;
         currentItem = inventoryItems[itemIndex];
         itemSlot.mesh = inventoryMeshes[currentItem];
+        if (pickedUpItem == false)
+        {
+            pickedUpItem = true;
+            //Show item inventory thing
+            canvas.SetActive(true);
+            StartCoroutine(TurnOffCanvas());
+        }
     }
 
     public void AddItemToInventory(InventoryItem item)
     {
-        if (pickedUpItem == false)
-        {
-            pickedUpItem = true;
-            Debug.Log("PickedUpItem!");
-            //Show item inventory thing
-        }
         inventoryItems.Add(item.ItemType);
         inventoryMeshes.Add(item.ItemType, item.GetComponent<MeshFilter>().sharedMesh);
-        // itemIndex = inventoryItems.Count - 1;
-        // currentItem = inventoryItems[itemIndex];
-        // itemSlot.mesh = inventoryMeshes[currentItem];
+    }
+
+    IEnumerator TurnOffCanvas()
+    {
+        yield return new WaitForSeconds(5f);
+        canvas.SetActive(false);
     }
 
     public void RemoveFromInventory(ItemType item)

@@ -79,7 +79,7 @@ public class Safe : MonoBehaviour, IInteractable
         StopCoroutine(RotateDial());
         safeState = SafeState.FirstNum;
         StartCoroutine(ReturnDial());
-        canvas.SetActive(true);
+        canvas.SetActive(false);
     }
 
     void UnlockSafe()

@@ -22528,6 +22528,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8181992832224978663, guid: 3a1d8506804b2e84fae86f064a7bf47a, type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 106620938}
     - target: {fileID: 8892849615150260674, guid: 3a1d8506804b2e84fae86f064a7bf47a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -28225,6 +28229,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4778175715345358919, guid: 3cb7f217e016f1d4bbc7d9ea6b87b415, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b582904d139fc745960a4803322146a, type: 2}
     - target: {fileID: 5644392819679761747, guid: 3cb7f217e016f1d4bbc7d9ea6b87b415, type: 3}
       propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
       value: 0.75
@@ -97004,7 +97012,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1015305644}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa785023d9eb4ac4eaeb5a4c9677b76d, type: 3}
   m_Name: 
@@ -124127,7 +124135,7 @@ Transform:
   m_GameObject: {fileID: 1204651846}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3, y: 0.59627724, z: -46.1}
+  m_LocalPosition: {x: -2.37, y: 0.59627724, z: -44.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -175117,6 +175125,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 3bd994f7-cfb6-49cf-98be-a34f6e66a541
     m_ActionName: 'Cutscene/New action[/Mouse/leftButton]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1cd069f7-67e1-4b29-b6bf-027bb990249e
+    m_ActionName: 'Safe/Restart[/Keyboard/r]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Interactable
@@ -222969,6 +222981,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 4778175715345358919, guid: 3cb7f217e016f1d4bbc7d9ea6b87b415, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b582904d139fc745960a4803322146a, type: 2}
     - target: {fileID: 5644392819679761747, guid: 3cb7f217e016f1d4bbc7d9ea6b87b415, type: 3}
       propertyPath: CollisionModule.m_EnergyLossOnCollision.scalar
       value: 0.75
